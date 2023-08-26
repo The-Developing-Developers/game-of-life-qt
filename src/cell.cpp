@@ -1,32 +1,30 @@
 #include <QDebug>
 #include "cell.hpp"
 
-#define NDEBUG
-
 Cell::Cell(void)
   : m_IsAlive(false)
   // : m_IsAlive(true)
 {
-  // qDebug() << "Live cell created.";
-  // qDebug() << "Dead cell created.";
+  // qDebug() << __func__ << ": Live cell created.";
+  // qDebug() << __func__ << ": Dead cell created.";
 }
 
 
-void Cell::Revive(void)
+void Cell::revive(void)
 {
   m_IsAlive = true;
-  qDebug() << "Cell revived.";
+  qDebug() << __func__ << ": Cell revived.";
 }
 
 
-void Cell::Kill(void)
+void Cell::kill(void)
 {
   m_IsAlive = false;
-  qDebug() << "Cell killed.";
+  qDebug() << __func__ << ": Cell killed.";
 }
 
 
-bool Cell::IsAlive(void)
+bool Cell::isAlive(void)
 {
   return m_IsAlive;
 }

@@ -10,8 +10,8 @@ ApplicationWindow
   property int startButtonMargins:  5
   property int squareSide:    50
   property int squareSpacing: 5
-  property int rows:  5
-  property int cols:  10
+  property int rows:  5   // TODO: ask the user, avoid hard-coding
+  property int cols:  10  // TODO: ask the user, avoid hard-coding
   property int numOfSquares:  rows * cols
 
   minimumWidth:  (squareSide + squareSpacing) * cols + squareSpacing
@@ -25,7 +25,8 @@ ApplicationWindow
 
     x: squareSpacing; y: squareSpacing
     spacing: root.squareSpacing
-    columns: Math.floor(root.width / (root.squareSide + root.squareSpacing))
+    // columns: Math.floor(root.width / (root.squareSide + root.squareSpacing)) // resizes dynamically. Undesirable
+    columns: root.cols // size of grid does not vary when resizing the ApplicationWindow
 
     Repeater
     {
@@ -49,7 +50,7 @@ ApplicationWindow
           target: backend
           function onBoardRecalculated()
           {
-            console.log("Getting cell status for index: " + index);
+            console.log("Board has been updated. Getting cell status for index: " + index);
             isAlive = backend.getCellStatus(index);
           }
         }
@@ -57,7 +58,7 @@ ApplicationWindow
         MouseArea
         {
           anchors.fill: cell
-          enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer selectable
+          enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
 
           onClicked: function()
           {

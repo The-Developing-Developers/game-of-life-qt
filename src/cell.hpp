@@ -2,24 +2,22 @@
 #define CELL_HPP
 
 #include <iostream>
-#include <string>
-#include <thread>
-#include <chrono>
-#include <limits>
 
 #define NDEBUG
 
 class Cell
 {
-  bool m_IsAlive;
-
-  public:
+public:
 
   Cell(void);
 
-  void Revive(void);
-  void Kill(void);
-  bool IsAlive(void);
+  void revive(void);
+  void kill(void);
+  bool isAlive(void);
+
+private:
+
+  bool m_IsAlive;
 };
 
 #endif // CELL_HPP
