@@ -23,7 +23,6 @@ qt_add_qml_module(${PROJECT_NAME}
     qml/WelcomeScreen.qml
     qml/GameBoard.qml
     qml/Main.qml
-    qml/StartButton.qml
   RESOURCES resources.qrc
   SOURCES
     src/backend.h src/backend.cpp

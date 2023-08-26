@@ -13,8 +13,6 @@ Item
   property int rows: 10 // TODO: ask the user, avoid hard-coding
   property int cols: 15 // TODO: ask the user, avoid hard-coding
   property int numOfSquares:  rows * cols
-  property int startButtonHeight: 20
-  property int startButtonMargins: 10
 
   Rectangle
   {
@@ -102,30 +100,30 @@ Item
     }
   }
 
-  // TODO: rimpiazzare con un CustomButton e rimuovere StartButton.qml
-  StartButton
+  CustomButton
   {
-    id: startButton
-
     fontSize: 20
+    butnText: "Start Game"
 
     anchors
     {
       horizontalCenter: rootRect.horizontalCenter
       top:              rootRect.bottom
-      topMargin:        rootRect.startButtonMargins
+      topMargin:        50
     }
 
     onClicked: function()
     {
       if ( timer.running === true )
       {
-        timer.running = false
+        timer.running = false;
+        butnText = "Start Game";
         console.log("Timer stopped");
       }
       else
       {
         timer.running = true
+        butnText = "Stop Game";
         console.log("Timer is running");
       }
     }
