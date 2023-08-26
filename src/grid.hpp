@@ -17,6 +17,7 @@ public:
 
   bool getCellStatus(int cellIndex);
   void setCellStatus(int index, bool isAlive);
+  void clearBoard    (void);
 
 private:
 

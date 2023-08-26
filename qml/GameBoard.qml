@@ -10,8 +10,8 @@ Item
 
   property int squareSide:    50
   property int squareSpacing: 5
-  property int rows: 10 // TODO: ask the user, avoid hard-coding
-  property int cols: 15 // TODO: ask the user, avoid hard-coding
+  property int rows: 3  // TODO: ask the user, avoid hard-coding
+  property int cols: 25 // TODO: ask the user, avoid hard-coding
   property int numOfSquares:  rows * cols
 
   Rectangle
@@ -152,13 +152,13 @@ Item
       }
       else
       {
-        console.log("Clearing board... (NOT YET IMPLEMENTED)") // TODO: implement!
+        backend.clearBoard();
       }
     }
   }
 
   Component.onCompleted:
   {
-    backend.initialiseGrid(root.rows, root.cols);
+    backend.initialiseBoard(root.rows, root.cols);
   }
 } // Item

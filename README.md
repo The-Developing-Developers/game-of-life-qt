@@ -38,11 +38,11 @@ This version of Game Of Life is being implemented in Qt Quick 6.5.
 
 - Check the algorithm. The right-hand half of the grid does not behave correctly.
 - Is `Backend` class unnecessary? Could it be merged with `Grid`?
-- Add Reset button, only active when the timer is not running, to reset the board.
 - In the welcome screen, allow the user to choose the size of the grid. Now it is hard-coded in `GameBoard.qml`.
 - Add selectable simulation speed.
 - Translate Italian comments into English.
 - Document what the code is doing and why.
 - Refactor the code to favour readability.
+- ~~Add Reset button, only active when the timer is not running, to reset the board.~~
 - ~~Improve Start button: it could display "running" (or something similar) when the game is running.~~
 - ~~Remove unused methods and test code.~~

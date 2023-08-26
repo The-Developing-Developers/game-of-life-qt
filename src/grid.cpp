@@ -96,6 +96,19 @@ void Grid::setCellStatus(int cellIndex, bool isAlive)
 }
 
 
+void Grid::clearBoard(void)
+{
+  for (size_t row = 0; row != m_numOfRows; ++row)
+  {
+    for (size_t col = 0; col != m_numOfCols; ++col)
+    {
+      m_currentMatrix[row][col].kill();
+      m_futureMatrix [row][col].kill();
+    }
+  }
+}
+
+
 void Grid::recalculateBoard(void)
 {
   qDebug() << __func__ << "Recalculating board...";

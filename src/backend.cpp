@@ -12,12 +12,19 @@ Backend::~Backend(void)
 }
 
 
-void Backend::initialiseGrid(int numOfRows, int numOfCols)
+void Backend::initialiseBoard(int numOfRows, int numOfCols)
 {
   qDebug() << __func__ << ": Initialising grid...";
   qDebug() << __func__ << ":   - Number of rows: " << numOfRows;
   qDebug() << __func__ << ":   - Number of cols: " << numOfCols;
   m_grid = new Grid(numOfRows, numOfCols);
+}
+
+
+void Backend::clearBoard(void)
+{
+  m_grid->clearBoard();
+  emit boardRecalculated();
 }
 
 

@@ -1,10 +1,6 @@
 #ifndef CELL_HPP
 #define CELL_HPP
 
-#include <iostream>
-
-#define NDEBUG
-
 class Cell
 {
 public:
