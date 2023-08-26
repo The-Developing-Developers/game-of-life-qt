@@ -102,6 +102,8 @@ Item
 
   CustomButton
   {
+    id: startGameButton
+
     fontSize: 20
     butnText: "Start Game"
 
@@ -117,14 +119,40 @@ Item
       if ( timer.running === true )
       {
         timer.running = false;
-        butnText = "Start Game";
-        console.log("Timer stopped");
+        butnText = "Click to restart";
       }
       else
       {
         timer.running = true
-        butnText = "Stop Game";
-        console.log("Timer is running");
+        butnText = "Click to stop";
+      }
+    }
+  }
+
+  CustomButton
+  {
+    id: clearBoardButton
+
+    fontSize: 20
+    butnText: "Clear Game Board"
+
+    anchors
+    {
+      horizontalCenter: rootRect.horizontalCenter
+      top:              startGameButton.bottom
+      topMargin:        20
+    }
+
+    onClicked: function()
+    {
+
+      if ( timer.running === true )
+      {
+        // Do nothing
+      }
+      else
+      {
+        console.log("Clearing board... (NOT YET IMPLEMENTED)") // TODO: implement!
       }
     }
   }
