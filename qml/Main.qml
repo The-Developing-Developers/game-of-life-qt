@@ -38,7 +38,7 @@ ApplicationWindow
       {
         id: cell
 
-        property bool isAlive: false // All cells are dead at the beginning
+        property bool isAlive: false // All cells are dead at the creation of a new the game
 
         width:  root.squareSide
         height: root.squareSide
@@ -50,8 +50,8 @@ ApplicationWindow
           target: backend
           function onBoardRecalculated()
           {
-            console.log("Board has been updated. Getting cell status for index: " + index);
             isAlive = backend.getCellStatus(index);
+            console.log("Board has been updated. Cell " + index + " is: " + isAlive);
           }
         }
 
