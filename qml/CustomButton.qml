@@ -4,9 +4,10 @@ import QtQuick.Controls.Fusion
 
 Button
 {
-  id: startButton
+  id: customButton
 
   property alias fontSize: theText.font.pixelSize
+  property alias butnText: theText.text
 
   background: Rectangle
   {
@@ -14,7 +15,7 @@ Button
     property string hoverColour:  "#3275a8"
     property string normalColour: "#8bb0cc"
 
-    color: startButton.down ? pushedColour : (startButton.hovered ? hoverColour : normalColour)
+    color: customButton.down ? pushedColour : (customButton.hovered ? hoverColour : normalColour)
 
     border.width: 1
     border.color: "#414f45"
@@ -26,10 +27,10 @@ Button
   {
     id: theText
 
-    text: "Start"
+    text: "Text here..."
     font.pixelSize: 12
     opacity: enabled ? 1.0 : 0.3
-    color: startButton.hovered ? "white" : "black"
+    color: customButton.hovered ? "white" : "black"
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment:   Text.AlignVCenter
     elide: Text.ElideRight

@@ -19,6 +19,9 @@ qt_add_qml_module(${PROJECT_NAME}
   URI GameOfLife
   VERSION 1.0
   QML_FILES
+    qml/CustomButton.qml
+    qml/WelcomeScreen.qml
+    qml/GameBoard.qml
     qml/Main.qml
     qml/StartButton.qml
   RESOURCES resources.qrc
