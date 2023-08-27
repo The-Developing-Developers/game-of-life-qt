@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import GameStateEnum
 
 Rectangle
 {
@@ -26,21 +27,56 @@ Rectangle
     }
 
     text: "John Conway's Game of Life"
+    font.family: "Georgia"
     font.pixelSize: 50
     font.bold: true
-    color: "black" /* "#EEEEEE" */ /* "#d3e4ed" */
+    color: "black"
   }
 
-  GameOptions
+  Rectangle
   {
-    id: gameOptions
+    id: optionsRect
+
+    color: "#DDDDDD"
+    height: 200
+    width:  1200
+    radius: 10
 
     anchors
     {
-      // fill: background
       horizontalCenter: root.horizontalCenter
-      top:              introText.bottom
-      topMargin: 100
+      top: introText.bottom
+      topMargin: 200
+    }
+
+    Text
+    {
+      id: optionsText
+
+      anchors
+      {
+        horizontalCenter: optionsRect.horizontalCenter
+        top: optionsRect.top
+        topMargin: 20
+      }
+
+      text: "Set up the game options:"
+      font.family: "Helvetica"
+      font.pixelSize: 32
+      font.bold: true
+      color: "black"
+    }
+
+    GameOptions
+    {
+      id: gameOptions
+
+      anchors
+      {
+        horizontalCenter: optionsRect.horizontalCenter
+        top:              optionsText.bottom
+        topMargin: 50
+      }
     }
   }
 
@@ -49,24 +85,14 @@ Rectangle
     anchors
     {
       horizontalCenter: root.horizontalCenter
-      top: gameOptions.bottom
-      topMargin: 100
+      top: optionsRect.bottom
+      topMargin: 150
     }
 
     padding:  20
     fontSize: 30
     butnText: "Start Game of Life"
 
-    onClicked: function()
-    {
-      root.startGame = true;
-    }
-  }
-
-  Binding
-  {
-    target: parent
-    property: "startGame" // name of parent's property
-    value: root.startGame // parent's property is now bound to `root.startGame`
+    onClicked: backend.changeGameState(GameState.GameBoard)
   }
 }

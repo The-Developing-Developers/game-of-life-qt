@@ -4,7 +4,7 @@ import QtQuick.Controls.Fusion
 
 Row
 {
-  spacing: 20
+  spacing: 50
 
   TextField
   {
@@ -21,8 +21,8 @@ Row
     {
       radius: 5
       color:        parent.enabled      ? "lightGrey"   : "#353637"
-      border.color: parent.activeFocus  ? "teal"        : "transparent"
-      border.width: 2
+      border.color: parent.activeFocus  ? "teal"        : "black"
+      border.width: parent.activeFocus  ? 3 : 1
     }
 
     onTextChanged:  { backend.setNumOfRows(parseInt(text)) }
@@ -44,8 +44,8 @@ Row
     {
       radius: 5
       color:        parent.enabled      ? "lightGrey"   :  "#353637"
-      border.color: parent.activeFocus  ? "teal"        : "transparent"
-      border.width: 2
+      border.color: parent.activeFocus  ? "teal"        : "black"
+      border.width: parent.activeFocus  ? 3 : 1
     }
 
     onTextChanged:  { backend.setNumOfCols(parseInt(text)) }
@@ -67,8 +67,8 @@ Row
     {
       radius: 5
       color:        parent.enabled      ? "lightGrey"   : "#353637"
-      border.color: parent.activeFocus  ? "teal"        : "transparent"
-      border.width: 2
+      border.color: parent.activeFocus  ? "teal"        : "black"
+      border.width: parent.activeFocus  ? 3 : 1
     }
 
     onTextChanged:  { backend.setSquareSize(parseInt(text)) }
@@ -90,8 +90,8 @@ Row
     {
       radius: 5
       color:        parent.enabled      ? "lightGrey"   : "#353637"
-      border.color: parent.activeFocus  ? "teal"        : "transparent"
-      border.width: 2
+      border.color: parent.activeFocus  ? "teal"        : "black"
+      border.width: parent.activeFocus  ? 3 : 1
     }
 
     onTextChanged:  { backend.setTimerPeriod(parseInt(text)) }

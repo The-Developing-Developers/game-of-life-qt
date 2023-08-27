@@ -14,9 +14,9 @@ Backend::~Backend(void)
 
 void Backend::initialiseBoard(void)
 {
-  // qDebug() << __func__ << ": Initialising grid...";
-  // qDebug() << __func__ << ":   - Number of rows: " << numOfRows;
-  // qDebug() << __func__ << ":   - Number of cols: " << numOfCols;
+  if (m_grid != nullptr)
+    delete m_grid;
+
   m_grid = new GameBoard(m_numOfRows, m_numOfCols);
 }
 
@@ -104,4 +104,17 @@ int Backend::getTimerPeriod(void) const
 int Backend::getSquareSize(void) const
 {
   return m_squareSize;
+}
+
+
+void Backend::changeGameState(GameState_ns::GameState gameState)
+{
+  m_gameState = gameState;
+  emit gameStateChanged();
+}
+
+
+GameState_ns::GameState Backend::getGameState(void)
+{
+  return m_gameState;
 }

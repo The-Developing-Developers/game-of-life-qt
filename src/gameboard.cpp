@@ -19,8 +19,6 @@ GameBoard::GameBoard(int numOfRows, int numOfCols)
   }
 
   m_isInitialised = true;
-
-  qDebug() << __func__ << ": Square grid created, with" << m_numOfRows * m_numOfCols << "squares.";
 }
 
 
@@ -43,8 +41,6 @@ GameBoard::~GameBoard(void)
   delete[] m_futureMatrix;
   m_currentMatrix = nullptr;
   m_futureMatrix = nullptr;
-
-  qDebug() << __func__ << ": Square grid destroyed.";
 }
 
 
@@ -85,7 +81,6 @@ bool GameBoard::getCellStatus(int cellIndex)
 
 void GameBoard::setCellStatus(int cellIndex, bool isAlive)
 {
-  // qDebug() << __func__ << ": index: " << index << "; isAlive: " << isAlive;
   std::pair<int, int> rowCol = getRowColFromIndex(cellIndex);
   int row = rowCol.first;
   int col = rowCol.second;
@@ -94,12 +89,6 @@ void GameBoard::setCellStatus(int cellIndex, bool isAlive)
     m_currentMatrix[row][col].revive();
   else
     m_currentMatrix[row][col].kill();
-
-  // // TODO: debug
-  // if (m_currentMatrix[row][col].isAlive())
-  //   qDebug() << __func__ << ": Cell (" << row << "," << col << "), index" << cellIndex << ", is alive";
-  // else
-  //   qDebug() << __func__ << ": Cell (" << row << "," << col << "), index" << cellIndex << ", is not alive";
 }
 
 
@@ -118,7 +107,6 @@ void GameBoard::clearBoard(void)
 
 void GameBoard::recalculateBoard(void)
 {
-  // qDebug() << __func__ << "Recalculating board...";
   calculateFutureMatrix();
   overwriteCurrentMatrixWithFutureMatrix();
 }

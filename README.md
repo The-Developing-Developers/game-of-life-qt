@@ -35,7 +35,7 @@ This is a simplified sequence of events when the application is started:
     - Here, the user can modify the game's default properties (game options).
     - When the user modifies a value, this is immediately communicated to the back-end via the `backend` keyword.
 5. `WelcomeScreen.qml`
-    - When the user clicks on "Start Game", the `Binding` informs the `parent`, i.e. `Main.qml`, that the game should change state. The `Loader` then loads `GameBoard.qml`.
+    - When the user clicks on the "Start Game" button, the button informs the `backend` that a state change has been requested. `backend` changes the state and emits an appropriate signal, which is in turn caught by `Main.qml`. Therefore, `Loader` can load `GameBoard.qml`.
 6. `GameBoard.qml`
     - This QML document reads the values typed in earlier by the user, if any (otherwise, it will use the defaults, which are defined in `backend.h`)
     - The values are used to instantiate the Game Board, first as a visual element, and then as a C++ back-end in the `Component.onCompleted` section.
@@ -63,10 +63,13 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 - Is `Backend` class unnecessary? Could it be merged with `Grid`?
 - Add the possibility to select multiple squares in the game board by clicking and dragging the mouse over the board.
-- Translate Italian comments into English.
-- Document what the code is doing and why.
 - Refactor the code to favour readability.
 - Add automatic calculation to avoid having an excessively large (i.e., out of screen) game board.
+- In `Backend`, evaluate which methods should be `Q_INVOKABLE` or `public slots`.
+- Decide whether the `TextField`s in `GameOptions.qml` can be simplified / exported in an external QML document. There is a lot of code duplication.
+- A definitive name should be chosen for the Options / Welcome Screen.
+- ~~Translate Italian comments into English.~~
+- ~~Document what the code is doing and why.~~
 - ~~Add selectable simulation speed and square size.~~
 - ~~In the welcome screen, allow the user to choose the size of the grid. Now it is hard-coded in `GameBoard.qml`.~~
 - ~~Rename `Grid` class to `Board`?~~

@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import GameStateEnum
 
 ApplicationWindow
 {
@@ -26,6 +27,30 @@ ApplicationWindow
       // source: assigned by "state" property
 
       // onLoaded:{ console.log("loaded file: " + source) } // TODO: debug
+    }
+
+    Connections
+    {
+      target: backend
+
+      function onGameStateChanged()
+      {
+        switch ( backend.getGameState() )
+        {
+          case GameState.WelcomeScreen:
+            rootContainer.state = "welcomeScreen"
+            break;
+
+          case GameState.GameBoard:
+            rootContainer.state = "gameScreen"
+            break;
+
+          case GameState.Undefined:
+          default:
+            console.log("Main.qml: unknown error during state change")
+            break;
+        }
+      }
     }
 
     state: "welcomeScreen" // default state

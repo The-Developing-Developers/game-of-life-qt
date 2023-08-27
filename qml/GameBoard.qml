@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import GameStateEnum
 
 Item
 {
@@ -88,13 +89,8 @@ Item
     onTriggered: function() { backend.recalculateBoard(); }
   }
 
-  CustomButton
+  Row
   {
-    id: startGameButton
-
-    fontSize: 20
-    butnText: "Start Game"
-
     anchors
     {
       horizontalCenter: background.horizontalCenter
@@ -102,38 +98,58 @@ Item
       topMargin:        50
     }
 
-    onClicked: function()
+    spacing: 100
+
+    CustomButton
     {
-      if ( timer.running )
+      id: startGameButton
+
+      width: 250
+      fontSize: 24
+      butnText: "Start Game"
+
+      onClicked: function()
       {
-        timer.running = false;
-        butnText = "Click to restart";
-      }
-      else
-      {
-        timer.running = true
-        butnText = "Click to stop";
+        if ( timer.running )
+        {
+          timer.running = false;
+          butnText = "Click to restart";
+        }
+        else
+        {
+          timer.running = true
+          butnText = "Click to stop";
+        }
       }
     }
-  }
 
-  CustomButton
-  {
-    id: clearBoardButton
-
-    fontSize: 20
-    butnText: "Clear Game Board"
-    enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
-
-    anchors
+    CustomButton
     {
-      horizontalCenter: background.horizontalCenter
-      top:              startGameButton.bottom
-      topMargin:        20
+      id: clearBoardButton
+
+      width: 250
+      fontSize: 24
+      butnText: "Clear Game Board"
+      enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
+
+      onClicked: function() { backend.clearBoard(); }
     }
 
-    onClicked: function() { backend.clearBoard(); }
-  }
+    CustomButton
+    {
+      id: backToOptionsButton
+
+      width: 250
+      fontSize: 24
+      butnText: "Go back to options"
+      enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
+
+      onClicked: function()
+      {
+        backend.changeGameState(GameState.WelcomeScreen);
+      }
+    }
+  } // Row
 
   Component.onCompleted:
   {

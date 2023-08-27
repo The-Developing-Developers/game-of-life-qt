@@ -5,6 +5,15 @@
 
 int main(int argc, char *argv[])
 {
+  qmlRegisterUncreatableMetaObject
+  (
+    GameState_ns::staticMetaObject, // meta object created by Q_NAMESPACE macro
+    "GameStateEnum",                // import statement (can be any string)
+    1, 0,                           // major and minor version of the import
+    "GameState",                    // name in QML (does not have to match C++ name)
+    "Error: only enums"             // error in case someone tries to create a MyNamespace object
+  );
+
   Backend               backend;
   QGuiApplication       app(argc, argv);
   QQmlApplicationEngine engine; // Motore QML
