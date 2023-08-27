@@ -28,7 +28,7 @@ qt_add_qml_module(${PROJECT_NAME}
   SOURCES
     src/backend.h src/backend.cpp
     src/cell.hpp src/cell.cpp
-    src/grid.hpp src/grid.cpp
+    src/gameboard.hpp src/gameboard.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

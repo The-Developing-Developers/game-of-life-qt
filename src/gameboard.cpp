@@ -1,10 +1,10 @@
 #include <QDebug>
-#include "grid.hpp"
+#include "gameboard.hpp"
 
 /**
- * @brief Construct a new Grid object with custom size.
+ * @brief Construct a new GameBoard object with custom size.
  **/
-Grid::Grid(int numOfRows, int numOfCols)
+GameBoard::GameBoard(int numOfRows, int numOfCols)
   : m_numOfRows(numOfRows), m_numOfCols(numOfCols)
 {
   // Number of rows
@@ -24,7 +24,7 @@ Grid::Grid(int numOfRows, int numOfCols)
 }
 
 
-Grid::~Grid(void)
+GameBoard::~GameBoard(void)
 {
   if (!m_isInitialised)
   {
@@ -48,13 +48,13 @@ Grid::~Grid(void)
 }
 
 
-int Grid::getIndexFromRowCol(int row, int col)
+int GameBoard::getIndexFromRowCol(int row, int col)
 {
   return row * m_numOfCols + col;
 }
 
 
-std::pair<int, int> Grid::getRowColFromIndex(int cellIndex)
+std::pair<int, int> GameBoard::getRowColFromIndex(int cellIndex)
 {
   int row = 0;
   int col = 0;
@@ -74,7 +74,7 @@ std::pair<int, int> Grid::getRowColFromIndex(int cellIndex)
 }
 
 
-bool Grid::getCellStatus(int cellIndex)
+bool GameBoard::getCellStatus(int cellIndex)
 {
   std::pair<int, int> rowCol = getRowColFromIndex(cellIndex);
   int row = rowCol.first;
@@ -83,7 +83,7 @@ bool Grid::getCellStatus(int cellIndex)
 }
 
 
-void Grid::setCellStatus(int cellIndex, bool isAlive)
+void GameBoard::setCellStatus(int cellIndex, bool isAlive)
 {
   // qDebug() << __func__ << ": index: " << index << "; isAlive: " << isAlive;
   std::pair<int, int> rowCol = getRowColFromIndex(cellIndex);
@@ -103,7 +103,7 @@ void Grid::setCellStatus(int cellIndex, bool isAlive)
 }
 
 
-void Grid::clearBoard(void)
+void GameBoard::clearBoard(void)
 {
   for (size_t row = 0; row != m_numOfRows; ++row)
   {
@@ -116,7 +116,7 @@ void Grid::clearBoard(void)
 }
 
 
-void Grid::recalculateBoard(void)
+void GameBoard::recalculateBoard(void)
 {
   // qDebug() << __func__ << "Recalculating board...";
   calculateFutureMatrix();
@@ -128,7 +128,7 @@ void Grid::recalculateBoard(void)
  * @brief For each cell in a given matrix, checks the cell's neighbours and
  * applies Game Of Life's rules. Also, decides the fate of the examined cell.
  **/
-void Grid::calculateFutureMatrix(void)
+void GameBoard::calculateFutureMatrix(void)
 {
   for (int i = 0; i < m_numOfRows; ++i)
   {
@@ -219,19 +219,19 @@ void Grid::calculateFutureMatrix(void)
 }
 
 
-bool Grid::isNeighbourWithinBounds(int row, int col)
+bool GameBoard::isNeighbourWithinBounds(int row, int col)
 {
   return ( row >= 0 && col >= 0 && row < m_numOfRows && col < m_numOfCols );
 }
 
 
-bool Grid::isNeighbourAlive(int row, int col)
+bool GameBoard::isNeighbourAlive(int row, int col)
 {
   return ( m_currentMatrix[row][col].isAlive() );
 }
 
 
-void Grid::overwriteCurrentMatrixWithFutureMatrix(void)
+void GameBoard::overwriteCurrentMatrixWithFutureMatrix(void)
 {
   for (size_t row = 0; row != m_numOfRows; ++row)
   {

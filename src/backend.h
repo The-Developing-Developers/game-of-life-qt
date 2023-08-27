@@ -4,7 +4,7 @@
 #include <QObject>
 #include <utility>
 #include <qqmlintegration.h>
-#include "grid.hpp"
+#include "gameboard.hpp"
 
 class Backend : public QObject
 {
@@ -42,11 +42,11 @@ private:
   static constexpr int m_minNumOfRowsAndCols  = 5;
   static constexpr int m_minTimerPeriod_ms    = 50;
   static constexpr int m_minSquareSize        = 10;
-  int   m_numOfRows       = 5;
-  int   m_numOfCols       = 5;
-  int   m_timerPeriod_ms  = 250;
-  int   m_squareSize      = 50;
-  Grid* m_grid;
+  int        m_numOfRows       = 5;
+  int        m_numOfCols       = 5;
+  int        m_timerPeriod_ms  = 250;
+  int        m_squareSize      = 50;
+  GameBoard* m_grid;
 };
 
 #endif // BACKEND_H

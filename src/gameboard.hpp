@@ -1,17 +1,17 @@
-#ifndef GRID_HPP
-#define GRID_HPP
+#ifndef GAMEBOARD_HPP
+#define GAMEBOARD_HPP
 
 #include "cell.hpp"
 
 /**
  * @brief Create a square grid populated with cells. Minimum size given by "m_MinMatrixSize".
  **/
-class Grid
+class GameBoard
 {
 public:
 
-   Grid(int numOfRows, int numOfCols);
-  ~Grid(void);
+   GameBoard(int numOfRows, int numOfCols);
+  ~GameBoard(void);
 
   void recalculateBoard(void);
 
@@ -37,4 +37,4 @@ private:
   bool      m_isInitialised = false;
 };
 
-#endif // GRID_HPP
+#endif // GAMEBOARD_HPP
