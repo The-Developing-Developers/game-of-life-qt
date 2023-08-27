@@ -213,15 +213,15 @@ void Grid::calculateFutureMatrix(void)
 }
 
 
-bool Grid::isNeighbourWithinBounds(int i, int j)
+bool Grid::isNeighbourWithinBounds(int row, int col)
 {
-  return ( i >= 0 && j >= 0 && i < m_numOfRows && j < m_numOfRows );
+  return ( row >= 0 && col >= 0 && row < m_numOfRows && col < m_numOfCols );
 }
 
 
-bool Grid::isNeighbourAlive(int i, int j)
+bool Grid::isNeighbourAlive(int row, int col)
 {
-  return ( m_currentMatrix[i][j].isAlive() );
+  return ( m_currentMatrix[row][col].isAlive() );
 }
 
 

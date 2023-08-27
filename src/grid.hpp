@@ -23,8 +23,8 @@ private:
 
   void calculateFutureMatrix                  (void);
   void overwriteCurrentMatrixWithFutureMatrix (void);
-  bool isNeighbourWithinBounds                (int i, int j);
-  bool isNeighbourAlive                       (int i, int j);
+  bool isNeighbourWithinBounds                (int row, int col);
+  bool isNeighbourAlive                       (int row, int col);
   int  getIndexFromRowCol                     (int row, int col);
   std::pair<int, int> getRowColFromIndex      (int cellIndex);
 
