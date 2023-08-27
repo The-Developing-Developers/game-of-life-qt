@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Controls.Fusion
 
 ApplicationWindow
 {
@@ -22,14 +21,11 @@ ApplicationWindow
     {
       id: loader
 
-      property bool startGame: false
+      property bool startGame: false // assigned by binding in WelcomeScreen.qml
       anchors.fill: parent
       // source: assigned by "state" property
 
-      onLoaded:
-      {
-        console.log("loaded file: " + source)
-      }
+      // onLoaded:{ console.log("loaded file: " + source) } // TODO: debug
     }
 
     state: "welcomeScreen" // default state
@@ -51,4 +47,4 @@ ApplicationWindow
       }
     ]
   } // rootContainer
-}
+} // root

@@ -88,11 +88,11 @@ void Grid::setCellStatus(int cellIndex, bool isAlive)
   else
     m_currentMatrix[row][col].kill();
 
-  // TODO: debug
-  if (m_currentMatrix[row][col].isAlive())
-    qDebug() << __func__ << ": Cell (" << row << "," << col << "), index" << cellIndex << ", is alive";
-  else
-    qDebug() << __func__ << ": Cell (" << row << "," << col << "), index" << cellIndex << ", is not alive";
+  // // TODO: debug
+  // if (m_currentMatrix[row][col].isAlive())
+  //   qDebug() << __func__ << ": Cell (" << row << "," << col << "), index" << cellIndex << ", is alive";
+  // else
+  //   qDebug() << __func__ << ": Cell (" << row << "," << col << "), index" << cellIndex << ", is not alive";
 }
 
 
@@ -111,8 +111,7 @@ void Grid::clearBoard(void)
 
 void Grid::recalculateBoard(void)
 {
-  qDebug() << __func__ << "Recalculating board...";
-
+  // qDebug() << __func__ << "Recalculating board...";
   calculateFutureMatrix();
   overwriteCurrentMatrixWithFutureMatrix();
 }

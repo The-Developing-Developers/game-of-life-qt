@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Controls.Fusion
 
 Item
 {
@@ -10,28 +9,27 @@ Item
 
   property int squareSide:    50
   property int squareSpacing: 5
-  property int rows: 15 // TODO: ask the user, avoid hard-coding
+  property int rows: 12 // TODO: ask the user, avoid hard-coding
   property int cols: 25 // TODO: ask the user, avoid hard-coding
   property int numOfSquares:  rows * cols
 
   Rectangle
   {
-    id: rootRect
+    id: background
 
     anchors.horizontalCenter: root.horizontalCenter
 
     width:  (squareSide + squareSpacing) * cols + squareSpacing
     height: (squareSide + squareSpacing) * rows + squareSpacing
+    color: "lightGrey"
     border.width: 1
   }
 
   Grid
   {
-    id: gameBoard
-
     anchors
     {
-      fill: rootRect
+      fill: background
       topMargin: squareSpacing
       leftMargin: squareSpacing
     }
@@ -42,8 +40,6 @@ Item
 
     Repeater
     {
-      id: repeater
-
       model: root.numOfSquares
 
       Rectangle
@@ -60,11 +56,7 @@ Item
         Connections
         {
           target: backend
-          function onBoardRecalculated()
-          {
-            isAlive = backend.getCellStatus(index);
-            console.log("Board has been updated. Cell " + index + " is: " + isAlive);
-          }
+          function onBoardRecalculated() { isAlive = backend.getCellStatus(index); }
         }
 
         MouseArea
@@ -83,21 +75,17 @@ Item
           }
         }
       } // id: cell
-    } // id: repeater
-  } // id: gameBoard
+    } // Repeater
+  } // Grid
 
   Timer
   {
     id: timer
 
-    interval: 1000;
+    interval: 500;
     running: false;
     repeat:  true
-    onTriggered: function()
-    {
-      console.log("Timer expired. Recalculating board...");
-      backend.recalculateBoard();
-    }
+    onTriggered: function() { backend.recalculateBoard(); }
   }
 
   CustomButton
@@ -109,8 +97,8 @@ Item
 
     anchors
     {
-      horizontalCenter: rootRect.horizontalCenter
-      top:              rootRect.bottom
+      horizontalCenter: background.horizontalCenter
+      top:              background.bottom
       topMargin:        50
     }
 
@@ -135,26 +123,16 @@ Item
 
     fontSize: 20
     butnText: "Clear Game Board"
+    enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
 
     anchors
     {
-      horizontalCenter: rootRect.horizontalCenter
+      horizontalCenter: background.horizontalCenter
       top:              startGameButton.bottom
       topMargin:        20
     }
 
-    onClicked: function()
-    {
-
-      if ( timer.running === true )
-      {
-        // Do nothing
-      }
-      else
-      {
-        backend.clearBoard();
-      }
-    }
+    onClicked: function() { backend.clearBoard(); }
   }
 
   Component.onCompleted:

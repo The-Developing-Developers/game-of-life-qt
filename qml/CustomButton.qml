@@ -12,7 +12,7 @@ Button
   background: Rectangle
   {
     property string pushedColour: "#bbbbbb"
-    property string hoverColour:  "#3275a8"
+    property string  hoverColour: "#3275a8"
     property string normalColour: "#8bb0cc"
 
     color: customButton.down ? pushedColour : (customButton.hovered ? hoverColour : normalColour)
