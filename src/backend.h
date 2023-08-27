@@ -29,7 +29,7 @@ public:
 public slots:
   void recalculateBoard (void);
   bool getCellStatus    (int cellIndex);
-  void setCellStatus    (int index, bool isAlive);
+  void setCellStatus    (int cellindex, bool isAlive);
   void setNumOfRows     (int numOfRows);
   void setNumOfCols     (int numOfCols);
   void setTimerPeriod   (int timerPeriod_ms);

@@ -12,22 +12,47 @@
 
 <p style="color:red;">**NOTE**: THIS DOCUMENT IS STILL WORK IN PROGRESS</p>
 
-The [Game Of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine. (*from Wikipedia*)
+The **Game Of Life**, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine. (*from [Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)*)
 
 
 # Implementation
 
-This version of Game Of Life is being implemented in Qt Quick 6.5.
+This is a simplified sequence of events when the application is started:
+
+1. `main.cpp`:
+    - The `main` function instantiates the `Backend` class, which will be the only one that can interact with the QML front-end.
+    - A QML engine, `QQmlApplicationEngine`, is created.
+    - From the QML engine, a `QQmlContext` is obtained.
+    - The context is used to set the `Backend` instance as a context property of the engine. That is, from now on the `Backend` class can interact with the QML front-end, by using the `backend` keyword in any QML document (`backend` has now global visibility in QML).
+    - The engine loads the entry point of the QML front-end, `Main.qml`.
+2. `Main.qml`:
+    - A root container (`rootContainer`) is created. It is necessary because the `ApplicationWindow` does not have `states`.
+    - A `Loader` is created. The `Loader` will be used to dynamically load the Welcome screen first, and the Game Board second. The `Loader` is governed by the `states` of the `rootContainer`.
+3. `WelcomeScreen.qml`
+    - This file is loaded by default, because it is tied to the default `state` of `rootContainer`.
+    - To avoid cluttering this QML document, the game options are managed by an external QML document, `GameOptions.qml`.
+4. `GameOptions.qml`
+    - Here, the user can modify the game's default properties (game options).
+    - When the user modifies a value, this is immediately communicated to the back-end via the `backend` keyword.
+5. `WelcomeScreen.qml`
+    - When the user clicks on "Start Game", the `Binding` informs the `parent`, i.e. `Main.qml`, that the game should change state. The `Loader` then loads `GameBoard.qml`.
+6. `GameBoard.qml`
+    - This QML document reads the values typed in earlier by the user, if any (otherwise, it will use the defaults, which are defined in `backend.h`)
+    - The values are used to instantiate the Game Board, first as a visual element, and then as a C++ back-end in the `Component.onCompleted` section.
+    - The user can click on any dead cell on the Game Board to revive it.
+    - When the user is satisfied with the selection, the evolution can start by pressing the "Start Game" button.
+
+Communication with the backend from QML to C++ and vice-versa is always and exclusively managed via the `backend` instance.
 
 
 # How To Build
 
 1. Clone this repository.
 2. Install Qt 6.5 (or later version) using the web installer. Required packages:
-  - C++ compiler
-  - Qt Creator 11.0.2 (or later version)
-  - CMake 3.24.2
-  - Ninja 1.10.2
+    - C++ compiler
+    - Qt Creator 11.0.2 (or later version)
+    - CMake 3.24.2
+    - Ninja 1.10.2
 3. Open Qt Creator.
 4. Open `MakeLists.txt`.
 5. Select *Release* configuration.

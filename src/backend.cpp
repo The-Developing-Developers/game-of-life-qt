@@ -41,9 +41,9 @@ bool Backend::getCellStatus(int cellIndex)
 }
 
 
-void Backend::setCellStatus(int index, bool isAlive)
+void Backend::setCellStatus(int cellIndex, bool isAlive)
 {
-  m_grid->setCellStatus(index, isAlive);
+  m_grid->setCellStatus(cellIndex, isAlive);
 }
 
 
