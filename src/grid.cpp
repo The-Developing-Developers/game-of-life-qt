@@ -18,12 +18,19 @@ Grid::Grid(int numOfRows, int numOfCols)
     m_futureMatrix[i] = new Cell[m_numOfCols];
   }
 
+  m_isInitialised = true;
+
   qDebug() << __func__ << ": Square grid created, with" << m_numOfRows * m_numOfCols << "squares.";
 }
 
 
 Grid::~Grid(void)
 {
+  if (!m_isInitialised)
+  {
+    return; // TODO: should prevent application crash when user closes the ApplicationWindow without loading the game board screen, but it still crashes (see Qt's terminal)
+  }
+
   for (int i = 0; i != m_numOfRows; ++i)
   {
     delete[] m_currentMatrix[i];

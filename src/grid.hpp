@@ -34,7 +34,7 @@ private:
   const int m_numOfCols;
   Cell**    m_currentMatrix;
   Cell**    m_futureMatrix;
-  bool      m_invertOrder = false;
+  bool      m_isInitialised = false;
 };
 
 #endif // GRID_HPP
