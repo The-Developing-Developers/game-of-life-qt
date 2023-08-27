@@ -12,12 +12,12 @@ Backend::~Backend(void)
 }
 
 
-void Backend::initialiseBoard(int numOfRows, int numOfCols)
+void Backend::initialiseBoard(void)
 {
   // qDebug() << __func__ << ": Initialising grid...";
   // qDebug() << __func__ << ":   - Number of rows: " << numOfRows;
   // qDebug() << __func__ << ":   - Number of cols: " << numOfCols;
-  m_grid = new Grid(numOfRows, numOfCols);
+  m_grid = new Grid(m_numOfRows, m_numOfCols);
 }
 
 
@@ -44,4 +44,64 @@ bool Backend::getCellStatus(int cellIndex)
 void Backend::setCellStatus(int index, bool isAlive)
 {
   m_grid->setCellStatus(index, isAlive);
+}
+
+
+void Backend::setNumOfRows(int numOfRows)
+{
+  if (numOfRows >= m_minNumOfRowsAndCols)
+    m_numOfRows = numOfRows;
+  else
+    m_numOfRows = m_minNumOfRowsAndCols;
+}
+
+
+void Backend::setNumOfCols(int numOfCols)
+{
+  if (numOfCols >= m_minNumOfRowsAndCols)
+    m_numOfCols = numOfCols;
+  else
+    m_numOfCols = m_minNumOfRowsAndCols;
+}
+
+
+void Backend::setTimerPeriod(int timerPeriod_ms)
+{
+  if (timerPeriod_ms >= m_minTimerPeriod_ms)
+    m_timerPeriod_ms = timerPeriod_ms;
+  else
+    m_timerPeriod_ms = m_minTimerPeriod_ms;
+}
+
+
+void Backend::setSquareSize(int squareSize)
+{
+  if (squareSize >= m_minSquareSize)
+    m_squareSize = squareSize;
+  else
+    m_squareSize = m_minSquareSize;
+}
+
+
+int Backend::getNumOfRows(void) const
+{
+  return m_numOfRows;
+}
+
+
+int Backend::getNumOfCols(void) const
+{
+  return m_numOfCols;
+}
+
+
+int Backend::getTimerPeriod(void) const
+{
+  return m_timerPeriod_ms;
+}
+
+
+int Backend::getSquareSize(void) const
+{
+  return m_squareSize;
 }

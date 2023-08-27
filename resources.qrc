@@ -3,6 +3,7 @@
         <file>qml/CustomButton.qml</file>
         <file>qml/WelcomeScreen.qml</file>
         <file>qml/GameBoard.qml</file>
+        <file>qml/GameOptions.qml</file>
         <file>qml/Main.qml</file>
     </qresource>
 </RCC>

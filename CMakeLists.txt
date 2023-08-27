@@ -22,6 +22,7 @@ qt_add_qml_module(${PROJECT_NAME}
     qml/CustomButton.qml
     qml/WelcomeScreen.qml
     qml/GameBoard.qml
+    qml/GameOptions.qml
     qml/Main.qml
   RESOURCES resources.qrc
   SOURCES

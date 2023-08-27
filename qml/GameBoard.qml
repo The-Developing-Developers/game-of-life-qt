@@ -7,10 +7,10 @@ Item
 
   anchors.fill: parent
 
-  property int squareSide:    50
   property int squareSpacing: 5
-  property int rows: 12 // TODO: ask the user, avoid hard-coding
-  property int cols: 25 // TODO: ask the user, avoid hard-coding
+  property int squareSide:    backend.getSquareSize()
+  property int rows:          backend.getNumOfRows()
+  property int cols:          backend.getNumOfCols()
   property int numOfSquares:  rows * cols
 
   Rectangle
@@ -82,7 +82,7 @@ Item
   {
     id: timer
 
-    interval: 500;
+    interval: backend.getTimerPeriod();
     running: false;
     repeat:  true
     onTriggered: function() { backend.recalculateBoard(); }
@@ -104,7 +104,7 @@ Item
 
     onClicked: function()
     {
-      if ( timer.running === true )
+      if ( timer.running )
       {
         timer.running = false;
         butnText = "Click to restart";
@@ -137,6 +137,6 @@ Item
 
   Component.onCompleted:
   {
-    backend.initialiseBoard(root.rows, root.cols);
+    backend.initialiseBoard();
   }
 } // Item

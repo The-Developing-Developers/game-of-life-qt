@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Controls.Fusion
 
 Rectangle
 {
@@ -32,7 +31,7 @@ Rectangle
     color: "black" /* "#EEEEEE" */ /* "#d3e4ed" */
   }
 
-  Row
+  GameOptions
   {
     id: gameOptions
 
@@ -40,112 +39,10 @@ Rectangle
     {
       // fill: background
       horizontalCenter: root.horizontalCenter
-      top: introText.bottom
+      top:              introText.bottom
       topMargin: 100
     }
-
-    spacing: 20
-
-    TextField
-    {
-      width:  220
-      height: 50
-
-      // focus: true
-      placeholderText: "Select num. of rows"
-      font.pointSize: 14
-      wrapMode: TextInput.Wrap
-      validator: IntValidator {bottom: 1; top: 12;}
-
-      background: Rectangle
-      {
-        radius: 5
-        color:        parent.enabled      ? "lightGrey"   : "#353637"
-        border.color: parent.activeFocus  ? "teal"        : "transparent"
-        border.width: 2
-      }
-
-      onAccepted:
-      {
-        // root.jsCall(input.text)
-      }
-    }
-
-    TextField
-    {
-      width:  220
-      height: 50
-
-      // focus: true
-      placeholderText: "Select num. of columns"
-      font.pointSize: 14
-      wrapMode: TextInput.Wrap
-      validator: IntValidator {bottom: 1; top: 25;}
-
-      background: Rectangle
-      {
-        radius: 5
-        color:        parent.enabled      ? "lightGrey"   :  "#353637"
-        border.color: parent.activeFocus  ? "teal"        : "transparent"
-        border.width: 2
-      }
-
-      onAccepted:
-      {
-        // root.jsCall(input.text)
-      }
-    }
-
-    TextField
-    {
-      width:  220
-      height: 50
-
-      // focus: true
-      placeholderText: "Select rectangle size"
-      font.pointSize: 14
-      wrapMode: TextInput.Wrap
-      validator: IntValidator {bottom: 10; top: 100;}
-
-      background: Rectangle
-      {
-        radius: 5
-        color:        parent.enabled      ? "lightGrey"   : "#353637"
-        border.color: parent.activeFocus  ? "teal"        : "transparent"
-        border.width: 2
-      }
-
-      onAccepted:
-      {
-        // root.jsCall(input.text)
-      }
-    }
-
-    TextField
-    {
-      width:  220
-      height: 50
-
-      // focus: true
-      placeholderText: "Select game speed in ms"
-      font.pointSize: 14
-      wrapMode: TextInput.Wrap
-      validator: IntValidator {bottom: 100; top: 5000;}
-
-      background: Rectangle
-      {
-        radius: 5
-        color:        parent.enabled      ? "lightGrey"   : "#353637"
-        border.color: parent.activeFocus  ? "teal"        : "transparent"
-        border.width: 2
-      }
-
-      onAccepted:
-      {
-        // root.jsCall(input.text)
-      }
-    }
-  } // Row
+  }
 
   CustomButton
   {
