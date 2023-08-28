@@ -14,7 +14,7 @@ ApplicationWindow
 
   Rectangle
   {
-    id: rootContainer
+    id: rootContainer // needed for the `state` property
 
     anchors.fill: parent
 
@@ -22,11 +22,8 @@ ApplicationWindow
     {
       id: loader
 
-      property bool startGame: false // assigned by binding in WelcomeScreen.qml
       anchors.fill: parent
-      // source: assigned by "state" property
-
-      // onLoaded:{ console.log("loaded file: " + source) } // TODO: debug
+      // source: assigned by `state` property
     }
 
     Connections
@@ -60,14 +57,12 @@ ApplicationWindow
       State
       {
         name: "welcomeScreen"
-        when: loader.startGame === false
         PropertyChanges { target: loader; source: "WelcomeScreen.qml"; }
       },
 
       State
       {
         name: "gameScreen"
-        when: loader.startGame === true
         PropertyChanges { target: loader; source: "GameBoard.qml"; }
       }
     ]

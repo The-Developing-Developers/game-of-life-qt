@@ -78,7 +78,7 @@ Rectangle
         topMargin: 50
       }
     }
-  }
+  } // id: optionsRect
 
   CustomButton
   {

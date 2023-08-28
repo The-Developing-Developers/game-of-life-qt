@@ -11,7 +11,7 @@ Row
     width:  220
     height: 50
 
-    // focus: true
+    focus: true
     placeholderText: "Rows: " + backend.getNumOfRows().toString()
     font.pointSize: 14
     wrapMode: TextInput.Wrap
@@ -34,7 +34,6 @@ Row
     width:  220
     height: 50
 
-    // focus: true
     placeholderText: "Columns: " + backend.getNumOfCols().toString()
     font.pointSize: 14
     wrapMode: TextInput.Wrap
@@ -57,7 +56,6 @@ Row
     width:  220
     height: 50
 
-    // focus: true
     placeholderText: "Square size: " + backend.getSquareSize().toString()
     font.pointSize: 14
     wrapMode: TextInput.Wrap
@@ -80,7 +78,6 @@ Row
     width:  220
     height: 50
 
-    // focus: true
     placeholderText: "Game speed: " + backend.getTimerPeriod().toString() + " ms"
     font.pointSize: 14
     wrapMode: TextInput.Wrap

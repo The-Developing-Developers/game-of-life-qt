@@ -63,11 +63,13 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 - Is `Backend` class unnecessary? Could it be merged with `Grid`?
 - Add the possibility to select multiple squares in the game board by clicking and dragging the mouse over the board.
+- Allow the user to choose the spacing between the cells in the Game Board.
 - Refactor the code to favour readability.
 - Add automatic calculation to avoid having an excessively large (i.e., out of screen) game board.
 - In `Backend`, evaluate which methods should be `Q_INVOKABLE` or `public slots`.
 - Decide whether the `TextField`s in `GameOptions.qml` can be simplified / exported in an external QML document. There is a lot of code duplication.
 - A definitive name should be chosen for the Options / Welcome Screen.
+- Add a couple more helper private methods in `gameboard.cpp` to make the code more readable in `calculateFutureMatrix`.
 - ~~Translate Italian comments into English.~~
 - ~~Document what the code is doing and why.~~
 - ~~Add selectable simulation speed and square size.~~

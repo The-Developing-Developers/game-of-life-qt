@@ -8,7 +8,7 @@ Item
 
   anchors.fill: parent
 
-  property int squareSpacing: 5
+  property int squareSpacing: 5 // TODO: let the user decide
   property int squareSide:    backend.getSquareSize()
   property int rows:          backend.getNumOfRows()
   property int cols:          backend.getNumOfCols()

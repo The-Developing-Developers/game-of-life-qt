@@ -26,7 +26,7 @@ GameBoard::~GameBoard(void)
 {
   if (!m_isInitialised)
   {
-    return; // TODO: should prevent application crash when user closes the ApplicationWindow without loading the game board screen, but it still crashes (see Qt's terminal)
+    return;
   }
 
   for (int i = 0; i != m_numOfRows; ++i)
@@ -125,6 +125,7 @@ void GameBoard::calculateFutureMatrix(void)
       size_t AliveNeighboursCounter = 0;
 
       // Investigate neighbours
+
       if (isNeighbourWithinBounds(i - 1, j - 1) && isNeighbourAlive(i - 1, j - 1) )
       {
         ++AliveNeighboursCounter; // Above left
@@ -177,10 +178,11 @@ void GameBoard::calculateFutureMatrix(void)
 
       if (m_currentMatrix[i][j].isAlive())
       {
+        // TODO: replace conditions with constants for readability?
         if (AliveNeighboursCounter == m_DeadOrAliveLowerThreshold || AliveNeighboursCounter == m_DeadOrAliveUpperThreshold)
         {
           // Rule 1: any live cell with two or three live neighbours survives.
-          m_futureMatrix[i][j].revive();
+          m_futureMatrix[i][j].revive(); // TODO: superfluous? Cell is already alive in this `if`
         }
         else
         {
@@ -199,7 +201,7 @@ void GameBoard::calculateFutureMatrix(void)
         }
         else
         {
-          m_futureMatrix[i][j].kill();
+          m_futureMatrix[i][j].kill(); // TODO: superfluous? Cell is already dead in this `else`
         }
       }
     } // for loop
