@@ -30,7 +30,7 @@ Rectangle
     font.family: "Georgia"
     font.pixelSize: 50
     font.bold: true
-    color: "black"
+    color: "#205050"
   }
 
   Rectangle
@@ -46,7 +46,7 @@ Rectangle
     {
       horizontalCenter: root.horizontalCenter
       top: introText.bottom
-      topMargin: 200
+      topMargin: 180
     }
 
     Text
@@ -82,17 +82,41 @@ Rectangle
 
   CustomButton
   {
+    id: startButton
+
     anchors
     {
       horizontalCenter: root.horizontalCenter
-      top: optionsRect.bottom
-      topMargin: 150
+      top:              optionsRect.bottom
+      topMargin: 130
     }
 
-    padding:  20
-    fontSize: 30
-    butnText: "Start Game of Life"
+    padding:      20
+    pixelSize_a:  30
+    text_a:       "Start Game of Life"
 
     onClicked: backend.changeGameState(GameState.GameBoard)
+  }
+
+  CustomButton
+  {
+    id: quitButton
+
+    anchors
+    {
+      horizontalCenter: startButton.horizontalCenter
+      top:              startButton.bottom
+      topMargin: 50
+    }
+
+    padding:      20
+    pixelSize_a:  20
+    text_a:       "Quit"
+
+    pushedColour_a: "#FFAA00"
+    hoverColour_a:  "red"
+    normalColour_a: "#803030"
+
+    onClicked: Qt.quit();
   }
 }

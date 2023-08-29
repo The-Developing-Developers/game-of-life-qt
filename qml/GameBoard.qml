@@ -89,8 +89,10 @@ Item
     onTriggered: function() { backend.recalculateBoard(); }
   }
 
-  Row
+  CustomButton
   {
+    id: startGameButton
+
     anchors
     {
       horizontalCenter: background.horizontalCenter
@@ -98,38 +100,51 @@ Item
       topMargin:        50
     }
 
-    spacing: 100
+    width:        250
+    pixelSize_a:  30
+    text_a:       "Start Game"
 
-    CustomButton
+    pushedColour_a: "#00FF00"
+    hoverColour_a:  "#00AF00"
+    normalColour_a: "#007F00"
+    normalTextColour_a: "white"
+    hoverTextColour_a: "white"
+
+    onClicked: function()
     {
-      id: startGameButton
-
-      width: 250
-      fontSize: 24
-      butnText: "Start Game"
-
-      onClicked: function()
+      if ( timer.running )
       {
-        if ( timer.running )
-        {
-          timer.running = false;
-          butnText = "Click to restart";
-        }
-        else
-        {
-          timer.running = true
-          butnText = "Click to stop";
-        }
+        timer.running = false;
+        text_a = "Click to restart";
+      }
+      else
+      {
+        timer.running = true
+        text_a = "Click to stop";
       }
     }
+  }
+
+  Row
+  {
+    id: otherButtons
+
+    anchors
+    {
+      horizontalCenter: startGameButton.horizontalCenter
+      top:              startGameButton.bottom
+      topMargin:        50
+    }
+
+    spacing: 100
 
     CustomButton
     {
       id: clearBoardButton
 
-      width: 250
-      fontSize: 24
-      butnText: "Clear Game Board"
+      width:        250
+      pixelSize_a:  24
+      text_a: "Clear Game Board"
       enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
 
       onClicked: function() { backend.clearBoard(); }
@@ -139,9 +154,9 @@ Item
     {
       id: backToOptionsButton
 
-      width: 250
-      fontSize: 24
-      butnText: "Go back to options"
+      width:        250
+      pixelSize_a:  24
+      text_a: "Go back to options"
       enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
 
       onClicked: function()
