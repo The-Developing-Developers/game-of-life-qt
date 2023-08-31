@@ -8,7 +8,7 @@ Item
 
   anchors.fill: parent
 
-  property int squareSpacing: 5 // TODO: let the user decide
+  property int squareSpacing: backend.getSquareSpacing()
   property int squareSide:    backend.getSquareSize()
   property int rows:          backend.getNumOfRows()
   property int cols:          backend.getNumOfCols()
@@ -24,19 +24,44 @@ Item
     height: (squareSide + squareSpacing) * rows + squareSpacing
     color: "lightGrey"
     border.width: 1
+
+    MouseArea
+    {
+      id: backMouseArea
+
+      anchors.fill: background
+      acceptedButtons: Qt.LeftButton | Qt.RightButton
+
+      onPressed: function(mouse)
+      {
+        if (timer.running === false)
+          backend.backgroundInteracted(mouse.x, mouse.y) // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
+      }
+
+      onPositionChanged: function(mouse)
+      {
+        if (timer.running === false)
+          backend.backgroundInteracted(mouse.x, mouse.y) // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
+      }
+
+      onReleased: function()
+      {
+        if (timer.running === false)
+          backend.backgroundReleased() // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
+      }
+    }
   }
 
   Grid
   {
     anchors
     {
-      fill: background
-      topMargin: squareSpacing
+      fill:       background
+      topMargin:  squareSpacing
       leftMargin: squareSpacing
     }
 
     spacing: squareSpacing
-    // columns: Math.floor(root.width / (root.squareSide + root.squareSpacing)) // resizes dynamically. Undesirable
     columns: cols // size of game board does not vary when resizing the ApplicationWindow
 
     Repeater
@@ -57,23 +82,7 @@ Item
         Connections
         {
           target: backend
-          function onBoardRecalculated() { isAlive = backend.getCellStatus(index); }
-        }
-
-        MouseArea
-        {
-          anchors.fill: cell
-          enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
-
-          onClicked: function()
-          {
-            if (isAlive)
-              isAlive = false;
-            else
-              isAlive = true;
-
-            backend.setCellStatus(index, isAlive);
-          }
+          function onBoardRecalculated()  { cell.isAlive = backend.getCellStatus(index); }
         }
       } // id: cell
     } // Repeater

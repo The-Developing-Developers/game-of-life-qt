@@ -8,42 +8,36 @@ Backend::Backend(QObject *parent)
 
 Backend::~Backend(void)
 {
-  delete m_grid;
+  delete m_gameBoard;
 }
 
 
 void Backend::initialiseBoard(void)
 {
-  if (m_grid != nullptr)
-    delete m_grid;
+  if (m_gameBoard != nullptr)
+    delete m_gameBoard;
 
-  m_grid = new GameBoard(m_numOfRows, m_numOfCols);
+  m_gameBoard = new GameBoard(m_numOfRows, m_numOfCols, m_squareSize, m_squareSpacing);
 }
 
 
 void Backend::clearBoard(void)
 {
-  m_grid->clearBoard();
+  m_gameBoard->clearBoard();
   emit boardRecalculated();
 }
 
 
 void Backend::recalculateBoard(void)
 {
-  m_grid->recalculateBoard();
+  m_gameBoard->recalculateBoard();
   emit boardRecalculated();
 }
 
 
 bool Backend::getCellStatus(int cellIndex)
 {
-  return m_grid->getCellStatus(cellIndex);
-}
-
-
-void Backend::setCellStatus(int cellIndex, bool isAlive)
-{
-  m_grid->setCellStatus(cellIndex, isAlive);
+  return m_gameBoard->getCellStatus(cellIndex);
 }
 
 
@@ -107,6 +101,12 @@ int Backend::getSquareSize(void) const
 }
 
 
+int Backend::getSquareSpacing(void) const
+{
+  return m_squareSpacing;
+}
+
+
 void Backend::changeGameState(GameState_ns::GameState gameState)
 {
   m_gameState = gameState;
@@ -117,4 +117,17 @@ void Backend::changeGameState(GameState_ns::GameState gameState)
 GameState_ns::GameState Backend::getGameState(void)
 {
   return m_gameState;
+}
+
+
+void Backend::backgroundInteracted(int mouseX, int mouseY)
+{
+  m_gameBoard->toggleCellStatusBecauseOfMouseInteraction(mouseX, mouseY);
+  emit boardRecalculated();
+}
+
+
+void Backend::backgroundReleased(void)
+{
+  m_gameBoard->clearHasJustBeenToggledFlag();
 }

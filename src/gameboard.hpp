@@ -10,14 +10,15 @@ class GameBoard
 {
 public:
 
-   GameBoard(int numOfRows, int numOfCols);
+   GameBoard(int numOfRows, int numOfCols, int squareSize, int squareSpacing);
   ~GameBoard(void);
 
   void recalculateBoard(void);
 
   bool getCellStatus(int cellIndex);
-  void setCellStatus(int index, bool isAlive);
   void clearBoard   (void);
+  void toggleCellStatusBecauseOfMouseInteraction (int mouseX, int mouseY);
+  void clearHasJustBeenToggledFlag(void);
 
 private:
 
@@ -32,6 +33,8 @@ private:
   static constexpr size_t m_DeadOrAliveLowerThreshold = 2; // Game of Life's rule
   const int m_numOfRows;
   const int m_numOfCols;
+  const int m_squareSize;
+  const int m_squareSpacing;
   Cell**    m_currentMatrix;
   Cell**    m_futureMatrix;
   bool      m_isInitialised = false;

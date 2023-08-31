@@ -4,8 +4,8 @@
 /**
  * @brief Construct a new GameBoard object with custom size.
  **/
-GameBoard::GameBoard(int numOfRows, int numOfCols)
-  : m_numOfRows(numOfRows), m_numOfCols(numOfCols)
+GameBoard::GameBoard(int numOfRows, int numOfCols, int squareSize, int squareSpacing)
+  : m_numOfRows(numOfRows), m_numOfCols(numOfCols), m_squareSize(squareSize), m_squareSpacing(squareSpacing)
 {
   // Number of rows
   m_currentMatrix = new Cell*[m_numOfRows];
@@ -76,19 +76,6 @@ bool GameBoard::getCellStatus(int cellIndex)
   int row = rowCol.first;
   int col = rowCol.second;
   return m_currentMatrix[row][col].isAlive();
-}
-
-
-void GameBoard::setCellStatus(int cellIndex, bool isAlive)
-{
-  std::pair<int, int> rowCol = getRowColFromIndex(cellIndex);
-  int row = rowCol.first;
-  int col = rowCol.second;
-
-  if (isAlive)
-    m_currentMatrix[row][col].revive();
-  else
-    m_currentMatrix[row][col].kill();
 }
 
 
@@ -228,6 +215,56 @@ void GameBoard::overwriteCurrentMatrixWithFutureMatrix(void)
     for (size_t col = 0; col != m_numOfCols; ++col)
     {
       m_currentMatrix[row][col] = m_futureMatrix[row][col];
+    }
+  }
+}
+
+
+/**
+ * @brief Receives mouse position (x, y) from the front-end. Calculates every cell's position on the
+ * game board, and toggles whichever cell the mouse is currently interacting with.
+ *
+ * @param mouseX mouse x position on the game board (coming from the front-end)
+ * @param mouseY mouse y position on the game board (coming from the front-end)
+ **/
+void GameBoard::toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY)
+{
+  for (int row = 0; row != m_numOfRows; ++row)
+  {
+    for (int col = 0; col != m_numOfCols; ++col)
+    {
+      int currentCellUpperLeftVertexPosition_x = m_squareSpacing + col * (m_squareSize + m_squareSpacing);
+      int currentCellUpperLeftVertexPosition_y = m_squareSpacing + row * (m_squareSize + m_squareSpacing);
+      int currentCellLowerRghtVertexPosition_x = currentCellUpperLeftVertexPosition_x + m_squareSize; // simple calculation because the cell is a square
+      int currentCellLowerRghtVertexPosition_y = currentCellUpperLeftVertexPosition_y + m_squareSize; // simple calculation because the cell is a square
+
+      auto isMouseInCurrentCell = [&mouseX, &mouseY, &currentCellUpperLeftVertexPosition_x, &currentCellUpperLeftVertexPosition_y, &currentCellLowerRghtVertexPosition_x, &currentCellLowerRghtVertexPosition_y]()
+      {
+        return (    mouseX >= currentCellUpperLeftVertexPosition_x && mouseX <= currentCellLowerRghtVertexPosition_x
+                &&  mouseY >= currentCellUpperLeftVertexPosition_y && mouseY <= currentCellLowerRghtVertexPosition_y );
+      };
+
+      if (isMouseInCurrentCell())
+      {
+        m_currentMatrix[row][col].toggle();
+        m_currentMatrix[row][col].m_hasJustBeenToggled = true; // TODO: must not access this directly
+      }
+      else
+      {
+        m_currentMatrix[row][col].m_hasJustBeenToggled = false; // TODO: must not access this directly
+      }
+    }
+  }
+}
+
+
+void GameBoard::clearHasJustBeenToggledFlag(void)
+{
+  for (int row = 0; row != m_numOfRows; ++row)
+  {
+    for (int col = 0; col != m_numOfCols; ++col)
+    {
+      m_currentMatrix[row][col].m_hasJustBeenToggled = false; // TODO: must not access this directly
     }
   }
 }

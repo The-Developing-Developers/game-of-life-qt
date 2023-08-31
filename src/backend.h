@@ -34,22 +34,24 @@ public:
   explicit Backend(QObject *parent = nullptr);
           ~Backend(void);
 
-  Q_INVOKABLE void initialiseBoard(void);
-  Q_INVOKABLE void clearBoard     (void);
-  Q_INVOKABLE int  getNumOfRows   (void) const;
-  Q_INVOKABLE int  getNumOfCols   (void) const;
-  Q_INVOKABLE int  getTimerPeriod (void) const;
-  Q_INVOKABLE int  getSquareSize  (void) const;
-  Q_INVOKABLE void changeGameState(GameState_ns::GameState gameState);
+  Q_INVOKABLE void initialiseBoard  (void);
+  Q_INVOKABLE void clearBoard       (void);
+  Q_INVOKABLE int  getNumOfRows     (void) const;
+  Q_INVOKABLE int  getNumOfCols     (void) const;
+  Q_INVOKABLE int  getTimerPeriod   (void) const;
+  Q_INVOKABLE int  getSquareSize    (void) const;
+  Q_INVOKABLE int  getSquareSpacing (void) const;
+  Q_INVOKABLE void changeGameState  (GameState_ns::GameState gameState);
 
 public slots:
-  void recalculateBoard (void);
-  bool getCellStatus    (int cellIndex);
-  void setCellStatus    (int cellindex, bool isAlive);
-  void setNumOfRows     (int numOfRows);
-  void setNumOfCols     (int numOfCols);
-  void setTimerPeriod   (int timerPeriod_ms);
-  void setSquareSize    (int squareSize);
+  void recalculateBoard     (void);
+  bool getCellStatus        (int cellIndex);
+  void setNumOfRows         (int numOfRows);
+  void setNumOfCols         (int numOfCols);
+  void setTimerPeriod       (int timerPeriod_ms);
+  void setSquareSize        (int squareSize);
+  void backgroundInteracted (int mouseX, int mouseY);
+  void backgroundReleased   (void);
   GameState_ns::GameState getGameState(void);
 
 signals:
@@ -64,7 +66,8 @@ private:
   int        m_numOfCols      = 5;
   int        m_timerPeriod_ms = 250;
   int        m_squareSize     = 50;
-  GameBoard* m_grid           = nullptr;
+  int        m_squareSpacing  = 5;
+  GameBoard* m_gameBoard      = nullptr;
   GameState_ns::GameState m_gameState = GameState_ns::GameState::Undefined;
 };
 

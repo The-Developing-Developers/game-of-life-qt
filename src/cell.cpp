@@ -2,23 +2,34 @@
 #include "cell.hpp"
 
 Cell::Cell(void)
-  : m_IsAlive(false)
 {;}
 
 
 void Cell::revive(void)
 {
-  m_IsAlive = true;
+  m_isAlive = true;
 }
 
 
 void Cell::kill(void)
 {
-  m_IsAlive = false;
+  m_isAlive = false;
+}
+
+
+void Cell::toggle(void)
+{
+  if (!m_hasJustBeenToggled)
+  {
+    if (m_isAlive)
+      m_isAlive = false;
+    else
+      m_isAlive = true;
+  }
 }
 
 
 bool Cell::isAlive(void)
 {
-  return m_IsAlive;
+  return m_isAlive;
 }
