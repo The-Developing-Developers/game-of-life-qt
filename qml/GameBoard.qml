@@ -175,6 +175,7 @@ Item
     }
   } // Row
 
+  // TODO: bad. The front-end should know nothing about board initialisation in the back-end
   Component.onCompleted:
   {
     backend.initialiseBoard();

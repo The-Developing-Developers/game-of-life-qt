@@ -26,7 +26,6 @@ Row
       placeholderText: "Rows: " + backend.getNumOfRows().toString()
       font.pointSize: 14
       wrapMode: TextInput.Wrap
-      validator: IntValidator {bottom: 1; top: 12;}
 
       background: Rectangle
       {
@@ -60,7 +59,6 @@ Row
       placeholderText: "Columns: " + backend.getNumOfCols().toString()
       font.pointSize: 14
       wrapMode: TextInput.Wrap
-      validator: IntValidator {bottom: 1; top: 25;}
 
       background: Rectangle
       {
@@ -94,7 +92,6 @@ Row
       placeholderText: "Square size: " + backend.getSquareSize().toString()
       font.pointSize: 14
       wrapMode: TextInput.Wrap
-      validator: IntValidator {bottom: 10; top: 100;}
 
       background: Rectangle
       {
@@ -128,7 +125,6 @@ Row
       placeholderText: "Game speed: " + backend.getTimerPeriod().toString() + " ms"
       font.pointSize: 14
       wrapMode: TextInput.Wrap
-      validator: IntValidator {bottom: 100; top: 5000;}
 
       background: Rectangle
       {
