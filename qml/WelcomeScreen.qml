@@ -37,10 +37,11 @@ Rectangle
   {
     id: optionsBackground
 
-    color: "#DDDDDD"
     height: 200
     width:  780
     radius: 10
+    color: "#DDDDDD"
+    border.color: "black"
 
     anchors
     {

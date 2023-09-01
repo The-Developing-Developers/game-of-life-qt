@@ -73,6 +73,7 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 - A definitive name should be chosen for the Options / Welcome Screen.
 - Add a couple more helper private methods in `gameboard.cpp` to make the code more readable in `calculateFutureMatrix`.
 - Use smart pointers instead of raw pointers for the `Cell**` matrices?
+- `Q_PROPERTY` in `backend.h`: should they also use a `NOTIFY` signal?
 - ~~Add automatic calculation to avoid having an excessively large (i.e., out of screen) game board.~~
 - ~~Add the possibility to select multiple squares in the game board by clicking and dragging the mouse over the board.~~
 - ~~Translate Italian comments into English.~~

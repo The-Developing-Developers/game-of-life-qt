@@ -29,8 +29,8 @@ Item
       bottomMargin: 20
     }
 
-    contentWidth:  gridBackground.width
-    contentHeight: gridBackground.height
+    contentWidth:  squareSpacing + (squareSide + squareSpacing) * cols
+    contentHeight: squareSpacing + (squareSide + squareSpacing) * rows
 
     onWidthChanged: function() { gridBackground.adjustGridPositioning(); }
 
@@ -38,8 +38,8 @@ Item
     {
       id: gridBackground
 
-      width:  (squareSide + squareSpacing) * cols + squareSpacing
-      height: (squareSide + squareSpacing) * rows + squareSpacing
+      width:  scrollView.contentWidth
+      height: scrollView.contentHeight
       color: "lightGrey"
       border.width: 2
 
@@ -81,6 +81,8 @@ Item
 
     Grid
     {
+      id: gameBoard
+
       anchors
       {
         fill:       gridBackground
@@ -113,8 +115,21 @@ Item
           }
         } // id: cell
       } // Repeater
-    } // Grid
+    } // id: gameBoard
   } // id: scrollView
+
+  Rectangle
+  {
+    id: buttonsBackground
+
+    anchors.fill: buttons
+    anchors.margins: -10
+
+    border.color: "#00578a"
+    border.width: 2
+    color: "slateGrey"
+    radius: 10
+  }
 
   Column
   {

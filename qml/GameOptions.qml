@@ -128,7 +128,7 @@ Row
       width:  textFieldWidth
       height: textFieldHeight
 
-      placeholderText: "Game speed: " + backend.getTimerPeriod().toString() + " ms"
+      placeholderText: "Period: " + backend.getTimerPeriod().toString() + " ms"
       font.pointSize: fontPointSize
       wrapMode: TextInput.Wrap
 
