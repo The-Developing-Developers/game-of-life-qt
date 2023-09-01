@@ -35,18 +35,18 @@ Rectangle
 
   Rectangle
   {
-    id: optionsRect
+    id: optionsBackground
 
     color: "#DDDDDD"
     height: 200
-    width:  1200
+    width:  780
     radius: 10
 
     anchors
     {
       horizontalCenter: root.horizontalCenter
       top: introText.bottom
-      topMargin: 180
+      topMargin: 50
     }
 
     Text
@@ -55,8 +55,8 @@ Rectangle
 
       anchors
       {
-        horizontalCenter: optionsRect.horizontalCenter
-        top: optionsRect.top
+        horizontalCenter: optionsBackground.horizontalCenter
+        top: optionsBackground.top
         topMargin: 20
       }
 
@@ -73,12 +73,12 @@ Rectangle
 
       anchors
       {
-        horizontalCenter: optionsRect.horizontalCenter
+        horizontalCenter: optionsBackground.horizontalCenter
         top:              optionsText.bottom
         topMargin: 50
       }
     }
-  } // id: optionsRect
+  } // id: optionsBackground
 
   CustomButton
   {
@@ -87,8 +87,8 @@ Rectangle
     anchors
     {
       horizontalCenter: root.horizontalCenter
-      top:              optionsRect.bottom
-      topMargin: 130
+      top:              optionsBackground.bottom
+      topMargin: 50
     }
 
     padding:      20

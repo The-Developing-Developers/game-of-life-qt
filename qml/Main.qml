@@ -12,17 +12,17 @@ ApplicationWindow
   visibility: Qt.WindowFullScreen
   title: qsTr("Game Of Life")
 
-  Rectangle
+  Item
   {
     id: rootContainer // needed for the `state` property
 
-    anchors.fill: parent
+    anchors.fill: root.contentItem
 
     Loader
     {
       id: loader
 
-      anchors.fill: parent
+      anchors.fill: rootContainer
       // source: assigned by `state` property
     }
 

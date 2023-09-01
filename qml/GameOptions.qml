@@ -4,7 +4,13 @@ import QtQuick.Controls.Fusion
 
 Row
 {
-  spacing: 50
+  id: root
+
+  spacing: 20
+
+  property int textFieldWidth:  160
+  property int textFieldHeight:  50
+  property int fontPointSize:    14
 
   Column
   {
@@ -13,18 +19,18 @@ Row
     Text
     {
       anchors.horizontalCenter: rowsCol.horizontalCenter
-      text: "Number of rows:"
-      font.pointSize: 14
+      text: "Num. of rows"
+      font.pointSize: fontPointSize
     }
 
     TextField
     {
-      width:  220
-      height: 50
+      width:  textFieldWidth
+      height: textFieldHeight
 
       focus: true
       placeholderText: "Rows: " + backend.getNumOfRows().toString()
-      font.pointSize: 14
+      font.pointSize: fontPointSize
       wrapMode: TextInput.Wrap
 
       background: Rectangle
@@ -47,17 +53,17 @@ Row
     Text
     {
       anchors.horizontalCenter: colsCol.horizontalCenter
-      text: "Number of columns:"
-      font.pointSize: 14
+      text: "Num. of columns"
+      font.pointSize: fontPointSize
     }
 
     TextField
     {
-      width:  220
-      height: 50
+      width:  textFieldWidth
+      height: textFieldHeight
 
       placeholderText: "Columns: " + backend.getNumOfCols().toString()
-      font.pointSize: 14
+      font.pointSize: fontPointSize
       wrapMode: TextInput.Wrap
 
       background: Rectangle
@@ -80,17 +86,17 @@ Row
     Text
     {
       anchors.horizontalCenter: squareSizeCol.horizontalCenter
-      text: "Square size:"
-      font.pointSize: 14
+      text: "Square size"
+      font.pointSize: fontPointSize
     }
 
     TextField
     {
-      width:  220
-      height: 50
+      width:  textFieldWidth
+      height: textFieldHeight
 
       placeholderText: "Square size: " + backend.getSquareSize().toString()
-      font.pointSize: 14
+      font.pointSize: fontPointSize
       wrapMode: TextInput.Wrap
 
       background: Rectangle
@@ -113,17 +119,17 @@ Row
     Text
     {
       anchors.horizontalCenter: gameSpeedCol.horizontalCenter
-      text: "Refresh period (ms):"
-      font.pointSize: 14
+      text: "Refresh period (ms)"
+      font.pointSize: fontPointSize
     }
 
     TextField
     {
-      width:  220
-      height: 50
+      width:  textFieldWidth
+      height: textFieldHeight
 
       placeholderText: "Game speed: " + backend.getTimerPeriod().toString() + " ms"
-      font.pointSize: 14
+      font.pointSize: fontPointSize
       wrapMode: TextInput.Wrap
 
       background: Rectangle
