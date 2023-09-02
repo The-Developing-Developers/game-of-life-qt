@@ -1,4 +1,3 @@
-#include <QDebug>
 #include "cell.hpp"
 
 Cell::Cell(void)

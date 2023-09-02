@@ -3,18 +3,22 @@
 
 Backend::Backend(QObject *parent)
   : QObject{parent},
-    // it is unnecessary to initialise m_gameBoard here, because it will be managed by the finite-state machine
+    m_gameOptions     (new GameOptions),
+    m_gameBoard       (new GameBoard(m_gameOptions)),
     m_gameStateMachine(new GameStateMachine)
 {;}
 
 
 Backend::~Backend(void)
 {
+  if (m_gameStateMachine != nullptr)
+    delete m_gameStateMachine;
+
   if (m_gameBoard != nullptr)
     delete m_gameBoard;
 
-  if (m_gameStateMachine != nullptr)
-    delete m_gameStateMachine;
+  if (m_gameOptions != nullptr)
+    delete m_gameOptions;
 }
 
 
@@ -23,7 +27,7 @@ void Backend::reInitialiseBoard(void)
   if (m_gameBoard != nullptr)
     delete m_gameBoard;
 
-  m_gameBoard = new GameBoard(m_numOfRows, m_numOfCols, m_squareSize, m_squareSpacing);
+  m_gameBoard = new GameBoard(m_gameOptions);
 }
 
 
@@ -49,76 +53,61 @@ bool Backend::getCellStatus(int cellIndex)
 
 void Backend::setNumOfRows(int numOfRows)
 {
-  if (numOfRows >= m_minNumOfRowsAndCols)
-    m_numOfRows = numOfRows;
-  else
-    m_numOfRows = m_minNumOfRowsAndCols;
+  m_gameOptions->setNumOfRows(numOfRows);
 }
 
 
 void Backend::setNumOfCols(int numOfCols)
 {
-  if (numOfCols >= m_minNumOfRowsAndCols)
-    m_numOfCols = numOfCols;
-  else
-    m_numOfCols = m_minNumOfRowsAndCols;
+  m_gameOptions->setNumOfCols(numOfCols);
 }
 
 
 void Backend::setTimerPeriod(int timerPeriod_ms)
 {
-  if (timerPeriod_ms >= m_minTimerPeriod_ms)
-    m_timerPeriod_ms = timerPeriod_ms;
-  else
-    m_timerPeriod_ms = m_minTimerPeriod_ms;
+  m_gameOptions->setTimerPeriod(timerPeriod_ms);
 }
 
 
 void Backend::setSquareSize(int squareSize)
 {
-  if (squareSize >= m_minSquareSize)
-    m_squareSize = squareSize;
-  else
-    m_squareSize = m_minSquareSize;
+  m_gameOptions->setSquareSize(squareSize);
 }
 
 
 void Backend::setSquareSpacing(int squareSpacing)
 {
-  if (squareSpacing >= m_minSquareSpacing)
-    m_squareSpacing = squareSpacing;
-  else
-    m_squareSpacing = m_minSquareSpacing;
+  m_gameOptions->setSquareSpacing(squareSpacing);
 }
 
 
 int Backend::getNumOfRows(void) const
 {
-  return m_numOfRows;
+  return m_gameOptions->getNumOfRows();
 }
 
 
 int Backend::getNumOfCols(void) const
 {
-  return m_numOfCols;
+  return m_gameOptions->getNumOfCols();
 }
 
 
 int Backend::getTimerPeriod(void) const
 {
-  return m_timerPeriod_ms;
+  return m_gameOptions->getTimerPeriod();
 }
 
 
 int Backend::getSquareSize(void) const
 {
-  return m_squareSize;
+  return m_gameOptions->getSquareSize();
 }
 
 
 int Backend::getSquareSpacing(void) const
 {
-  return m_squareSpacing;
+  return m_gameOptions->getSquareSpacing();
 }
 
 

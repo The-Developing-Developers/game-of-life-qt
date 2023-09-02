@@ -4,6 +4,7 @@
 #include <QObject>
 #include <qqmlintegration.h>
 #include "gameboard.hpp"
+#include "gameoptions.hpp"
 #include "gamestatemachine.hpp"
 
 class Backend : public QObject
@@ -46,17 +47,9 @@ signals:
   void gameStateChanged (GameState_ns::GameState_e currentState);
 
 private:
-  static constexpr int m_minNumOfRowsAndCols  = 5;
-  static constexpr int m_minTimerPeriod_ms    = 50;
-  static constexpr int m_minSquareSize        = 10;
-  static constexpr int m_minSquareSpacing     = 2;
-  int        m_numOfRows      = 10;
-  int        m_numOfCols      = 10;
-  int        m_timerPeriod_ms = 100;
-  int        m_squareSize     = 50;
-  int        m_squareSpacing  = 5;
-  GameBoard* m_gameBoard      = nullptr;
-  GameStateMachine* m_gameStateMachine = nullptr;
+  GameOptions*      m_gameOptions       = nullptr;
+  GameBoard*        m_gameBoard         = nullptr;
+  GameStateMachine* m_gameStateMachine  = nullptr;
 };
 
 #endif // BACKEND_H

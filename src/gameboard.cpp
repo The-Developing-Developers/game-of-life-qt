@@ -1,52 +1,53 @@
-#include <QDebug>
 #include "gameboard.hpp"
+#include "gameoptions.hpp"
 
 /**
  * @brief Construct a new GameBoard object with custom size.
  **/
-GameBoard::GameBoard(int numOfRows, int numOfCols, int squareSize, int squareSpacing)
-  : m_numOfRows(numOfRows), m_numOfCols(numOfCols), m_squareSize(squareSize), m_squareSpacing(squareSpacing)
+GameBoard::GameBoard(GameOptions* gameOptions)
+  : m_gameOptions(gameOptions)
 {
   // Number of rows
-  m_currentMatrix = new Cell*[m_numOfRows];
-  m_futureMatrix  = new Cell*[m_numOfRows];
+  m_currentMatrix = new Cell*[m_gameOptions->getNumOfRows()];
+  m_futureMatrix  = new Cell*[m_gameOptions->getNumOfRows()];
 
   // Number of cols
-  for (int i = 0; i != m_numOfRows; ++i)
+  for (int i = 0; i != m_gameOptions->getNumOfRows(); ++i)
   {
-    m_currentMatrix[i] = new Cell[m_numOfCols];
-    m_futureMatrix[i] = new Cell[m_numOfCols];
+    m_currentMatrix[i] = new Cell[m_gameOptions->getNumOfCols()];
+    m_futureMatrix[i]  = new Cell[m_gameOptions->getNumOfCols()];
   }
 
-  m_isInitialised = true;
+  m_isInitialised = true; // TODO: is it necessary?
 }
 
 
 GameBoard::~GameBoard(void)
 {
-  if (!m_isInitialised)
+  if (!m_isInitialised) // TODO: is it necessary?
   {
     return;
   }
 
-  for (int i = 0; i != m_numOfRows; ++i)
+  int numOfRows_initial = m_gameOptions->getNumOfRows_initial();
+  for (int i = 0; i != numOfRows_initial; ++i)
   {
     delete[] m_currentMatrix[i];
     delete[] m_futureMatrix[i];
     m_currentMatrix[i] = nullptr;
-    m_futureMatrix[i] = nullptr;
+    m_futureMatrix[i]  = nullptr;
   }
 
   delete[] m_currentMatrix;
   delete[] m_futureMatrix;
   m_currentMatrix = nullptr;
-  m_futureMatrix = nullptr;
+  m_futureMatrix  = nullptr;
 }
 
 
 int GameBoard::getIndexFromRowCol(int row, int col)
 {
-  return row * m_numOfCols + col;
+  return row * m_gameOptions->getNumOfCols() + col;
 }
 
 
@@ -55,11 +56,11 @@ std::pair<int, int> GameBoard::getRowColFromIndex(int cellIndex)
   int row = 0;
   int col = 0;
 
-  for (size_t i = 0; i != cellIndex; ++i)
+  for (int i = 0; i != cellIndex; ++i)
   {
     ++col;
 
-    if (col == m_numOfCols)
+    if (col == m_gameOptions->getNumOfCols())
     {
       ++row;
       col = 0;
@@ -81,9 +82,9 @@ bool GameBoard::getCellStatus(int cellIndex)
 
 void GameBoard::clearBoard(void)
 {
-  for (size_t row = 0; row != m_numOfRows; ++row)
+  for (int row = 0; row != m_gameOptions->getNumOfRows(); ++row)
   {
-    for (size_t col = 0; col != m_numOfCols; ++col)
+    for (int col = 0; col != m_gameOptions->getNumOfCols(); ++col)
     {
       m_currentMatrix[row][col].kill();
       m_futureMatrix [row][col].kill();
@@ -105,11 +106,11 @@ void GameBoard::recalculateBoard(void)
  **/
 void GameBoard::calculateFutureMatrix(void)
 {
-  for (int i = 0; i < m_numOfRows; ++i)
+  for (int i = 0; i < m_gameOptions->getNumOfRows(); ++i)
   {
-    for (int j = 0; j < m_numOfCols; ++j)
+    for (int j = 0; j < m_gameOptions->getNumOfCols(); ++j)
     {
-      size_t AliveNeighboursCounter = 0;
+      int AliveNeighboursCounter = 0;
 
       // Investigate neighbours
 
@@ -166,7 +167,7 @@ void GameBoard::calculateFutureMatrix(void)
       if (m_currentMatrix[i][j].isAlive())
       {
         // TODO: replace conditions with constants for readability?
-        if (AliveNeighboursCounter == m_DeadOrAliveLowerThreshold || AliveNeighboursCounter == m_DeadOrAliveUpperThreshold)
+        if (AliveNeighboursCounter == m_gameOptions->getDeadOrAliveLowerThreshold() || AliveNeighboursCounter == m_gameOptions->getDeadOrAliveUpperThreshold())
         {
           // Rule 1: any live cell with two or three live neighbours survives.
           m_futureMatrix[i][j].revive(); // TODO: superfluous? Cell is already alive in this `if`
@@ -181,7 +182,7 @@ void GameBoard::calculateFutureMatrix(void)
       {
         // Analysing dead cells
 
-        if (AliveNeighboursCounter == m_DeadOrAliveUpperThreshold)
+        if (AliveNeighboursCounter == m_gameOptions->getDeadOrAliveUpperThreshold())
         {
           // Rule 2: Any dead cell with three live neighbours becomes a live cell.
           m_futureMatrix[i][j].revive();
@@ -198,7 +199,7 @@ void GameBoard::calculateFutureMatrix(void)
 
 bool GameBoard::isNeighbourWithinBounds(int row, int col)
 {
-  return ( row >= 0 && col >= 0 && row < m_numOfRows && col < m_numOfCols );
+  return ( row >= 0 && col >= 0 && row < m_gameOptions->getNumOfRows() && col < m_gameOptions->getNumOfCols() );
 }
 
 
@@ -210,9 +211,9 @@ bool GameBoard::isNeighbourAlive(int row, int col)
 
 void GameBoard::overwriteCurrentMatrixWithFutureMatrix(void)
 {
-  for (size_t row = 0; row != m_numOfRows; ++row)
+  for (int row = 0; row != m_gameOptions->getNumOfRows(); ++row)
   {
-    for (size_t col = 0; col != m_numOfCols; ++col)
+    for (int col = 0; col != m_gameOptions->getNumOfCols(); ++col)
     {
       m_currentMatrix[row][col] = m_futureMatrix[row][col];
     }
@@ -230,14 +231,14 @@ void GameBoard::overwriteCurrentMatrixWithFutureMatrix(void)
  **/
 void GameBoard::toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY)
 {
-  for (int row = 0; row != m_numOfRows; ++row)
+  for (int row = 0; row != m_gameOptions->getNumOfRows(); ++row)
   {
-    for (int col = 0; col != m_numOfCols; ++col)
+    for (int col = 0; col != m_gameOptions->getNumOfCols(); ++col)
     {
-      int currentCellUpperLeftVertexPosition_x = m_squareSpacing + col * (m_squareSize + m_squareSpacing);
-      int currentCellUpperLeftVertexPosition_y = m_squareSpacing + row * (m_squareSize + m_squareSpacing);
-      int currentCellLowerRghtVertexPosition_x = currentCellUpperLeftVertexPosition_x + m_squareSize; // simple calculation because the cell is a square
-      int currentCellLowerRghtVertexPosition_y = currentCellUpperLeftVertexPosition_y + m_squareSize; // simple calculation because the cell is a square
+      int currentCellUpperLeftVertexPosition_x = m_gameOptions->getSquareSpacing() + col * (m_gameOptions->getSquareSize() + m_gameOptions->getSquareSpacing());
+      int currentCellUpperLeftVertexPosition_y = m_gameOptions->getSquareSpacing() + row * (m_gameOptions->getSquareSize() + m_gameOptions->getSquareSpacing());
+      int currentCellLowerRghtVertexPosition_x = currentCellUpperLeftVertexPosition_x + m_gameOptions->getSquareSize(); // simple calculation because the cell is a square
+      int currentCellLowerRghtVertexPosition_y = currentCellUpperLeftVertexPosition_y + m_gameOptions->getSquareSize(); // simple calculation because the cell is a square
 
       auto isMouseInCurrentCell = [mouseX, mouseY, currentCellUpperLeftVertexPosition_x, currentCellUpperLeftVertexPosition_y, currentCellLowerRghtVertexPosition_x, currentCellLowerRghtVertexPosition_y]()
       {
@@ -261,9 +262,9 @@ void GameBoard::toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY
 
 void GameBoard::clearHasJustBeenToggledFlag(void)
 {
-  for (int row = 0; row != m_numOfRows; ++row)
+  for (int row = 0; row != m_gameOptions->getNumOfRows(); ++row)
   {
-    for (int col = 0; col != m_numOfCols; ++col)
+    for (int col = 0; col != m_gameOptions->getNumOfCols(); ++col)
     {
       m_currentMatrix[row][col].unlockToggling();
     }
