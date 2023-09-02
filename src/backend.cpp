@@ -124,8 +124,22 @@ int Backend::getSquareSpacing(void) const
 
 void Backend::changeGameState(GameState_ns::GameState_e gameState)
 {
-  if (m_gameStateMachine->changeGameStateAndReinitIfNecessary(gameState))
-    reInitialiseBoard();
+  GameStateMachine::RequiredAction requiredAction = m_gameStateMachine->requestGameStateChangeAndReceiveFeedback(gameState);
+
+  switch (requiredAction)
+  {
+    case GameStateMachine::RequiredAction::noAction:
+      break;
+
+    case GameStateMachine::RequiredAction::reinitialiseGameBoard:
+      reInitialiseBoard();
+      break;
+
+    case GameStateMachine::RequiredAction::undefined:
+    default:
+      qDebug() << "Error during state change";
+      break;
+  }
 
   emit gameStateChanged(m_gameStateMachine->getGameState());
 }

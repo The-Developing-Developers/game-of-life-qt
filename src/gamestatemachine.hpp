@@ -3,15 +3,13 @@
 
 #include <QObject>
 
-// class Backend;
-
 namespace GameState_ns
 {
   Q_NAMESPACE // required for meta object creation
 
   enum class GameState_e
   {
-    Undefined,
+    Undefined = 0,
     WelcomeScreen,
     GameBoard,
 
@@ -25,10 +23,19 @@ class GameStateMachine
 {
 public:
 
+  enum class RequiredAction
+  {
+    noAction = 0,
+    reinitialiseGameBoard,
+    undefined,
+
+    howMany
+  };
+
    GameStateMachine(void);
   ~GameStateMachine(void);
 
-  bool                      changeGameStateAndReinitIfNecessary(GameState_ns::GameState_e requestedGameState);
+  RequiredAction            requestGameStateChangeAndReceiveFeedback(GameState_ns::GameState_e requestedGameState);
   GameState_ns::GameState_e getGameState    (void) const;
 
 private:

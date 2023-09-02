@@ -70,7 +70,7 @@ ApplicationWindow
 
   Component.onCompleted:
   {
-    // The finite-state machine is started here
+    // The finite-state machine is kick-started here
     backend.changeGameState(GameState.WelcomeScreen);
   }
 } // root

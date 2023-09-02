@@ -18,16 +18,16 @@ GameStateMachine::~GameStateMachine(void)
 {;}
 
 
-bool GameStateMachine::changeGameStateAndReinitIfNecessary(GameState_ns::GameState_e requestedGameState)
+GameStateMachine::RequiredAction GameStateMachine::requestGameStateChangeAndReceiveFeedback(GameState_ns::GameState_e requestedGameState)
 {
-  bool isItNecessaryToReinitTheBoard = false;
+  RequiredAction requiredAction = RequiredAction::noAction;
 
   if (requestedGameState == GameState_ns::GameState_e::GameBoard)
-    isItNecessaryToReinitTheBoard = true;
+    requiredAction = RequiredAction::reinitialiseGameBoard;
 
   m_currentGameState = requestedGameState;
 
-  return isItNecessaryToReinitTheBoard;
+  return requiredAction;
 }
 
 
