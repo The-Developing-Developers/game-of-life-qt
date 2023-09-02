@@ -24,10 +24,11 @@ namespace GameState_ns
 class Backend : public QObject
 {
   Q_OBJECT
-  Q_PROPERTY(int rows         READ getNumOfRows   WRITE setNumOfRows    FINAL)
-  Q_PROPERTY(int cols         READ getNumOfCols   WRITE setNumOfCols    FINAL)
-  Q_PROPERTY(int timerPeriod  READ getTimerPeriod WRITE setTimerPeriod  FINAL)
-  Q_PROPERTY(int squareSize   READ getSquareSize  WRITE setSquareSize   FINAL)
+  Q_PROPERTY(int rows           READ getNumOfRows     WRITE setNumOfRows      FINAL)
+  Q_PROPERTY(int cols           READ getNumOfCols     WRITE setNumOfCols      FINAL)
+  Q_PROPERTY(int timerPeriod    READ getTimerPeriod   WRITE setTimerPeriod    FINAL)
+  Q_PROPERTY(int squareSize     READ getSquareSize    WRITE setSquareSize     FINAL)
+  Q_PROPERTY(int squareSpacing  READ getSquareSpacing WRITE setSquareSpacing  FINAL)
   QML_ELEMENT
 
 public:
@@ -50,6 +51,7 @@ public slots:
   void setNumOfCols         (int numOfCols);
   void setTimerPeriod       (int timerPeriod_ms);
   void setSquareSize        (int squareSize);
+  void setSquareSpacing     (int squareSpacing);
   void backgroundInteracted (int mouseX, int mouseY);
   void backgroundReleased   (void);
   GameState_ns::GameState getGameState(void);
@@ -62,6 +64,7 @@ private:
   static constexpr int m_minNumOfRowsAndCols  = 5;
   static constexpr int m_minTimerPeriod_ms    = 50;
   static constexpr int m_minSquareSize        = 10;
+  static constexpr int m_minSquareSpacing     = 5;
   int        m_numOfRows      = 10;
   int        m_numOfCols      = 10;
   int        m_timerPeriod_ms = 100;

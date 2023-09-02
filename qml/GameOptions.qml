@@ -2,11 +2,13 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Fusion
 
-Row
+Grid
 {
   id: root
 
-  spacing: 20
+  columns: 3
+  columnSpacing: 50
+     rowSpacing: 10
 
   property int textFieldWidth:  160
   property int textFieldHeight:  50
@@ -14,11 +16,11 @@ Row
 
   Column
   {
-    id: rowsCol
+    id: numOfRows
 
     Text
     {
-      anchors.horizontalCenter: rowsCol.horizontalCenter
+      anchors.horizontalCenter: numOfRows.horizontalCenter
       text: "Num. of rows"
       font.pointSize: fontPointSize
     }
@@ -48,11 +50,11 @@ Row
 
   Column
   {
-    id: colsCol
+    id: numOfCols
 
     Text
     {
-      anchors.horizontalCenter: colsCol.horizontalCenter
+      anchors.horizontalCenter: numOfCols.horizontalCenter
       text: "Num. of columns"
       font.pointSize: fontPointSize
     }
@@ -81,11 +83,11 @@ Row
 
   Column
   {
-    id: squareSizeCol
+    id: squareSize
 
     Text
     {
-      anchors.horizontalCenter: squareSizeCol.horizontalCenter
+      anchors.horizontalCenter: squareSize.horizontalCenter
       text: "Square size"
       font.pointSize: fontPointSize
     }
@@ -114,11 +116,11 @@ Row
 
   Column
   {
-    id: gameSpeedCol
+    id: refreshPeriod
 
     Text
     {
-      anchors.horizontalCenter: gameSpeedCol.horizontalCenter
+      anchors.horizontalCenter: refreshPeriod.horizontalCenter
       text: "Refresh period (ms)"
       font.pointSize: fontPointSize
     }
@@ -142,6 +144,39 @@ Row
 
       onTextChanged:  { backend.setTimerPeriod(parseInt(text)) }
       onAccepted:     { backend.setTimerPeriod(parseInt(text)) }
+    }
+  }
+
+  Column
+  {
+    id: squareSpacing
+
+    Text
+    {
+      anchors.horizontalCenter: squareSpacing.horizontalCenter
+      text: "Square spacing"
+      font.pointSize: fontPointSize
+    }
+
+    TextField
+    {
+      width:  textFieldWidth
+      height: textFieldHeight
+
+      placeholderText: "Spacing: " + backend.getSquareSpacing().toString() + " px"
+      font.pointSize: fontPointSize
+      wrapMode: TextInput.Wrap
+
+      background: Rectangle
+      {
+        radius: 5
+        color:        parent.enabled      ? "lightGrey"   : "#353637"
+        border.color: parent.activeFocus  ? "teal"        : "black"
+        border.width: parent.activeFocus  ? 3 : 1
+      }
+
+      onTextChanged:  { backend.setSquareSpacing(parseInt(text)) }
+      onAccepted:     { backend.setSquareSpacing(parseInt(text)) }
     }
   }
 } // Row

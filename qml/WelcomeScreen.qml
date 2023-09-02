@@ -37,8 +37,12 @@ Rectangle
   {
     id: optionsBackground
 
-    height: 200
-    width:  780
+    property int someHeightMargin: 70
+    property int someWidthMargin:  20
+    property int applicationWindowMinimumWidth: 800
+
+    height: optionsText.height + gameOptions.height + someHeightMargin
+    width:  applicationWindowMinimumWidth - someWidthMargin
     radius: 10
     color: "#DDDDDD"
     border.color: "black"
@@ -49,41 +53,41 @@ Rectangle
       top: introText.bottom
       topMargin: 50
     }
+  }
 
-    Text
-    {
-      id: optionsText
-
-      anchors
-      {
-        horizontalCenter: optionsBackground.horizontalCenter
-        top: optionsBackground.top
-        topMargin: 20
-      }
-
-      text: "Set up the game options:"
-      font.family: "Helvetica"
-      font.pixelSize: 32
-      font.bold: true
-      color: "black"
-    }
-
-    GameOptions
-    {
-      id: gameOptions
-
-      anchors
-      {
-        horizontalCenter: optionsBackground.horizontalCenter
-        top:              optionsText.bottom
-        topMargin: 50
-      }
-    }
-  } // id: optionsBackground
-
-  CustomButton
+  Text
   {
-    id: startButton
+    id: optionsText
+
+    anchors
+    {
+      horizontalCenter: optionsBackground.horizontalCenter
+      top: optionsBackground.top
+      topMargin: 20
+    }
+
+    text: "Set up the game options:"
+    font.family: "Helvetica"
+    font.pixelSize: 32
+    font.bold: true
+    color: "black"
+  }
+
+  GameOptions
+  {
+    id: gameOptions
+
+    anchors
+    {
+      horizontalCenter: optionsBackground.horizontalCenter
+      top:              optionsText.bottom
+      topMargin: 10
+    }
+  }
+
+  Row
+  {
+    id: startAndQuitButtons
 
     anchors
     {
@@ -92,32 +96,36 @@ Rectangle
       topMargin: 50
     }
 
-    padding:      20
-    pixelSize_a:  30
-    text_a:       "Start Game of Life"
+    property int someMargin: 100
 
-    onClicked: backend.changeGameState(GameState.GameBoard)
-  }
+    spacing: optionsBackground.width - startButton.width - quitButton.width - someMargin
 
-  CustomButton
-  {
-    id: quitButton
-
-    anchors
+    CustomButton
     {
-      horizontalCenter: startButton.horizontalCenter
-      top:              startButton.bottom
-      topMargin: 50
+      id: startButton
+
+      padding:      20
+      pixelSize_a:  30
+      text_a:       "Start Game of Life"
+
+      onClicked: backend.changeGameState(GameState.GameBoard)
     }
 
-    padding:      20
-    pixelSize_a:  20
-    text_a:       "Quit"
+    CustomButton
+    {
+      id: quitButton
 
-    pushedColour_a: "#FFAA00"
-    hoverColour_a:  "red"
-    normalColour_a: "#803030"
+      width: startButton.width
 
-    onClicked: Qt.quit();
-  }
+      padding:      20
+      pixelSize_a:  30
+      text_a:       "Quit"
+
+      pushedColour_a: "#FFAA00"
+      hoverColour_a:  "red"
+      normalColour_a: "#803030"
+
+      onClicked: Qt.quit();
+    }
+  } // id: startAndQuitButtons
 }

@@ -77,6 +77,15 @@ void Backend::setSquareSize(int squareSize)
 }
 
 
+void Backend::setSquareSpacing(int squareSpacing)
+{
+  if (squareSpacing >= m_minSquareSpacing)
+    m_squareSpacing = squareSpacing;
+  else
+    m_squareSpacing = m_minSquareSpacing;
+}
+
+
 int Backend::getNumOfRows(void) const
 {
   return m_numOfRows;

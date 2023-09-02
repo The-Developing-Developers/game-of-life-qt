@@ -64,7 +64,6 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 - Is `Backend` class unnecessary? Could it be merged with `GameBoard`? There is a lot of duplicated code.
 - Should the game options be migrated from the `Backend` to a new, dedicated `GameOptions` class? This could remove some duplication between `Backend` and `GameBoard`.
 - Should the `Backend` implement a finite-state machine to manage the states? This would relieve the front-end (`GameBoard.qml`) of the responsibility to instantiate a new game board via the `initialiseBoard` method. The main idea would be to only request game state changes from the front-end, which would therefore be completely agnostic of how the various classes are instantiated. The `Backend` would then create a new `GameBoard` every time a new game is started, and destroy it whenever the user decides to go back to the welcome screen, because if the user decides to modify the game board's size and restart, it is necessary to reallocate the two `Cell**` matrices in `GameBoard`.
-- Allow the user to choose the spacing between the cells in the Game Board.
 - `m_hasJustBeenToggled` data member is temporarily set manually from the outside, but it will need to be set via a proper setter, and made `private`.
 - Consider unifying the concept of game board square and `Cell` in the code.
 - Refactor the code to favour readability.
@@ -74,6 +73,7 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 - Add a couple more helper private methods in `gameboard.cpp` to make the code more readable in `calculateFutureMatrix`.
 - Use smart pointers instead of raw pointers for the `Cell**` matrices?
 - `Q_PROPERTY` in `backend.h`: should they also use a `NOTIFY` signal?
+- ~~Allow the user to choose the spacing between the cells in the Game Board.~~
 - ~~Add automatic calculation to avoid having an excessively large (i.e., out of screen) game board.~~
 - ~~Add the possibility to select multiple squares in the game board by clicking and dragging the mouse over the board.~~
 - ~~Translate Italian comments into English.~~
