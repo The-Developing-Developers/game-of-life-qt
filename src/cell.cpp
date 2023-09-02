@@ -19,7 +19,7 @@ void Cell::kill(void)
 
 void Cell::toggle(void)
 {
-  if (!m_hasJustBeenToggled)
+  if (!m_isTogglingLocked)
   {
     if (m_isAlive)
       m_isAlive = false;
@@ -32,4 +32,16 @@ void Cell::toggle(void)
 bool Cell::isAlive(void)
 {
   return m_isAlive;
+}
+
+
+void Cell::lockToggling(void)
+{
+  m_isTogglingLocked = true;
+}
+
+
+void Cell::unlockToggling(void)
+{
+  m_isTogglingLocked = false;
 }

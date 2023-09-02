@@ -222,7 +222,8 @@ void GameBoard::overwriteCurrentMatrixWithFutureMatrix(void)
 
 /**
  * @brief Receives mouse position (x, y) from the front-end. Calculates every cell's position on the
- * game board, and toggles whichever cell the mouse is currently interacting with.
+ * game board, and toggles whichever cell the mouse is currently interacting with. Until mouse exits
+ * a cell, locks that cell to prevent rapid-fire toggling.
  *
  * @param mouseX mouse x position on the game board (coming from the front-end)
  * @param mouseY mouse y position on the game board (coming from the front-end)
@@ -238,7 +239,7 @@ void GameBoard::toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY
       int currentCellLowerRghtVertexPosition_x = currentCellUpperLeftVertexPosition_x + m_squareSize; // simple calculation because the cell is a square
       int currentCellLowerRghtVertexPosition_y = currentCellUpperLeftVertexPosition_y + m_squareSize; // simple calculation because the cell is a square
 
-      auto isMouseInCurrentCell = [&mouseX, &mouseY, &currentCellUpperLeftVertexPosition_x, &currentCellUpperLeftVertexPosition_y, &currentCellLowerRghtVertexPosition_x, &currentCellLowerRghtVertexPosition_y]()
+      auto isMouseInCurrentCell = [mouseX, mouseY, currentCellUpperLeftVertexPosition_x, currentCellUpperLeftVertexPosition_y, currentCellLowerRghtVertexPosition_x, currentCellLowerRghtVertexPosition_y]()
       {
         return (    mouseX >= currentCellUpperLeftVertexPosition_x && mouseX <= currentCellLowerRghtVertexPosition_x
                 &&  mouseY >= currentCellUpperLeftVertexPosition_y && mouseY <= currentCellLowerRghtVertexPosition_y );
@@ -247,11 +248,11 @@ void GameBoard::toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY
       if (isMouseInCurrentCell())
       {
         m_currentMatrix[row][col].toggle();
-        m_currentMatrix[row][col].m_hasJustBeenToggled = true; // TODO: must not access this directly
+        m_currentMatrix[row][col].lockToggling();
       }
       else
       {
-        m_currentMatrix[row][col].m_hasJustBeenToggled = false; // TODO: must not access this directly
+        m_currentMatrix[row][col].unlockToggling();
       }
     }
   }
@@ -264,7 +265,7 @@ void GameBoard::clearHasJustBeenToggledFlag(void)
   {
     for (int col = 0; col != m_numOfCols; ++col)
     {
-      m_currentMatrix[row][col].m_hasJustBeenToggled = false; // TODO: must not access this directly
+      m_currentMatrix[row][col].unlockToggling();
     }
   }
 }

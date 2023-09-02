@@ -49,7 +49,7 @@ private:
   static constexpr int m_minNumOfRowsAndCols  = 5;
   static constexpr int m_minTimerPeriod_ms    = 50;
   static constexpr int m_minSquareSize        = 10;
-  static constexpr int m_minSquareSpacing     = 5;
+  static constexpr int m_minSquareSpacing     = 2;
   int        m_numOfRows      = 10;
   int        m_numOfCols      = 10;
   int        m_timerPeriod_ms = 100;

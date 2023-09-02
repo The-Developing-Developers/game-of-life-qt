@@ -7,16 +7,17 @@ public:
 
   Cell(void);
 
-  void revive (void);
-  void kill   (void);
-  void toggle (void);
-  bool isAlive(void);
+  void revive         (void);
+  void kill           (void);
+  void toggle         (void);
+  bool isAlive        (void);
+  void lockToggling   (void);
+  void unlockToggling (void);
 
 private:
 
-  bool m_isAlive            = false;
-public: // TODO: da togliere. Aggiungere setter / getter
-  bool m_hasJustBeenToggled = false;
+  bool m_isAlive          = false;
+  bool m_isTogglingLocked = false;
 };
 
 #endif // CELL_HPP
