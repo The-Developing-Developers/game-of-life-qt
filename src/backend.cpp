@@ -2,17 +2,23 @@
 #include "backend.h"
 
 Backend::Backend(QObject *parent)
-  : QObject{parent}
+  : QObject{parent},
+    // it is unnecessary to initialise m_gameBoard here, because it will be managed by the finite-state machine
+    m_gameStateMachine(new GameStateMachine)
 {;}
 
 
 Backend::~Backend(void)
 {
-  delete m_gameBoard;
+  if (m_gameBoard != nullptr)
+    delete m_gameBoard;
+
+  if (m_gameStateMachine != nullptr)
+    delete m_gameStateMachine;
 }
 
 
-void Backend::initialiseBoard(void)
+void Backend::reInitialiseBoard(void)
 {
   if (m_gameBoard != nullptr)
     delete m_gameBoard;
@@ -116,16 +122,18 @@ int Backend::getSquareSpacing(void) const
 }
 
 
-void Backend::changeGameState(GameState_ns::GameState gameState)
+void Backend::changeGameState(GameState_ns::GameState_e gameState)
 {
-  m_gameState = gameState;
-  emit gameStateChanged();
+  if (m_gameStateMachine->changeGameStateAndReinitIfNecessary(gameState))
+    reInitialiseBoard();
+
+  emit gameStateChanged(m_gameStateMachine->getGameState());
 }
 
 
-GameState_ns::GameState Backend::getGameState(void)
+GameState_ns::GameState_e Backend::getGameState(void)
 {
-  return m_gameState;
+  return m_gameStateMachine->getGameState();
 }
 
 

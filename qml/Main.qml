@@ -30,9 +30,9 @@ ApplicationWindow
     {
       target: backend
 
-      function onGameStateChanged()
+      function onGameStateChanged(currentState)
       {
-        switch ( backend.getGameState() )
+        switch ( currentState )
         {
           case GameState.WelcomeScreen:
             rootContainer.state = "welcomeScreen"
@@ -67,4 +67,10 @@ ApplicationWindow
       }
     ]
   } // rootContainer
+
+  Component.onCompleted:
+  {
+    // The finite-state machine is started here
+    backend.changeGameState(GameState.WelcomeScreen);
+  }
 } // root

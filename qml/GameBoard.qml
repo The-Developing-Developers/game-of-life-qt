@@ -216,11 +216,4 @@ Item
     repeat:   true
     onTriggered: function() { backend.recalculateBoard(); }
   }
-
-  // TODO: bad! The front-end should know nothing about board initialisation in the back-end.
-  // Solution: implement a finite-state machine in the back-end to manage the state transitions.
-  Component.onCompleted:
-  {
-    backend.initialiseBoard();
-  }
 } // id: root

@@ -4,22 +4,7 @@
 #include <QObject>
 #include <qqmlintegration.h>
 #include "gameboard.hpp"
-
-namespace GameState_ns
-{
-  Q_NAMESPACE // required for meta object creation
-
-  enum class GameState
-  {
-    Undefined,
-    WelcomeScreen,
-    GameBoard,
-
-    HowMany
-  };
-
-  Q_ENUM_NS(GameState) // register the enum in meta object data
-}
+#include "gamestatemachine.hpp"
 
 class Backend : public QObject
 {
@@ -35,14 +20,14 @@ public:
   explicit Backend(QObject *parent = nullptr);
           ~Backend(void);
 
-  Q_INVOKABLE void initialiseBoard  (void);
+  Q_INVOKABLE void reInitialiseBoard  (void);
   Q_INVOKABLE void clearBoard       (void);
   Q_INVOKABLE int  getNumOfRows     (void) const;
   Q_INVOKABLE int  getNumOfCols     (void) const;
   Q_INVOKABLE int  getTimerPeriod   (void) const;
   Q_INVOKABLE int  getSquareSize    (void) const;
   Q_INVOKABLE int  getSquareSpacing (void) const;
-  Q_INVOKABLE void changeGameState  (GameState_ns::GameState gameState);
+  Q_INVOKABLE void changeGameState  (GameState_ns::GameState_e gameState);
 
 public slots:
   void recalculateBoard     (void);
@@ -54,11 +39,11 @@ public slots:
   void setSquareSpacing     (int squareSpacing);
   void backgroundInteracted (int mouseX, int mouseY);
   void backgroundReleased   (void);
-  GameState_ns::GameState getGameState(void);
+  GameState_ns::GameState_e getGameState(void);
 
 signals:
   void boardRecalculated(void);
-  void gameStateChanged (void);
+  void gameStateChanged (GameState_ns::GameState_e currentState);
 
 private:
   static constexpr int m_minNumOfRowsAndCols  = 5;
@@ -71,7 +56,7 @@ private:
   int        m_squareSize     = 50;
   int        m_squareSpacing  = 5;
   GameBoard* m_gameBoard      = nullptr;
-  GameState_ns::GameState m_gameState = GameState_ns::GameState::Undefined;
+  GameStateMachine* m_gameStateMachine = nullptr;
 };
 
 #endif // BACKEND_H
