@@ -6,5 +6,7 @@
         <file>qml/GameOptions.qml</file>
         <file>qml/Main.qml</file>
         <file>qml/WarningPopup.qml</file>
+        <file>qml/CustomScrollView.qml</file>
+        <file>qml/CustomTextField.qml</file>
     </qresource>
 </RCC>

@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Controls.Fusion
 
 Grid
 {
@@ -10,9 +9,7 @@ Grid
   columnSpacing: 50
      rowSpacing: 10
 
-  property int textFieldWidth:  160
-  property int textFieldHeight:  50
-  property int fontPointSize:    14
+  property int fontPointSize: 14
 
   Column
   {
@@ -25,26 +22,10 @@ Grid
       font.pointSize: fontPointSize
     }
 
-    TextField
+    CustomTextField
     {
-      width:  textFieldWidth
-      height: textFieldHeight
-
-      focus: true
       placeholderText: "Rows: " + backend.getNumOfRows().toString()
-      font.pointSize: fontPointSize
-      wrapMode: TextInput.Wrap
-
-      background: Rectangle
-      {
-        radius: 5
-        color:        parent.enabled      ? "lightGrey"   : "#353637"
-        border.color: parent.activeFocus  ? "teal"        : "black"
-        border.width: parent.activeFocus  ? 3 : 1
-      }
-
       onTextChanged:  { backend.setNumOfRows(parseInt(text)) }
-      onAccepted:     { backend.setNumOfRows(parseInt(text)) }
     }
   }
 
@@ -59,25 +40,10 @@ Grid
       font.pointSize: fontPointSize
     }
 
-    TextField
+    CustomTextField
     {
-      width:  textFieldWidth
-      height: textFieldHeight
-
       placeholderText: "Columns: " + backend.getNumOfCols().toString()
-      font.pointSize: fontPointSize
-      wrapMode: TextInput.Wrap
-
-      background: Rectangle
-      {
-        radius: 5
-        color:        parent.enabled      ? "lightGrey"   :  "#353637"
-        border.color: parent.activeFocus  ? "teal"        : "black"
-        border.width: parent.activeFocus  ? 3 : 1
-      }
-
       onTextChanged:  { backend.setNumOfCols(parseInt(text)) }
-      onAccepted:     { backend.setNumOfCols(parseInt(text)) }
     }
   }
 
@@ -92,25 +58,10 @@ Grid
       font.pointSize: fontPointSize
     }
 
-    TextField
+    CustomTextField
     {
-      width:  textFieldWidth
-      height: textFieldHeight
-
       placeholderText: "Square size: " + backend.getSquareSize().toString()
-      font.pointSize: fontPointSize
-      wrapMode: TextInput.Wrap
-
-      background: Rectangle
-      {
-        radius: 5
-        color:        parent.enabled      ? "lightGrey"   : "#353637"
-        border.color: parent.activeFocus  ? "teal"        : "black"
-        border.width: parent.activeFocus  ? 3 : 1
-      }
-
       onTextChanged:  { backend.setSquareSize(parseInt(text)) }
-      onAccepted:     { backend.setSquareSize(parseInt(text)) }
     }
   }
 
@@ -125,25 +76,10 @@ Grid
       font.pointSize: fontPointSize
     }
 
-    TextField
+    CustomTextField
     {
-      width:  textFieldWidth
-      height: textFieldHeight
-
       placeholderText: "Period: " + backend.getTimerPeriod().toString() + " ms"
-      font.pointSize: fontPointSize
-      wrapMode: TextInput.Wrap
-
-      background: Rectangle
-      {
-        radius: 5
-        color:        parent.enabled      ? "lightGrey"   : "#353637"
-        border.color: parent.activeFocus  ? "teal"        : "black"
-        border.width: parent.activeFocus  ? 3 : 1
-      }
-
       onTextChanged:  { backend.setTimerPeriod(parseInt(text)) }
-      onAccepted:     { backend.setTimerPeriod(parseInt(text)) }
     }
   }
 
@@ -158,25 +94,10 @@ Grid
       font.pointSize: fontPointSize
     }
 
-    TextField
+    CustomTextField
     {
-      width:  textFieldWidth
-      height: textFieldHeight
-
       placeholderText: "Spacing: " + backend.getSquareSpacing().toString() + " px"
-      font.pointSize: fontPointSize
-      wrapMode: TextInput.Wrap
-
-      background: Rectangle
-      {
-        radius: 5
-        color:        parent.enabled      ? "lightGrey"   : "#353637"
-        border.color: parent.activeFocus  ? "teal"        : "black"
-        border.width: parent.activeFocus  ? 3 : 1
-      }
-
       onTextChanged:  { backend.setSquareSpacing(parseInt(text)) }
-      onAccepted:     { backend.setSquareSpacing(parseInt(text)) }
     }
   }
 } // Row

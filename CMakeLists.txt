@@ -25,6 +25,8 @@ qt_add_executable(${PROJECT_NAME}
     qml/GameOptions.qml
     qml/Main.qml
     qml/WarningPopup.qml
+    qml/CustomScrollView.qml
+    qml/CustomTextField.qml
   RESOURCES resources.qrc
   SOURCES
     src/backend.h src/backend.cpp
