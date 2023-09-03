@@ -15,7 +15,9 @@ Backend::~Backend(void)
 
 void Backend::reInitialiseBoard(void)
 {
+  GameBoard copy(m_gameBoard->saveGameBoardCopy());
   m_gameBoard.reset(new GameBoard(*m_gameOptions));
+  m_gameBoard->loadGameBoardCopy(copy);
 }
 
 

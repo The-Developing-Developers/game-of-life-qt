@@ -261,3 +261,47 @@ bool GameBoard::doesBoardNeedReInit(void) const
 {
   return m_boardNeedsReinit;
 }
+
+
+GameBoard GameBoard::saveGameBoardCopy(void)
+{
+  GameBoard copy(*this);
+  return copy;
+}
+
+
+/**
+ * @brief Assess which matrix is the smaller: the previous one or the new one. Use the smaller dimensions
+ * to copy over from the previous one to the new one.
+ *
+ * @param copy previous GameBoard which to copy the matrix from.
+ **/
+void GameBoard::loadGameBoardCopy(const GameBoard& copy)
+{
+  int smallerNumOfRows;
+  int smallerNumOfCols;
+  int currentNumOfRows  = m_gameOptions.getNumOfRows();
+  int currentNumOfCols  = m_gameOptions.getNumOfCols();
+  int copyNumOfRows     = copy.m_currentMatrix.size();
+  int copyNumOfCols     = copy.m_currentMatrix[0].size();
+
+  // Assessment
+  if (currentNumOfRows > copyNumOfRows)
+      smallerNumOfRows = copyNumOfRows;
+  else
+      smallerNumOfRows = currentNumOfRows;
+
+  if (currentNumOfCols > copyNumOfCols)
+      smallerNumOfCols = copyNumOfCols;
+  else
+      smallerNumOfCols = currentNumOfCols;
+
+  // Copy
+  for (int row = 0; row < smallerNumOfRows; ++row)
+  {
+    for (int col = 0; col < smallerNumOfCols; ++col)
+    {
+      m_currentMatrix[row][col] = copy.m_currentMatrix[row][col];
+    }
+  }
+}

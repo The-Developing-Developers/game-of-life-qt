@@ -26,6 +26,9 @@ public:
   bool doesBoardNeedReInit        (void) const;
   void toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY);
 
+  GameBoard saveGameBoardCopy(void);
+  void      loadGameBoardCopy(const GameBoard& gameboard);
+
 private:
 
   void calculateFutureMatrix                  (void);
