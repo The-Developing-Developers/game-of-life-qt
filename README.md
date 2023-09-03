@@ -65,12 +65,12 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 - Consider unifying the concept of game board square and `Cell` in the code.
 - Refactor the code to favour readability.
-- In `Backend`, evaluate which methods should be `Q_INVOKABLE` or `public slots`.
 - Decide whether the `TextField`s in `GameOptions.qml` can be simplified / exported in an external QML document. There is a lot of code duplication.
 - A definitive name should be chosen for the Options / Welcome Screen.
 - Add a couple more helper private methods in `gameboard.cpp` to make the code more readable in `calculateFutureMatrix`.
 - Consider not clearing the board if the user goes back to the options and only modifies options NOT related to the game board's size (for example, the user only wants to modify the game's speed).
 - Implement an automatic stop once there is no change between the `m_currentMatrix` and the `m_futureMatrix`.
+- ~~In `Backend`, evaluate which methods should be `Q_INVOKABLE` or `public slots`.~~
 - ~~`Q_PROPERTY` in `backend.h`: should they also use a `NOTIFY` signal?~~
 - ~~Consider removing all `Q_PROPERTY` in `backend.h` and using only the public methods / slots / `Q_INVOKABLE` to interact between C++ and QML.~~
 - ~~Use smart pointers instead of raw pointers for the `Cell**` matrices?~~

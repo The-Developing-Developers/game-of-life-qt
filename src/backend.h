@@ -16,26 +16,24 @@ public:
   explicit Backend(QObject *parent = nullptr);
           ~Backend(void);
 
-  Q_INVOKABLE void reInitialiseBoard(void);
-  Q_INVOKABLE void clearBoard       (void);
-  Q_INVOKABLE int  getNumOfRows     (void) const;
-  Q_INVOKABLE int  getNumOfCols     (void) const;
-  Q_INVOKABLE int  getTimerPeriod   (void) const;
-  Q_INVOKABLE int  getSquareSize    (void) const;
-  Q_INVOKABLE int  getSquareSpacing (void) const;
-  Q_INVOKABLE void changeGameState  (GameState_ns::GameState_e gameState);
-
-public slots:
-  void recalculateBoard     (void);
-  bool getCellStatus        (int cellIndex);
-  void setNumOfRows         (int numOfRows);
-  void setNumOfCols         (int numOfCols);
-  void setTimerPeriod       (int timerPeriod_ms);
-  void setSquareSize        (int squareSize);
-  void setSquareSpacing     (int squareSpacing);
-  void backgroundInteracted (int mouseX, int mouseY);
-  void backgroundReleased   (void);
-  GameState_ns::GameState_e getGameState(void);
+  Q_INVOKABLE void reInitialiseBoard    (void);
+  Q_INVOKABLE void clearBoard           (void);
+  Q_INVOKABLE int  getNumOfRows         (void) const;
+  Q_INVOKABLE int  getNumOfCols         (void) const;
+  Q_INVOKABLE int  getTimerPeriod       (void) const;
+  Q_INVOKABLE int  getSquareSize        (void) const;
+  Q_INVOKABLE int  getSquareSpacing     (void) const;
+  Q_INVOKABLE void changeGameState      (GameState_ns::GameState_e gameState);
+  Q_INVOKABLE void recalculateBoard     (void);
+  Q_INVOKABLE bool getCellStatus        (int cellIndex);
+  Q_INVOKABLE void setNumOfRows         (int numOfRows);
+  Q_INVOKABLE void setNumOfCols         (int numOfCols);
+  Q_INVOKABLE void setTimerPeriod       (int timerPeriod_ms);
+  Q_INVOKABLE void setSquareSize        (int squareSize);
+  Q_INVOKABLE void setSquareSpacing     (int squareSpacing);
+  Q_INVOKABLE void backgroundInteracted (int mouseX, int mouseY);
+  Q_INVOKABLE void backgroundReleased   (void);
+  Q_INVOKABLE GameState_ns::GameState_e getGameState(void);
 
 signals:
   void boardRecalculated(void);

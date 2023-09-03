@@ -12,9 +12,9 @@ ApplicationWindow
   visibility: Qt.WindowFullScreen
   title: qsTr("Game Of Life")
 
-  Item
+  Item // needed for the `state` property
   {
-    id: rootContainer // needed for the `state` property
+    id: rootContainer
 
     anchors.fill: root.contentItem
 
@@ -73,4 +73,4 @@ ApplicationWindow
     // The finite-state machine is kick-started here
     backend.changeGameState(GameState.WelcomeScreen);
   }
-} // root
+} // id: root
