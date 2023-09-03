@@ -11,7 +11,7 @@ Popup
   modal: true
   focus: true
   closePolicy: Popup.NoAutoClose
-  padding: 10
+  padding:  0
 
   signal yesClicked()
 
@@ -22,23 +22,21 @@ Popup
     color: "yellow"
     border.color: "blue"
     border.width: 5
+    radius: 5
 
     Column
     {
       id: background
 
-      anchors
-      {
-        horizontalCenter: rect.horizontalCenter
-        top: rect.top
-        topMargin: 20
-      }
+      anchors.centerIn: rect
       spacing: 20
 
       Text
       {
+        anchors.horizontalCenter: background.horizontalCenter
         text: "Are you sure?"
-        font.pixelSize: 24
+        color: "blue"
+        font.pixelSize: 30
       }
 
       Row
@@ -52,7 +50,7 @@ Popup
         {
           id: yesButton
 
-          width:        50
+          width:        100
           pixelSize_a:  24
           text_a: "Yes"
 
@@ -67,7 +65,7 @@ Popup
         {
           id: noButton
 
-          width:        50
+          width:        100
           pixelSize_a:  24
           text_a: "No"
 
@@ -76,7 +74,7 @@ Popup
             popup.close()
           }
         }
-      }
-    }
-  }
-}
+      } // id: yesNoButtons
+    } // id: background
+  } // id: rect
+} // id: popup
