@@ -15,7 +15,6 @@ public:
   void  setSquareSpacing      (int squareSpacing);
   int   getNumOfRows          (void) const;
   int   getNumOfCols          (void) const;
-  int   getNumOfRows_initial  (void);
   int   getTimerPeriod        (void) const;
   int   getSquareSize         (void) const;
   int   getSquareSpacing      (void) const;
@@ -24,7 +23,6 @@ public:
 
 private:
   void updateNumOfRows(void);
-  void updateNumOfCols(void);
 
   static constexpr int  m_minNumOfRowsAndCols       = 3;
   static constexpr int  m_minTimerPeriod_ms         = 50;
@@ -33,12 +31,11 @@ private:
   static constexpr int  m_DeadOrAliveUpperThreshold = 3; // Game of Life's rule
   static constexpr int  m_DeadOrAliveLowerThreshold = 2; // Game of Life's rule
 
-  int m_numOfRows         = 10;
-  int m_numOfRows_initial = m_numOfRows;
-  int m_numOfCols         = 10;
-  int m_timerPeriod_ms    = 100;
-  int m_squareSize        = 50;
-  int m_squareSpacing     = 5;
+  int m_numOfRows       = 10;
+  int m_numOfCols       = 10;
+  int m_timerPeriod_ms  = 100;
+  int m_squareSize      = 50;
+  int m_squareSpacing   = 5;
 };
 
 #endif // GAMEOPTIONS_HPP

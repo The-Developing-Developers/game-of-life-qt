@@ -65,14 +65,6 @@ int GameOptions::getNumOfCols(void) const
 }
 
 
-int GameOptions::getNumOfRows_initial(void)
-{
-  int numOfRows_initial = m_numOfRows_initial;
-  updateNumOfRows();
-  return numOfRows_initial;
-}
-
-
 int GameOptions::getTimerPeriod(void) const
 {
   return m_timerPeriod_ms;
@@ -100,10 +92,4 @@ int GameOptions::getDeadOrAliveLowerThreshold(void) const
 int GameOptions::getDeadOrAliveUpperThreshold(void) const
 {
   return m_DeadOrAliveUpperThreshold;
-}
-
-
-void GameOptions::updateNumOfRows(void)
-{
-  m_numOfRows_initial = m_numOfRows;
 }

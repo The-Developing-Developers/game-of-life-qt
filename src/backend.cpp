@@ -5,7 +5,7 @@ Backend::Backend(QObject *parent)
   : QObject{parent},
     m_gameOptions     (new GameOptions),
     m_gameBoard       (new GameBoard(*m_gameOptions)),
-    m_gameStateMachine(new GameStateMachine)
+    m_gameStateMachine(new GameStateMachine(*this))
 {;}
 
 
@@ -42,12 +42,14 @@ bool Backend::getCellStatus(int cellIndex)
 void Backend::setNumOfRows(int numOfRows)
 {
   m_gameOptions->setNumOfRows(numOfRows);
+  m_gameBoard->flagBoardForReInit();
 }
 
 
 void Backend::setNumOfCols(int numOfCols)
 {
   m_gameOptions->setNumOfCols(numOfCols);
+  m_gameBoard->flagBoardForReInit();
 }
 
 
@@ -138,4 +140,10 @@ void Backend::backgroundInteracted(int mouseX, int mouseY)
 void Backend::backgroundReleased(void)
 {
   m_gameBoard->clearHasJustBeenToggledFlag();
+}
+
+
+bool Backend::doesBoardNeedReInit(void) const
+{
+  return m_gameBoard->doesBoardNeedReInit();
 }

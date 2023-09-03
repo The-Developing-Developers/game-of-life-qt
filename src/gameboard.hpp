@@ -19,10 +19,12 @@ public:
 
   void recalculateBoard(void);
 
-  bool getCellStatus(int cellIndex);
-  void clearBoard   (void);
-  void toggleCellStatusBecauseOfMouseInteraction (int mouseX, int mouseY);
+  bool getCellStatus              (int cellIndex);
+  void clearBoard                 (void);
   void clearHasJustBeenToggledFlag(void);
+  void flagBoardForReInit         (void);
+  bool doesBoardNeedReInit        (void) const;
+  void toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY);
 
 private:
 
@@ -36,6 +38,7 @@ private:
   QVector<QVector<Cell>>  m_currentMatrix;
   QVector<QVector<Cell>>  m_futureMatrix;
   GameOptions&            m_gameOptions;
+  bool                    m_boardNeedsReinit = false;
 };
 
 #endif // GAMEBOARD_HPP

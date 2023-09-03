@@ -1,7 +1,9 @@
 #include <QQmlEngine>
 #include "gamestatemachine.hpp"
+#include "backend.h"
 
-GameStateMachine::GameStateMachine(void)
+GameStateMachine::GameStateMachine(Backend& backend)
+  : m_backend(backend)
 {
   qmlRegisterUncreatableMetaObject
   (
@@ -22,7 +24,8 @@ GameStateMachine::RequiredAction GameStateMachine::requestGameStateChangeAndRece
 {
   RequiredAction requiredAction = RequiredAction::noAction;
 
-  if (requestedGameState == GameState_ns::GameState_e::GameBoard)
+  if (    requestedGameState == GameState_ns::GameState_e::GameBoard
+      &&  m_backend.doesBoardNeedReInit() )
     requiredAction = RequiredAction::reinitialiseGameBoard;
 
   m_currentGameState = requestedGameState;

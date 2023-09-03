@@ -101,7 +101,7 @@ Item
         {
           id: cell
 
-          property bool isAlive: false // All cells are dead at the creation of a new the game
+          property bool isAlive: backend.getCellStatus(index)
 
           width:  root.squareSide
           height: root.squareSide

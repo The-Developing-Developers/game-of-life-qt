@@ -13,10 +13,10 @@ class Backend : public QObject
   QML_ELEMENT
 
 public:
+
   explicit Backend(QObject *parent = nullptr);
           ~Backend(void);
 
-  Q_INVOKABLE void reInitialiseBoard    (void);
   Q_INVOKABLE void clearBoard           (void);
   Q_INVOKABLE int  getNumOfRows         (void) const;
   Q_INVOKABLE int  getNumOfCols         (void) const;
@@ -35,14 +35,20 @@ public:
   Q_INVOKABLE void backgroundReleased   (void);
   Q_INVOKABLE GameState_ns::GameState_e getGameState(void);
 
+  bool doesBoardNeedReInit(void) const;
+
 signals:
+
   void boardRecalculated(void);
   void gameStateChanged (GameState_ns::GameState_e currentState);
 
 private:
+
   QScopedPointer<GameOptions>      m_gameOptions;
   QScopedPointer<GameBoard>        m_gameBoard;
   QScopedPointer<GameStateMachine> m_gameStateMachine;
+
+  void reInitialiseBoard(void);
 };
 
 #endif // BACKEND_H

@@ -249,3 +249,15 @@ void GameBoard::clearHasJustBeenToggledFlag(void)
     }
   }
 }
+
+
+void GameBoard::flagBoardForReInit(void)
+{
+  m_boardNeedsReinit = true;
+}
+
+
+bool GameBoard::doesBoardNeedReInit(void) const
+{
+  return m_boardNeedsReinit;
+}

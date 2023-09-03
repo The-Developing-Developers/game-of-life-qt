@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+class Backend;
+
 namespace GameState_ns
 {
   Q_NAMESPACE // required for meta object creation
@@ -32,7 +34,7 @@ public:
     howMany
   };
 
-   GameStateMachine(void);
+   GameStateMachine(Backend& backend);
   ~GameStateMachine(void);
 
   RequiredAction            requestGameStateChangeAndReceiveFeedback(GameState_ns::GameState_e requestedGameState);
@@ -41,6 +43,7 @@ public:
 private:
 
   GameState_ns::GameState_e m_currentGameState = GameState_ns::GameState_e::Undefined;
+  Backend&                  m_backend;
 };
 
 #endif // GAMESTATEMACHINE_HPP
