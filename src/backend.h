@@ -10,18 +10,13 @@
 class Backend : public QObject
 {
   Q_OBJECT
-  Q_PROPERTY(int rows           READ getNumOfRows     WRITE setNumOfRows      FINAL)
-  Q_PROPERTY(int cols           READ getNumOfCols     WRITE setNumOfCols      FINAL)
-  Q_PROPERTY(int timerPeriod    READ getTimerPeriod   WRITE setTimerPeriod    FINAL)
-  Q_PROPERTY(int squareSize     READ getSquareSize    WRITE setSquareSize     FINAL)
-  Q_PROPERTY(int squareSpacing  READ getSquareSpacing WRITE setSquareSpacing  FINAL)
   QML_ELEMENT
 
 public:
   explicit Backend(QObject *parent = nullptr);
           ~Backend(void);
 
-  Q_INVOKABLE void reInitialiseBoard  (void);
+  Q_INVOKABLE void reInitialiseBoard(void);
   Q_INVOKABLE void clearBoard       (void);
   Q_INVOKABLE int  getNumOfRows     (void) const;
   Q_INVOKABLE int  getNumOfCols     (void) const;

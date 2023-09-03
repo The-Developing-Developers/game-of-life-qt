@@ -69,12 +69,12 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 - Decide whether the `TextField`s in `GameOptions.qml` can be simplified / exported in an external QML document. There is a lot of code duplication.
 - A definitive name should be chosen for the Options / Welcome Screen.
 - Add a couple more helper private methods in `gameboard.cpp` to make the code more readable in `calculateFutureMatrix`.
-- ~~Use Qt's `QScopedPointer` and `<QVector>` instead of unique pointers and `std::vector`?~~
-- `Q_PROPERTY` in `backend.h`: should they also use a `NOTIFY` signal?
-- Consider removing all `Q_PROPERTY` in `backend.h` and using only the public methods / slots / `Q_INVOKABLE` to interact between C++ and QML.
 - Consider not clearing the board if the user goes back to the options and only modifies options NOT related to the game board's size (for example, the user only wants to modify the game's speed).
 - Implement an automatic stop once there is no change between the `m_currentMatrix` and the `m_futureMatrix`.
+- ~~`Q_PROPERTY` in `backend.h`: should they also use a `NOTIFY` signal?~~
+- ~~Consider removing all `Q_PROPERTY` in `backend.h` and using only the public methods / slots / `Q_INVOKABLE` to interact between C++ and QML.~~
 - ~~Use smart pointers instead of raw pointers for the `Cell**` matrices?~~
+- ~~Use Qt's `QScopedPointer` and `<QVector>` instead of unique pointers and `std::vector`?~~
 - ~~Is `Backend` class unnecessary? Could it be merged with `GameBoard`? There is a lot of duplicated code.~~ No, it is not unnecessary: creating the `GameOptions` class has removed a lot of duplications.
 - ~~Should the game options be migrated from the `Backend` to a new, dedicated `GameOptions` class? This could remove some duplication between `Backend` and `GameBoard`.~~
 - ~~`m_hasJustBeenToggled` data member is temporarily set manually from the outside, but it will need to be set via a proper setter, and made `private`.~~
