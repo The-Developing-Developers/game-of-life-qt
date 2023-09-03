@@ -2,6 +2,7 @@
 #define GAMEBOARD_HPP
 
 #include <utility>
+#include <vector>
 #include "cell.hpp"
 
 class GameOptions;
@@ -13,7 +14,7 @@ class GameBoard
 {
 public:
 
-   GameBoard(GameOptions* gameOptions);
+   GameBoard(GameOptions& gameOptions);
   ~GameBoard(void);
 
   void recalculateBoard(void);
@@ -32,10 +33,9 @@ private:
   int  getIndexFromRowCol                     (int row, int col);
   std::pair<int, int> getRowColFromIndex      (int cellIndex);
 
-  bool          m_isInitialised = false; // TODO: evaluate if this is necessary
-  Cell**        m_currentMatrix;
-  Cell**        m_futureMatrix;
-  GameOptions*  m_gameOptions;
+  std::vector<std::vector<Cell>>  m_currentMatrix;
+  std::vector<std::vector<Cell>>  m_futureMatrix;
+  GameOptions&                    m_gameOptions;
 };
 
 #endif // GAMEBOARD_HPP

@@ -3,31 +3,20 @@
 
 Backend::Backend(QObject *parent)
   : QObject{parent},
-    m_gameOptions     (new GameOptions),
-    m_gameBoard       (new GameBoard(m_gameOptions)),
-    m_gameStateMachine(new GameStateMachine)
+    m_gameOptions     (std::make_unique<GameOptions>()),
+    m_gameBoard       (std::make_unique<GameBoard>(*m_gameOptions)),
+    m_gameStateMachine(std::make_unique<GameStateMachine>())
 {;}
 
 
 Backend::~Backend(void)
-{
-  if (m_gameStateMachine != nullptr)
-    delete m_gameStateMachine;
-
-  if (m_gameBoard != nullptr)
-    delete m_gameBoard;
-
-  if (m_gameOptions != nullptr)
-    delete m_gameOptions;
-}
+{;}
 
 
 void Backend::reInitialiseBoard(void)
 {
-  if (m_gameBoard != nullptr)
-    delete m_gameBoard;
-
-  m_gameBoard = new GameBoard(m_gameOptions);
+  m_gameBoard.reset();
+  m_gameBoard = std::make_unique<GameBoard>(*m_gameOptions);
 }
 
 

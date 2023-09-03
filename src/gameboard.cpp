@@ -4,50 +4,29 @@
 /**
  * @brief Construct a new GameBoard object with custom size.
  **/
-GameBoard::GameBoard(GameOptions* gameOptions)
+GameBoard::GameBoard(GameOptions& gameOptions)
   : m_gameOptions(gameOptions)
 {
   // Number of rows
-  m_currentMatrix = new Cell*[m_gameOptions->getNumOfRows()];
-  m_futureMatrix  = new Cell*[m_gameOptions->getNumOfRows()];
+  m_currentMatrix.resize(m_gameOptions.getNumOfRows());
+  m_futureMatrix.resize(m_gameOptions.getNumOfRows());
 
   // Number of cols
-  for (int i = 0; i != m_gameOptions->getNumOfRows(); ++i)
+  for (int i = 0; i != m_gameOptions.getNumOfRows(); ++i)
   {
-    m_currentMatrix[i] = new Cell[m_gameOptions->getNumOfCols()];
-    m_futureMatrix[i]  = new Cell[m_gameOptions->getNumOfCols()];
+    m_currentMatrix[i].resize(m_gameOptions.getNumOfCols());
+    m_futureMatrix[i].resize(m_gameOptions.getNumOfCols());
   }
-
-  m_isInitialised = true; // TODO: is it necessary?
 }
 
 
 GameBoard::~GameBoard(void)
-{
-  if (!m_isInitialised) // TODO: is it necessary?
-  {
-    return;
-  }
-
-  int numOfRows_initial = m_gameOptions->getNumOfRows_initial();
-  for (int i = 0; i != numOfRows_initial; ++i)
-  {
-    delete[] m_currentMatrix[i];
-    delete[] m_futureMatrix[i];
-    m_currentMatrix[i] = nullptr;
-    m_futureMatrix[i]  = nullptr;
-  }
-
-  delete[] m_currentMatrix;
-  delete[] m_futureMatrix;
-  m_currentMatrix = nullptr;
-  m_futureMatrix  = nullptr;
-}
+{;}
 
 
 int GameBoard::getIndexFromRowCol(int row, int col)
 {
-  return row * m_gameOptions->getNumOfCols() + col;
+  return row * m_gameOptions.getNumOfCols() + col;
 }
 
 
@@ -60,7 +39,7 @@ std::pair<int, int> GameBoard::getRowColFromIndex(int cellIndex)
   {
     ++col;
 
-    if (col == m_gameOptions->getNumOfCols())
+    if (col == m_gameOptions.getNumOfCols())
     {
       ++row;
       col = 0;
@@ -82,9 +61,9 @@ bool GameBoard::getCellStatus(int cellIndex)
 
 void GameBoard::clearBoard(void)
 {
-  for (int row = 0; row != m_gameOptions->getNumOfRows(); ++row)
+  for (int row = 0; row != m_gameOptions.getNumOfRows(); ++row)
   {
-    for (int col = 0; col != m_gameOptions->getNumOfCols(); ++col)
+    for (int col = 0; col != m_gameOptions.getNumOfCols(); ++col)
     {
       m_currentMatrix[row][col].kill();
       m_futureMatrix [row][col].kill();
@@ -106,9 +85,9 @@ void GameBoard::recalculateBoard(void)
  **/
 void GameBoard::calculateFutureMatrix(void)
 {
-  for (int i = 0; i < m_gameOptions->getNumOfRows(); ++i)
+  for (int i = 0; i < m_gameOptions.getNumOfRows(); ++i)
   {
-    for (int j = 0; j < m_gameOptions->getNumOfCols(); ++j)
+    for (int j = 0; j < m_gameOptions.getNumOfCols(); ++j)
     {
       int AliveNeighboursCounter = 0;
 
@@ -167,7 +146,7 @@ void GameBoard::calculateFutureMatrix(void)
       if (m_currentMatrix[i][j].isAlive())
       {
         // TODO: replace conditions with constants for readability?
-        if (AliveNeighboursCounter == m_gameOptions->getDeadOrAliveLowerThreshold() || AliveNeighboursCounter == m_gameOptions->getDeadOrAliveUpperThreshold())
+        if (AliveNeighboursCounter == m_gameOptions.getDeadOrAliveLowerThreshold() || AliveNeighboursCounter == m_gameOptions.getDeadOrAliveUpperThreshold())
         {
           // Rule 1: any live cell with two or three live neighbours survives.
           m_futureMatrix[i][j].revive(); // TODO: superfluous? Cell is already alive in this `if`
@@ -182,7 +161,7 @@ void GameBoard::calculateFutureMatrix(void)
       {
         // Analysing dead cells
 
-        if (AliveNeighboursCounter == m_gameOptions->getDeadOrAliveUpperThreshold())
+        if (AliveNeighboursCounter == m_gameOptions.getDeadOrAliveUpperThreshold())
         {
           // Rule 2: Any dead cell with three live neighbours becomes a live cell.
           m_futureMatrix[i][j].revive();
@@ -199,7 +178,7 @@ void GameBoard::calculateFutureMatrix(void)
 
 bool GameBoard::isNeighbourWithinBounds(int row, int col)
 {
-  return ( row >= 0 && col >= 0 && row < m_gameOptions->getNumOfRows() && col < m_gameOptions->getNumOfCols() );
+  return ( row >= 0 && col >= 0 && row < m_gameOptions.getNumOfRows() && col < m_gameOptions.getNumOfCols() );
 }
 
 
@@ -211,9 +190,9 @@ bool GameBoard::isNeighbourAlive(int row, int col)
 
 void GameBoard::overwriteCurrentMatrixWithFutureMatrix(void)
 {
-  for (int row = 0; row != m_gameOptions->getNumOfRows(); ++row)
+  for (int row = 0; row != m_gameOptions.getNumOfRows(); ++row)
   {
-    for (int col = 0; col != m_gameOptions->getNumOfCols(); ++col)
+    for (int col = 0; col != m_gameOptions.getNumOfCols(); ++col)
     {
       m_currentMatrix[row][col] = m_futureMatrix[row][col];
     }
@@ -231,14 +210,14 @@ void GameBoard::overwriteCurrentMatrixWithFutureMatrix(void)
  **/
 void GameBoard::toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY)
 {
-  for (int row = 0; row != m_gameOptions->getNumOfRows(); ++row)
+  for (int row = 0; row != m_gameOptions.getNumOfRows(); ++row)
   {
-    for (int col = 0; col != m_gameOptions->getNumOfCols(); ++col)
+    for (int col = 0; col != m_gameOptions.getNumOfCols(); ++col)
     {
-      int currentCellUpperLeftVertexPosition_x = m_gameOptions->getSquareSpacing() + col * (m_gameOptions->getSquareSize() + m_gameOptions->getSquareSpacing());
-      int currentCellUpperLeftVertexPosition_y = m_gameOptions->getSquareSpacing() + row * (m_gameOptions->getSquareSize() + m_gameOptions->getSquareSpacing());
-      int currentCellLowerRghtVertexPosition_x = currentCellUpperLeftVertexPosition_x + m_gameOptions->getSquareSize(); // simple calculation because the cell is a square
-      int currentCellLowerRghtVertexPosition_y = currentCellUpperLeftVertexPosition_y + m_gameOptions->getSquareSize(); // simple calculation because the cell is a square
+      int currentCellUpperLeftVertexPosition_x = m_gameOptions.getSquareSpacing() + col * (m_gameOptions.getSquareSize() + m_gameOptions.getSquareSpacing());
+      int currentCellUpperLeftVertexPosition_y = m_gameOptions.getSquareSpacing() + row * (m_gameOptions.getSquareSize() + m_gameOptions.getSquareSpacing());
+      int currentCellLowerRghtVertexPosition_x = currentCellUpperLeftVertexPosition_x + m_gameOptions.getSquareSize(); // simple calculation because the cell is a square
+      int currentCellLowerRghtVertexPosition_y = currentCellUpperLeftVertexPosition_y + m_gameOptions.getSquareSize(); // simple calculation because the cell is a square
 
       auto isMouseInCurrentCell = [mouseX, mouseY, currentCellUpperLeftVertexPosition_x, currentCellUpperLeftVertexPosition_y, currentCellLowerRghtVertexPosition_x, currentCellLowerRghtVertexPosition_y]()
       {
@@ -262,9 +241,9 @@ void GameBoard::toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY
 
 void GameBoard::clearHasJustBeenToggledFlag(void)
 {
-  for (int row = 0; row != m_gameOptions->getNumOfRows(); ++row)
+  for (int row = 0; row != m_gameOptions.getNumOfRows(); ++row)
   {
-    for (int col = 0; col != m_gameOptions->getNumOfCols(); ++col)
+    for (int col = 0; col != m_gameOptions.getNumOfCols(); ++col)
     {
       m_currentMatrix[row][col].unlockToggling();
     }
