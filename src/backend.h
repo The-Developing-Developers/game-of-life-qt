@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <qqmlintegration.h>
-#include <memory>
 #include "gameboard.hpp"
 #include "gameoptions.hpp"
 #include "gamestatemachine.hpp"
@@ -48,9 +47,9 @@ signals:
   void gameStateChanged (GameState_ns::GameState_e currentState);
 
 private:
-  std::unique_ptr<GameOptions>      m_gameOptions;
-  std::unique_ptr<GameBoard>        m_gameBoard;
-  std::unique_ptr<GameStateMachine> m_gameStateMachine;
+  QScopedPointer<GameOptions>      m_gameOptions;
+  QScopedPointer<GameBoard>        m_gameBoard;
+  QScopedPointer<GameStateMachine> m_gameStateMachine;
 };
 
 #endif // BACKEND_H

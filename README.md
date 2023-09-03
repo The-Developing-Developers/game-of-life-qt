@@ -69,7 +69,7 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 - Decide whether the `TextField`s in `GameOptions.qml` can be simplified / exported in an external QML document. There is a lot of code duplication.
 - A definitive name should be chosen for the Options / Welcome Screen.
 - Add a couple more helper private methods in `gameboard.cpp` to make the code more readable in `calculateFutureMatrix`.
-- Use Qt's `QScopedPointer` and `<QVector>` instead of unique pointers and `std::vector`?
+- ~~Use Qt's `QScopedPointer` and `<QVector>` instead of unique pointers and `std::vector`?~~
 - `Q_PROPERTY` in `backend.h`: should they also use a `NOTIFY` signal?
 - Consider removing all `Q_PROPERTY` in `backend.h` and using only the public methods / slots / `Q_INVOKABLE` to interact between C++ and QML.
 - Consider not clearing the board if the user goes back to the options and only modifies options NOT related to the game board's size (for example, the user only wants to modify the game's speed).

@@ -3,9 +3,9 @@
 
 Backend::Backend(QObject *parent)
   : QObject{parent},
-    m_gameOptions     (std::make_unique<GameOptions>()),
-    m_gameBoard       (std::make_unique<GameBoard>(*m_gameOptions)),
-    m_gameStateMachine(std::make_unique<GameStateMachine>())
+    m_gameOptions     (new GameOptions),
+    m_gameBoard       (new GameBoard(*m_gameOptions)),
+    m_gameStateMachine(new GameStateMachine)
 {;}
 
 
@@ -15,8 +15,7 @@ Backend::~Backend(void)
 
 void Backend::reInitialiseBoard(void)
 {
-  m_gameBoard.reset();
-  m_gameBoard = std::make_unique<GameBoard>(*m_gameOptions);
+  m_gameBoard.reset(new GameBoard(*m_gameOptions));
 }
 
 

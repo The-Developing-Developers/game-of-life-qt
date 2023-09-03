@@ -2,7 +2,7 @@
 #define GAMEBOARD_HPP
 
 #include <utility>
-#include <vector>
+#include <QVector>
 #include "cell.hpp"
 
 class GameOptions;
@@ -33,9 +33,9 @@ private:
   int  getIndexFromRowCol                     (int row, int col);
   std::pair<int, int> getRowColFromIndex      (int cellIndex);
 
-  std::vector<std::vector<Cell>>  m_currentMatrix;
-  std::vector<std::vector<Cell>>  m_futureMatrix;
-  GameOptions&                    m_gameOptions;
+  QVector<QVector<Cell>>  m_currentMatrix;
+  QVector<QVector<Cell>>  m_futureMatrix;
+  GameOptions&            m_gameOptions;
 };
 
 #endif // GAMEBOARD_HPP
