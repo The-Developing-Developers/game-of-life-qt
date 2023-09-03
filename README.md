@@ -56,7 +56,7 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
     - CMake 3.24.2
     - Ninja 1.10.2
 3. Open Qt Creator.
-4. Open `MakeLists.txt`.
+4. Open `CMakeLists.txt`.
 5. Select *Release* configuration.
 6. Run.
 
@@ -65,13 +65,13 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 - Consider unifying the concept of game board square and `Cell` in the code.
 - Refactor the code to favour readability.
-- Decide whether the `TextField`s in `GameOptions.qml` can be simplified / exported in an external QML document. There is a lot of code duplication.
+- Decide whether the `TextField`s in `GameOptions.qml` can be simplified / exported in an external QML document. There is a lot of code duplication. Even better: make QML documents leaner by creating more, smaller QML documents.
 - A definitive name should be chosen for the Options / Welcome Screen.
 - Add a couple more helper private methods in `gameboard.cpp` to make the code more readable in `calculateFutureMatrix`.
 - Implement an automatic stop once there is no change between the `m_currentMatrix` and the `m_futureMatrix`.
 - Consider not clearing the board even if the user goes back to the options and modifies the game board's size. To do this, especially in case the board is shrinked, it is necessary to memorise (save) the cells' status (alive or dead) and reinstate (load) it when a game board of a different size is created. Maybe a vector of `bool` is sufficient: the indices of the vector could correspond to the indices of the recreated game board's matrix. To help with this, consider not destroying the game board when a new game is started, but simply to resize the vector of vectors of `Cell`s whenever the number of rows or columns is modified through the game options.
-- Add "are you sure" pop-up when the user clicks on "clear game board".
 - Now that the FSM receives the `backend` by reference, should the FSM be directly responsible of carrying out back-end actions such as reinitialising the game board? Or is it better that the FSM just informs the `Backend` that the `Backend` has to perform a certain action, and the `Backend` actually carries out that action?
+- ~~Add "are you sure" pop-up when the user clicks on "clear game board".~~
 - ~~Consider not clearing the board if the user goes back to the options and only modifies options NOT related to the game board's size (for example, the user only wants to modify the game's speed).~~
 - ~~In `Backend`, evaluate which methods should be `Q_INVOKABLE` or `public slots`.~~
 - ~~`Q_PROPERTY` in `backend.h`: should they also use a `NOTIFY` signal?~~

@@ -187,7 +187,10 @@ Item
         text_a: "Clear Game Board"
         enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
 
-        onClicked: function() { backend.clearBoard(); }
+        onClicked: function()
+        {
+          popup.open()
+        }
       }
 
       CustomButton
@@ -206,6 +209,18 @@ Item
       }
     } // Row
   } // Column
+
+  WarningPopup
+  {
+    id: popup
+  }
+
+  Connections
+  {
+    target: popup
+
+    function onYesClicked() { backend.clearBoard(); }
+  }
 
   Timer
   {

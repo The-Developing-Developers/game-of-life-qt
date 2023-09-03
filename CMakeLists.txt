@@ -24,6 +24,7 @@ qt_add_executable(${PROJECT_NAME}
     qml/GameBoard.qml
     qml/GameOptions.qml
     qml/Main.qml
+    qml/WarningPopup.qml
   RESOURCES resources.qrc
   SOURCES
     src/backend.h src/backend.cpp
