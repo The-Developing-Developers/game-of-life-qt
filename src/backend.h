@@ -35,7 +35,7 @@ public:
   Q_INVOKABLE void backgroundReleased   (void);
   Q_INVOKABLE GameState_ns::GameState_e getGameState(void);
 
-  bool doesBoardNeedReInit(void) const;
+  bool doesBoardNeedResizing(void) const;
 
 signals:
 
@@ -48,7 +48,7 @@ private:
   QScopedPointer<GameBoard>        m_gameBoard;
   QScopedPointer<GameStateMachine> m_gameStateMachine;
 
-  void reInitialiseBoard(void);
+  void resizeGameBoard(void);
 };
 
 #endif // BACKEND_H

@@ -239,7 +239,7 @@ void GameBoard::toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY
 }
 
 
-void GameBoard::clearHasJustBeenToggledFlag(void)
+void GameBoard::unlockToggling(void)
 {
   for (int row = 0; row != m_gameOptions.getNumOfRows(); ++row)
   {
@@ -251,15 +251,31 @@ void GameBoard::clearHasJustBeenToggledFlag(void)
 }
 
 
-void GameBoard::flagBoardForReInit(void)
+void GameBoard::flagBoardForResizing(void)
 {
   m_boardNeedsReinit = true;
 }
 
 
-bool GameBoard::doesBoardNeedReInit(void) const
+bool GameBoard::doesBoardNeedResizing(void) const
 {
   return m_boardNeedsReinit;
+}
+
+
+void GameBoard::resizeGameBoard(void)
+{
+  int newNumOfRows = m_gameOptions.getNumOfRows();
+  int newNumOfCols = m_gameOptions.getNumOfCols();
+
+  m_currentMatrix.resize(newNumOfRows);
+  m_futureMatrix.resize(newNumOfRows);
+
+  for (int row = 0; row != newNumOfRows; ++row)
+  {
+    m_currentMatrix[row].resize(newNumOfCols);
+    m_futureMatrix[row].resize(newNumOfCols);
+  }
 }
 
 

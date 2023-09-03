@@ -25,8 +25,8 @@ GameStateMachine::RequiredAction GameStateMachine::requestGameStateChangeAndRece
   RequiredAction requiredAction = RequiredAction::noAction;
 
   if (    requestedGameState == GameState_ns::GameState_e::GameBoard
-      &&  m_backend.doesBoardNeedReInit() )
-    requiredAction = RequiredAction::reinitialiseGameBoard;
+      &&  m_backend.doesBoardNeedResizing() )
+    requiredAction = RequiredAction::resizeGameBoard;
 
   m_currentGameState = requestedGameState;
 

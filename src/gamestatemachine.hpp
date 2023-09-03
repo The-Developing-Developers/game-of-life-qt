@@ -28,7 +28,7 @@ public:
   enum class RequiredAction
   {
     noAction = 0,
-    reinitialiseGameBoard,
+    resizeGameBoard,
     undefined,
 
     howMany

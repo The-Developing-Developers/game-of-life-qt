@@ -13,11 +13,9 @@ Backend::~Backend(void)
 {;}
 
 
-void Backend::reInitialiseBoard(void)
+void Backend::resizeGameBoard(void)
 {
-  GameBoard copy(m_gameBoard->saveGameBoardCopy());
-  m_gameBoard.reset(new GameBoard(*m_gameOptions));
-  m_gameBoard->loadGameBoardCopy(copy);
+  m_gameBoard->resizeGameBoard();
 }
 
 
@@ -44,14 +42,14 @@ bool Backend::getCellStatus(int cellIndex)
 void Backend::setNumOfRows(int numOfRows)
 {
   m_gameOptions->setNumOfRows(numOfRows);
-  m_gameBoard->flagBoardForReInit();
+  m_gameBoard->flagBoardForResizing();
 }
 
 
 void Backend::setNumOfCols(int numOfCols)
 {
   m_gameOptions->setNumOfCols(numOfCols);
-  m_gameBoard->flagBoardForReInit();
+  m_gameBoard->flagBoardForResizing();
 }
 
 
@@ -112,8 +110,8 @@ void Backend::changeGameState(GameState_ns::GameState_e gameState)
     case GameStateMachine::RequiredAction::noAction:
       break;
 
-    case GameStateMachine::RequiredAction::reinitialiseGameBoard:
-      reInitialiseBoard();
+    case GameStateMachine::RequiredAction::resizeGameBoard:
+      resizeGameBoard();
       break;
 
     case GameStateMachine::RequiredAction::undefined:
@@ -141,11 +139,11 @@ void Backend::backgroundInteracted(int mouseX, int mouseY)
 
 void Backend::backgroundReleased(void)
 {
-  m_gameBoard->clearHasJustBeenToggledFlag();
+  m_gameBoard->unlockToggling();
 }
 
 
-bool Backend::doesBoardNeedReInit(void) const
+bool Backend::doesBoardNeedResizing(void) const
 {
-  return m_gameBoard->doesBoardNeedReInit();
+  return m_gameBoard->doesBoardNeedResizing();
 }

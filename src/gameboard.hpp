@@ -19,11 +19,12 @@ public:
 
   void recalculateBoard(void);
 
-  bool getCellStatus              (int cellIndex);
-  void clearBoard                 (void);
-  void clearHasJustBeenToggledFlag(void);
-  void flagBoardForReInit         (void);
-  bool doesBoardNeedReInit        (void) const;
+  bool getCellStatus          (int cellIndex);
+  void clearBoard             (void);
+  void unlockToggling         (void);
+  void flagBoardForResizing   (void);
+  bool doesBoardNeedResizing  (void) const;
+  void resizeGameBoard        (void);
   void toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY);
 
   GameBoard saveGameBoardCopy(void);
