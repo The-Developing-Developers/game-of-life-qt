@@ -35,12 +35,15 @@ public:
   Q_INVOKABLE void backgroundReleased   (void);
   Q_INVOKABLE GameState_ns::GameState_e getGameState(void);
 
-  bool doesBoardNeedResizing(void) const;
+  bool          doesBoardNeedResizing (void) const;
+  void          stopTheTimer          (void) const;
+  GameOptions&  getGameOptions        (void) const;
 
 signals:
 
   void boardRecalculated(void);
   void gameStateChanged (GameState_ns::GameState_e currentState);
+  void stopTimer(void) const;
 
 private:
 

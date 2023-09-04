@@ -3,9 +3,10 @@
 
 #include <utility>
 #include <QVector>
-#include "cell.hpp"
 
+class Backend;
 class GameOptions;
+class Cell;
 
 /**
  * @brief Create a square grid populated with cells. Minimum size given by "m_MinMatrixSize".
@@ -14,7 +15,7 @@ class GameBoard
 {
 public:
 
-   GameBoard(GameOptions& gameOptions);
+   GameBoard(Backend& backend);
   ~GameBoard(void);
 
   void recalculateBoard(void);
@@ -39,7 +40,8 @@ private:
   std::pair<int, int> getRowColFromIndex    (int cellIndex);
 
   QVector<QVector<Cell>>  m_currentMatrix;
-  QVector<QVector<Cell>>  m_futureMatrix;
+  QVector<QVector<Cell>>  m_nextMatrix;
+  Backend&                m_backend;
   GameOptions&            m_gameOptions;
   bool                    m_boardNeedsResizing = false;
 };

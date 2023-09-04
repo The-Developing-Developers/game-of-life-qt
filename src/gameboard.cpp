@@ -1,21 +1,23 @@
 #include "gameboard.hpp"
 #include "gameoptions.hpp"
+#include "cell.hpp"
+#include "backend.h"
 
 /**
  * @brief Construct a new GameBoard object with custom size.
  **/
-GameBoard::GameBoard(GameOptions& gameOptions)
-  : m_gameOptions(gameOptions)
+GameBoard::GameBoard(Backend& backend)
+  : m_backend(backend), m_gameOptions(m_backend.getGameOptions())
 {
   // Number of rows
   m_currentMatrix.resize(m_gameOptions.getNumOfRows());
-  m_futureMatrix.resize(m_gameOptions.getNumOfRows());
+  m_nextMatrix.resize(m_gameOptions.getNumOfRows());
 
   // Number of cols
   for (int i = 0; i != m_gameOptions.getNumOfRows(); ++i)
   {
     m_currentMatrix[i].resize(m_gameOptions.getNumOfCols());
-    m_futureMatrix[i].resize(m_gameOptions.getNumOfCols());
+    m_nextMatrix[i].resize(m_gameOptions.getNumOfCols());
   }
 }
 
@@ -66,7 +68,7 @@ void GameBoard::clearBoard(void)
     for (int col = 0; col != m_gameOptions.getNumOfCols(); ++col)
     {
       m_currentMatrix[row][col].kill();
-      m_futureMatrix [row][col].kill();
+      m_nextMatrix [row][col].kill();
     }
   }
 }
@@ -98,13 +100,10 @@ void GameBoard::calculateNextMatrix(void)
 
 void GameBoard::overwriteCurrentMatrixWithNextMatrix(void)
 {
-  for (int row = 0; row != m_gameOptions.getNumOfRows(); ++row)
-  {
-    for (int col = 0; col != m_gameOptions.getNumOfCols(); ++col)
-    {
-      m_currentMatrix[row][col] = m_futureMatrix[row][col];
-    }
-  }
+  if (m_currentMatrix != m_nextMatrix)
+    m_currentMatrix = m_nextMatrix;
+  else
+    m_backend.stopTheTimer();
 }
 
 
@@ -178,13 +177,13 @@ void GameBoard::resizeGameBoard(void)
 
   // Resize rows
   m_currentMatrix.resize(newNumOfRows);
-  m_futureMatrix.resize(newNumOfRows);
+  m_nextMatrix.resize(newNumOfRows);
 
   // Resize cols
   for (int row = 0; row != newNumOfRows; ++row)
   {
     m_currentMatrix[row].resize(newNumOfCols);
-    m_futureMatrix[row].resize(newNumOfCols);
+    m_nextMatrix[row].resize(newNumOfCols);
   }
 }
 
@@ -234,12 +233,12 @@ void GameBoard::applyGameRules(int row, int col, int aliveNeighboursCounter)
     if (rule_1)
     {
       // Rule 1: any live cell with two or three live neighbours survives.
-      m_futureMatrix[row][col].revive();
+      m_nextMatrix[row][col].revive();
     }
     else
     {
       // Rule 3: all other live cells die in the next generation. Similarly, all other dead cells stay dead.
-      m_futureMatrix[row][col].kill();
+      m_nextMatrix[row][col].kill();
     }
   }
   else
@@ -247,12 +246,12 @@ void GameBoard::applyGameRules(int row, int col, int aliveNeighboursCounter)
     if (rule_2)
     {
       // Rule 2: Any dead cell with three live neighbours becomes a live cell.
-      m_futureMatrix[row][col].revive();
+      m_nextMatrix[row][col].revive();
     }
     else
     {
       // Rule 3: all other dead cells stay dead.
-      m_futureMatrix[row][col].kill();
+      m_nextMatrix[row][col].kill();
     }
   }
 }

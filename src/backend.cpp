@@ -4,7 +4,7 @@
 Backend::Backend(QObject *parent)
   : QObject{parent},
     m_gameOptions     (new GameOptions),
-    m_gameBoard       (new GameBoard(*m_gameOptions)),
+    m_gameBoard       (new GameBoard(*this)),
     m_gameStateMachine(new GameStateMachine(*this))
 {;}
 
@@ -146,4 +146,16 @@ void Backend::backgroundReleased(void)
 bool Backend::doesBoardNeedResizing(void) const
 {
   return m_gameBoard->doesBoardNeedResizing();
+}
+
+
+GameOptions& Backend::getGameOptions(void) const
+{
+  return *m_gameOptions;
+}
+
+
+void Backend::stopTheTimer(void) const
+{
+  emit stopTimer();
 }

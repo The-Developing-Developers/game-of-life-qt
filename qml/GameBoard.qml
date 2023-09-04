@@ -57,24 +57,26 @@ Item
       pixelSize_a:  30
       text_a:       "Start Game"
 
-      pushedColour_a: "#00FF00"
-      hoverColour_a:  "#00AF00"
-      normalColour_a: "#007F00"
+      normalColour_a:     timer.running? "#ff8800" : "#007F00"
+      hoverColour_a:      timer.running? "#ffaa00" : "#00AF00"
+      pushedColour_a:     timer.running? "#ffcc00" : "#00FF00"
       normalTextColour_a: "white"
       hoverTextColour_a:  "white"
 
-      onClicked: function()
+      onClicked: toggleTimerAndChangeText()
+
+      function toggleTimerAndChangeText()
+      {
+        timer.toggleTimer();
+        startGameButton.changeText();
+      }
+
+      function changeText()
       {
         if ( timer.running )
-        {
-          timer.running = false;
-          text_a = "Click to restart";
-        }
-        else
-        {
-          timer.running = true
           text_a = "Click to stop";
-        }
+        else
+          text_a = "Click to restart";
       }
     } // id: startGameButton
 
@@ -136,5 +138,24 @@ Item
     running:  false;
     repeat:   true
     onTriggered: function() { backend.recalculateBoard(); }
+
+    function toggleTimer()
+    {
+      if ( timer.running )
+        timer.running = false;
+      else
+        timer.running = true
+    }
+  }
+
+  Connections
+  {
+    target: backend
+
+    function onStopTimer()
+    {
+      timer.running = false
+      startGameButton.changeText();
+    }
   }
 } // id: root

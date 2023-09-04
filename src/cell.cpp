@@ -44,3 +44,9 @@ void Cell::unlockToggling(void)
 {
   m_isTogglingLocked = false;
 }
+
+
+bool operator==(const Cell& cell_1, const Cell& cell_2)
+{
+  return cell_1.m_isAlive == cell_2.m_isAlive;
+}

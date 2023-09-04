@@ -14,6 +14,8 @@ public:
   void lockToggling   (void);
   void unlockToggling (void);
 
+  friend bool operator==(const Cell& cell_1, const Cell& cell_2);
+
 private:
 
   bool m_isAlive          = false;
