@@ -2,8 +2,8 @@
 #include "gamestatemachine.hpp"
 #include "backend.h"
 
-GameStateMachine::GameStateMachine(Backend& backend)
-  : m_backend(backend)
+GameStateMachine::GameStateMachine(GameManager& backend)
+  : m_gameManager(backend)
 {
   qmlRegisterUncreatableMetaObject
   (
@@ -25,7 +25,7 @@ GameStateMachine::RequiredAction GameStateMachine::requestGameStateChangeAndRece
   RequiredAction requiredAction = RequiredAction::noAction;
 
   if (    requestedGameState == GameState_ns::GameState_e::GameBoard
-      &&  m_backend.doesBoardNeedResizing() )
+      &&  m_gameManager.doesBoardNeedResizing() )
     requiredAction = RequiredAction::resizeGameBoard;
 
   m_currentGameState = requestedGameState;

@@ -7,15 +7,15 @@
 #include "gameoptions.hpp"
 #include "gamestatemachine.hpp"
 
-class Backend : public QObject
+class GameManager : public QObject
 {
   Q_OBJECT
   QML_ELEMENT
 
 public:
 
-  explicit Backend(QObject *parent = nullptr);
-          ~Backend(void);
+  explicit GameManager(QObject *parent = nullptr);
+          ~GameManager(void);
 
   Q_INVOKABLE void clearBoard           (void);
   Q_INVOKABLE int  getNumOfRows         (void) const;

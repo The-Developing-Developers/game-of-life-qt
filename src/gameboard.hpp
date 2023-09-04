@@ -4,7 +4,7 @@
 #include <utility>
 #include <QVector>
 
-class Backend;
+class GameManager;
 class GameOptions;
 class Cell;
 
@@ -15,7 +15,7 @@ class GameBoard
 {
 public:
 
-   GameBoard(Backend& backend);
+   GameBoard(GameManager& gameManager);
   ~GameBoard(void);
 
   void recalculateBoard(void);
@@ -41,7 +41,7 @@ private:
 
   QVector<QVector<Cell>>  m_currentMatrix;
   QVector<QVector<Cell>>  m_nextMatrix;
-  Backend&                m_backend;
+  GameManager&            m_gameManager;
   GameOptions&            m_gameOptions;
   bool                    m_boardNeedsResizing = false;
 };

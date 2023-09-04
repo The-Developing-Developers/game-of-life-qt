@@ -6,8 +6,8 @@
 /**
  * @brief Construct a new GameBoard object with custom size.
  **/
-GameBoard::GameBoard(Backend& backend)
-  : m_backend(backend), m_gameOptions(m_backend.getGameOptions())
+GameBoard::GameBoard(GameManager& backend)
+  : m_gameManager(backend), m_gameOptions(m_gameManager.getGameOptions())
 {
   // Number of rows
   m_currentMatrix.resize(m_gameOptions.getNumOfRows());
@@ -103,7 +103,7 @@ void GameBoard::overwriteCurrentMatrixWithNextMatrix(void)
   if (m_currentMatrix != m_nextMatrix)
     m_currentMatrix = m_nextMatrix;
   else
-    m_backend.stopTheTimer();
+    m_gameManager.stopTheTimer();
 }
 
 

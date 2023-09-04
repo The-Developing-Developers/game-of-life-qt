@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-class Backend;
+class GameManager;
 
 namespace GameState_ns
 {
@@ -34,7 +34,7 @@ public:
     howMany
   };
 
-   GameStateMachine(Backend& backend);
+   GameStateMachine(GameManager& backend);
   ~GameStateMachine(void);
 
   RequiredAction            requestGameStateChangeAndReceiveFeedback(GameState_ns::GameState_e requestedGameState);
@@ -43,7 +43,7 @@ public:
 private:
 
   GameState_ns::GameState_e m_currentGameState = GameState_ns::GameState_e::Undefined;
-  Backend&                  m_backend;
+  GameManager&              m_gameManager;
 };
 
 #endif // GAMESTATEMACHINE_HPP

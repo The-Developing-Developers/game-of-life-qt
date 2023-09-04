@@ -112,7 +112,7 @@ Item
 
         onClicked: function()
         {
-          backend.changeGameState(GameState.WelcomeScreen);
+          gameManager.changeGameState(GameState.WelcomeScreen);
         }
       }
     } // Row
@@ -127,17 +127,17 @@ Item
   {
     target: popup
 
-    function onYesClicked() { backend.clearBoard(); }
+    function onYesClicked() { gameManager.clearBoard(); }
   }
 
   Timer
   {
     id: timer
 
-    interval: backend.getTimerPeriod();
+    interval: gameManager.getTimerPeriod();
     running:  false;
     repeat:   true
-    onTriggered: function() { backend.recalculateBoard(); }
+    onTriggered: function() { gameManager.recalculateBoard(); }
 
     function toggleTimer()
     {
@@ -150,7 +150,7 @@ Item
 
   Connections
   {
-    target: backend
+    target: gameManager
 
     function onStopTimer()
     {

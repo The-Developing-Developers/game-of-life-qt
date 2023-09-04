@@ -1,7 +1,7 @@
 #include <QDebug>
 #include "backend.h"
 
-Backend::Backend(QObject *parent)
+GameManager::GameManager(QObject *parent)
   : QObject{parent},
     m_gameOptions     (new GameOptions),
     m_gameBoard       (new GameBoard(*this)),
@@ -9,99 +9,99 @@ Backend::Backend(QObject *parent)
 {;}
 
 
-Backend::~Backend(void)
+GameManager::~GameManager(void)
 {;}
 
 
-void Backend::resizeGameBoard(void)
+void GameManager::resizeGameBoard(void)
 {
   m_gameBoard->resizeGameBoard();
 }
 
 
-void Backend::clearBoard(void)
+void GameManager::clearBoard(void)
 {
   m_gameBoard->clearBoard();
   emit boardRecalculated();
 }
 
 
-void Backend::recalculateBoard(void)
+void GameManager::recalculateBoard(void)
 {
   m_gameBoard->recalculateBoard();
   emit boardRecalculated();
 }
 
 
-bool Backend::getCellStatus(int cellIndex)
+bool GameManager::getCellStatus(int cellIndex)
 {
   return m_gameBoard->getCellStatus(cellIndex);
 }
 
 
-void Backend::setNumOfRows(int numOfRows)
+void GameManager::setNumOfRows(int numOfRows)
 {
   m_gameOptions->setNumOfRows(numOfRows);
   m_gameBoard->flagBoardForResizing();
 }
 
 
-void Backend::setNumOfCols(int numOfCols)
+void GameManager::setNumOfCols(int numOfCols)
 {
   m_gameOptions->setNumOfCols(numOfCols);
   m_gameBoard->flagBoardForResizing();
 }
 
 
-void Backend::setTimerPeriod(int timerPeriod_ms)
+void GameManager::setTimerPeriod(int timerPeriod_ms)
 {
   m_gameOptions->setTimerPeriod(timerPeriod_ms);
 }
 
 
-void Backend::setSquareSize(int squareSize)
+void GameManager::setSquareSize(int squareSize)
 {
   m_gameOptions->setSquareSize(squareSize);
 }
 
 
-void Backend::setSquareSpacing(int squareSpacing)
+void GameManager::setSquareSpacing(int squareSpacing)
 {
   m_gameOptions->setSquareSpacing(squareSpacing);
 }
 
 
-int Backend::getNumOfRows(void) const
+int GameManager::getNumOfRows(void) const
 {
   return m_gameOptions->getNumOfRows();
 }
 
 
-int Backend::getNumOfCols(void) const
+int GameManager::getNumOfCols(void) const
 {
   return m_gameOptions->getNumOfCols();
 }
 
 
-int Backend::getTimerPeriod(void) const
+int GameManager::getTimerPeriod(void) const
 {
   return m_gameOptions->getTimerPeriod();
 }
 
 
-int Backend::getSquareSize(void) const
+int GameManager::getSquareSize(void) const
 {
   return m_gameOptions->getSquareSize();
 }
 
 
-int Backend::getSquareSpacing(void) const
+int GameManager::getSquareSpacing(void) const
 {
   return m_gameOptions->getSquareSpacing();
 }
 
 
-void Backend::changeGameState(GameState_ns::GameState_e gameState)
+void GameManager::changeGameState(GameState_ns::GameState_e gameState)
 {
   GameStateMachine::RequiredAction requiredAction = m_gameStateMachine->requestGameStateChangeAndReceiveFeedback(gameState);
 
@@ -124,38 +124,38 @@ void Backend::changeGameState(GameState_ns::GameState_e gameState)
 }
 
 
-GameState_ns::GameState_e Backend::getGameState(void)
+GameState_ns::GameState_e GameManager::getGameState(void)
 {
   return m_gameStateMachine->getGameState();
 }
 
 
-void Backend::backgroundInteracted(int mouseX, int mouseY)
+void GameManager::backgroundInteracted(int mouseX, int mouseY)
 {
   m_gameBoard->toggleCellStatusBecauseOfMouseInteraction(mouseX, mouseY);
   emit boardRecalculated();
 }
 
 
-void Backend::backgroundReleased(void)
+void GameManager::backgroundReleased(void)
 {
   m_gameBoard->unlockToggling();
 }
 
 
-bool Backend::doesBoardNeedResizing(void) const
+bool GameManager::doesBoardNeedResizing(void) const
 {
   return m_gameBoard->doesBoardNeedResizing();
 }
 
 
-GameOptions& Backend::getGameOptions(void) const
+GameOptions& GameManager::getGameOptions(void) const
 {
   return *m_gameOptions;
 }
 
 
-void Backend::stopTheTimer(void) const
+void GameManager::stopTheTimer(void) const
 {
   emit stopTimer();
 }

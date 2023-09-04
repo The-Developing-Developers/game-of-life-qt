@@ -28,7 +28,7 @@ ApplicationWindow
 
     Connections
     {
-      target: backend
+      target: gameManager
 
       function onGameStateChanged(currentState)
       {
@@ -71,6 +71,6 @@ ApplicationWindow
   Component.onCompleted:
   {
     // The finite-state machine is kick-started here
-    backend.changeGameState(GameState.WelcomeScreen);
+    gameManager.changeGameState(GameState.WelcomeScreen);
   }
 } // id: root

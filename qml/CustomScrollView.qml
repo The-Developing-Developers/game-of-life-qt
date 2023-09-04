@@ -5,10 +5,10 @@ ScrollView
 {
   id: scrollView
 
-  property int squareSpacing: backend.getSquareSpacing()
-  property int squareSide:    backend.getSquareSize()
-  property int rows:          backend.getNumOfRows()
-  property int cols:          backend.getNumOfCols()
+  property int squareSpacing: gameManager.getSquareSpacing()
+  property int squareSide:    gameManager.getSquareSize()
+  property int rows:          gameManager.getNumOfRows()
+  property int cols:          gameManager.getNumOfCols()
   property int numOfSquares:  rows * cols
 
   contentWidth:  squareSpacing + (squareSide + squareSpacing) * cols
@@ -36,19 +36,19 @@ ScrollView
       onPressed: function(mouse)
       {
         if (timer.running === false)
-          backend.backgroundInteracted(mouse.x, mouse.y) // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
+          gameManager.backgroundInteracted(mouse.x, mouse.y) // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
       }
 
       onPositionChanged: function(mouse)
       {
         if (timer.running === false)
-          backend.backgroundInteracted(mouse.x, mouse.y) // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
+          gameManager.backgroundInteracted(mouse.x, mouse.y) // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
       }
 
       onReleased: function()
       {
         if (timer.running === false)
-          backend.backgroundReleased() // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
+          gameManager.backgroundReleased() // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
       }
     }
 
@@ -84,7 +84,7 @@ ScrollView
       {
         id: cell
 
-        property bool isAlive: backend.getCellStatus(index)
+        property bool isAlive: gameManager.getCellStatus(index)
 
         width:  scrollView.squareSide
         height: scrollView.squareSide
@@ -93,8 +93,8 @@ ScrollView
 
         Connections
         {
-          target: backend
-          function onBoardRecalculated()  { cell.isAlive = backend.getCellStatus(index); }
+          target: gameManager
+          function onBoardRecalculated()  { cell.isAlive = gameManager.getCellStatus(index); }
         }
       } // id: cell
     } // Repeater

@@ -24,8 +24,8 @@ Grid
 
     CustomTextField
     {
-      placeholderText: "Rows: " + backend.getNumOfRows().toString()
-      onTextChanged:  { backend.setNumOfRows(parseInt(text)) }
+      placeholderText: "Rows: " + gameManager.getNumOfRows().toString()
+      onTextChanged:  { gameManager.setNumOfRows(parseInt(text)) }
     }
   }
 
@@ -42,8 +42,8 @@ Grid
 
     CustomTextField
     {
-      placeholderText: "Columns: " + backend.getNumOfCols().toString()
-      onTextChanged:  { backend.setNumOfCols(parseInt(text)) }
+      placeholderText: "Columns: " + gameManager.getNumOfCols().toString()
+      onTextChanged:  { gameManager.setNumOfCols(parseInt(text)) }
     }
   }
 
@@ -60,8 +60,8 @@ Grid
 
     CustomTextField
     {
-      placeholderText: "Square size: " + backend.getSquareSize().toString()
-      onTextChanged:  { backend.setSquareSize(parseInt(text)) }
+      placeholderText: "Square size: " + gameManager.getSquareSize().toString()
+      onTextChanged:  { gameManager.setSquareSize(parseInt(text)) }
     }
   }
 
@@ -78,8 +78,8 @@ Grid
 
     CustomTextField
     {
-      placeholderText: "Period: " + backend.getTimerPeriod().toString() + " ms"
-      onTextChanged:  { backend.setTimerPeriod(parseInt(text)) }
+      placeholderText: "Period: " + gameManager.getTimerPeriod().toString() + " ms"
+      onTextChanged:  { gameManager.setTimerPeriod(parseInt(text)) }
     }
   }
 
@@ -96,8 +96,8 @@ Grid
 
     CustomTextField
     {
-      placeholderText: "Spacing: " + backend.getSquareSpacing().toString() + " px"
-      onTextChanged:  { backend.setSquareSpacing(parseInt(text)) }
+      placeholderText: "Spacing: " + gameManager.getSquareSpacing().toString() + " px"
+      onTextChanged:  { gameManager.setSquareSpacing(parseInt(text)) }
     }
   }
 } // Row

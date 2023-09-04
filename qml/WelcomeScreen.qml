@@ -108,7 +108,7 @@ Rectangle
       pixelSize_a:  30
       text_a:       "Start Game of Life"
 
-      onClicked: backend.changeGameState(GameState.GameBoard)
+      onClicked: gameManager.changeGameState(GameState.GameBoard)
     }
 
     CustomButton
