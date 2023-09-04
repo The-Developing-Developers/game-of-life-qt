@@ -1,5 +1,5 @@
 #include <QDebug>
-#include "backend.h"
+#include "gamemanager.hpp"
 
 GameManager::GameManager(QObject *parent)
   : QObject{parent},

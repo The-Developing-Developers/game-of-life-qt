@@ -1,7 +1,7 @@
 #include "gameboard.hpp"
 #include "gameoptions.hpp"
 #include "cell.hpp"
-#include "backend.h"
+#include "gamemanager.hpp"
 
 /**
  * @brief Construct a new GameBoard object with custom size.

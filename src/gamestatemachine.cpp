@@ -1,6 +1,6 @@
 #include <QQmlEngine>
 #include "gamestatemachine.hpp"
-#include "backend.h"
+#include "gamemanager.hpp"
 
 GameStateMachine::GameStateMachine(GameManager& backend)
   : m_gameManager(backend)

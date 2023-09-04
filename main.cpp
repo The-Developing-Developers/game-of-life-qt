@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "backend.h"
+#include "gamemanager.hpp"
 
 int main(int argc, char *argv[])
 {

@@ -1,5 +1,5 @@
-#ifndef BACKEND_H
-#define BACKEND_H
+#ifndef GAMEMANAGER_H
+#define GAMEMANAGER_H
 
 #include <QObject>
 #include <qqmlintegration.h>
@@ -54,4 +54,4 @@ private:
   void resizeGameBoard(void);
 };
 
-#endif // BACKEND_H
+#endif // GAMEMANAGER_H

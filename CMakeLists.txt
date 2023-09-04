@@ -29,7 +29,7 @@ qt_add_executable(${PROJECT_NAME}
     qml/CustomTextField.qml
   RESOURCES resources.qrc
   SOURCES
-    src/backend.h src/backend.cpp
+    src/gamemanager.hpp src/gamemanager.cpp
     src/cell.hpp src/cell.cpp
     src/gameboard.hpp src/gameboard.cpp
     src/gamestatemachine.hpp src/gamestatemachine.cpp
