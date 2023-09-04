@@ -85,94 +85,14 @@ void GameBoard::recalculateBoard(void)
  **/
 void GameBoard::calculateFutureMatrix(void)
 {
-  for (int i = 0; i < m_gameOptions.getNumOfRows(); ++i)
+  for (int row = 0; row != m_gameOptions.getNumOfRows(); ++row)
   {
-    for (int j = 0; j < m_gameOptions.getNumOfCols(); ++j)
+    for (int col = 0; col != m_gameOptions.getNumOfCols(); ++col)
     {
-      int AliveNeighboursCounter = 0;
-
-      // Investigate neighbours
-
-      if (isNeighbourWithinBounds(i - 1, j - 1) && isNeighbourAlive(i - 1, j - 1) )
-      {
-        ++AliveNeighboursCounter; // Above left
-      }
-      else {;}
-
-      if (isNeighbourWithinBounds(i - 1, j) && isNeighbourAlive(i - 1, j) )
-      {
-        ++AliveNeighboursCounter; // Above
-      }
-      else {;}
-
-      if (isNeighbourWithinBounds(i - 1, j + 1) && isNeighbourAlive(i - 1, j + 1) )
-      {
-        ++AliveNeighboursCounter; // Above right
-      }
-      else {;}
-
-      if (isNeighbourWithinBounds(i, j - 1) && isNeighbourAlive(i, j - 1) )
-      {
-        ++AliveNeighboursCounter; // Left
-      }
-      else {;}
-
-      if (isNeighbourWithinBounds(i, j + 1) && isNeighbourAlive(i, j + 1) )
-      {
-        ++AliveNeighboursCounter; // Right
-      }
-      else {;}
-
-      if (isNeighbourWithinBounds(i + 1, j - 1) && isNeighbourAlive(i + 1, j - 1) )
-      {
-        ++AliveNeighboursCounter; // Below Left
-      }
-      else {;}
-
-      if (isNeighbourWithinBounds(i + 1, j) && isNeighbourAlive(i + 1, j) )
-      {
-        ++AliveNeighboursCounter; // Below
-      }
-      else {;}
-
-      if (isNeighbourWithinBounds(i + 1, j + 1) && isNeighbourAlive(i + 1, j + 1) )
-      {
-        ++AliveNeighboursCounter; // Below right
-      }
-      else {;}
-
-      // Calculating next generation (applying game's rules)
-
-      if (m_currentMatrix[i][j].isAlive())
-      {
-        // TODO: replace conditions with constants for readability?
-        if (AliveNeighboursCounter == m_gameOptions.getDeadOrAliveLowerThreshold() || AliveNeighboursCounter == m_gameOptions.getDeadOrAliveUpperThreshold())
-        {
-          // Rule 1: any live cell with two or three live neighbours survives.
-          m_futureMatrix[i][j].revive(); // TODO: superfluous? Cell is already alive in this `if`
-        }
-        else
-        {
-          // Rule 3: all other live cells die in the next generation. Similarly, all other dead cells stay dead.
-          m_futureMatrix[i][j].kill();
-        }
-      }
-      else
-      {
-        // Analysing dead cells
-
-        if (AliveNeighboursCounter == m_gameOptions.getDeadOrAliveUpperThreshold())
-        {
-          // Rule 2: Any dead cell with three live neighbours becomes a live cell.
-          m_futureMatrix[i][j].revive();
-        }
-        else
-        {
-          m_futureMatrix[i][j].kill(); // TODO: superfluous? Cell is already dead in this `else`
-        }
-      }
-    } // for loop
-  } // for loop
+      int aliveNeighboursCounter = countNumOfAliveNeighbours(row, col);
+      calculateNextGeneration(row, col, aliveNeighboursCounter);
+    }
+  }
 }
 
 
@@ -318,6 +238,75 @@ void GameBoard::loadGameBoardCopy(const GameBoard& copy)
     for (int col = 0; col < smallerNumOfCols; ++col)
     {
       m_currentMatrix[row][col] = copy.m_currentMatrix[row][col];
+    }
+  }
+}
+
+
+int GameBoard::countNumOfAliveNeighbours(int row, int col)
+{
+  int aliveNeighboursCounter = 0;
+
+  if (isNeighbourWithinBounds(row - 1, col - 1) && isNeighbourAlive(row - 1, col - 1) )
+    ++aliveNeighboursCounter; // Alive neighbour found: above left
+
+  if (isNeighbourWithinBounds(row - 1, col) && isNeighbourAlive(row - 1, col) )
+    ++aliveNeighboursCounter; // Alive neighbour found: above
+
+  if (isNeighbourWithinBounds(row - 1, col + 1) && isNeighbourAlive(row - 1, col + 1) )
+    ++aliveNeighboursCounter; // Alive neighbour found: above right
+
+  if (isNeighbourWithinBounds(row, col - 1) && isNeighbourAlive(row, col - 1) )
+    ++aliveNeighboursCounter; // Alive neighbour found: left
+
+  if (isNeighbourWithinBounds(row, col + 1) && isNeighbourAlive(row, col + 1) )
+    ++aliveNeighboursCounter; // Alive neighbour found: right
+
+  if (isNeighbourWithinBounds(row + 1, col - 1) && isNeighbourAlive(row + 1, col - 1) )
+    ++aliveNeighboursCounter; // Alive neighbour found: below Left
+
+  if (isNeighbourWithinBounds(row + 1, col) && isNeighbourAlive(row + 1, col) )
+    ++aliveNeighboursCounter; // Alive neighbour found: below
+
+  if (isNeighbourWithinBounds(row + 1, col + 1) && isNeighbourAlive(row + 1, col + 1) )
+    ++aliveNeighboursCounter; // Alive neighbour found: below right
+
+  return aliveNeighboursCounter;
+}
+
+
+/**
+ * @brief Applying Game of Life's rules
+ **/
+void GameBoard::calculateNextGeneration(int row, int col, int aliveNeighboursCounter)
+{
+  const bool rule_1 = aliveNeighboursCounter == m_gameOptions.getDeadOrAliveLowerThreshold() || aliveNeighboursCounter == m_gameOptions.getDeadOrAliveUpperThreshold();
+  const bool rule_2 = aliveNeighboursCounter == m_gameOptions.getDeadOrAliveUpperThreshold();
+
+  if (m_currentMatrix[row][col].isAlive())
+  {
+    if (rule_1)
+    {
+      // Rule 1: any live cell with two or three live neighbours survives.
+      m_futureMatrix[row][col].revive();
+    }
+    else
+    {
+      // Rule 3: all other live cells die in the next generation. Similarly, all other dead cells stay dead.
+      m_futureMatrix[row][col].kill();
+    }
+  }
+  else
+  {
+    if (rule_2)
+    {
+      // Rule 2: Any dead cell with three live neighbours becomes a live cell.
+      m_futureMatrix[row][col].revive();
+    }
+    else
+    {
+      // Rule 3: all other dead cells stay dead.
+      m_futureMatrix[row][col].kill();
     }
   }
 }

@@ -37,6 +37,8 @@ private:
   bool isNeighbourWithinBounds                (int row, int col);
   bool isNeighbourAlive                       (int row, int col);
   int  getIndexFromRowCol                     (int row, int col);
+  int  countNumOfAliveNeighbours              (int row, int col);
+  void calculateNextGeneration                (int row, int col, int aliveNeighboursCounter);
   std::pair<int, int> getRowColFromIndex      (int cellIndex);
 
   QVector<QVector<Cell>>  m_currentMatrix;

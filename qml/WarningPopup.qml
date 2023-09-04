@@ -13,6 +13,12 @@ Popup
   closePolicy: Popup.NoAutoClose
   padding:  0
 
+  Overlay.modal: Rectangle
+  {
+    // color: "#aacfdbe7"
+    color: "#AAAAAAAA" // Background is greyed out when Popup is active
+  }
+
   signal yesClicked()
 
   contentItem: Rectangle
