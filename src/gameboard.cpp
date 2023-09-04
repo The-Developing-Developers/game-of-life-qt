@@ -74,8 +74,8 @@ void GameBoard::clearBoard(void)
 
 void GameBoard::recalculateBoard(void)
 {
-  calculateFutureMatrix();
-  overwriteCurrentMatrixWithFutureMatrix();
+  calculateNextMatrix();
+  overwriteCurrentMatrixWithNextMatrix();
 }
 
 
@@ -83,32 +83,20 @@ void GameBoard::recalculateBoard(void)
  * @brief For each cell in a given matrix, checks the cell's neighbours and
  * applies Game Of Life's rules. Also, decides the fate of the examined cell.
  **/
-void GameBoard::calculateFutureMatrix(void)
+void GameBoard::calculateNextMatrix(void)
 {
   for (int row = 0; row != m_gameOptions.getNumOfRows(); ++row)
   {
     for (int col = 0; col != m_gameOptions.getNumOfCols(); ++col)
     {
       int aliveNeighboursCounter = countNumOfAliveNeighbours(row, col);
-      calculateNextGeneration(row, col, aliveNeighboursCounter);
+      applyGameRules(row, col, aliveNeighboursCounter);
     }
   }
 }
 
 
-bool GameBoard::isNeighbourWithinBounds(int row, int col)
-{
-  return ( row >= 0 && col >= 0 && row < m_gameOptions.getNumOfRows() && col < m_gameOptions.getNumOfCols() );
-}
-
-
-bool GameBoard::isNeighbourAlive(int row, int col)
-{
-  return ( m_currentMatrix[row][col].isAlive() );
-}
-
-
-void GameBoard::overwriteCurrentMatrixWithFutureMatrix(void)
+void GameBoard::overwriteCurrentMatrixWithNextMatrix(void)
 {
   for (int row = 0; row != m_gameOptions.getNumOfRows(); ++row)
   {
@@ -173,13 +161,13 @@ void GameBoard::unlockToggling(void)
 
 void GameBoard::flagBoardForResizing(void)
 {
-  m_boardNeedsReinit = true;
+  m_boardNeedsResizing = true;
 }
 
 
 bool GameBoard::doesBoardNeedResizing(void) const
 {
-  return m_boardNeedsReinit;
+  return m_boardNeedsResizing;
 }
 
 
@@ -188,57 +176,15 @@ void GameBoard::resizeGameBoard(void)
   int newNumOfRows = m_gameOptions.getNumOfRows();
   int newNumOfCols = m_gameOptions.getNumOfCols();
 
+  // Resize rows
   m_currentMatrix.resize(newNumOfRows);
   m_futureMatrix.resize(newNumOfRows);
 
+  // Resize cols
   for (int row = 0; row != newNumOfRows; ++row)
   {
     m_currentMatrix[row].resize(newNumOfCols);
     m_futureMatrix[row].resize(newNumOfCols);
-  }
-}
-
-
-GameBoard GameBoard::saveGameBoardCopy(void)
-{
-  GameBoard copy(*this);
-  return copy;
-}
-
-
-/**
- * @brief Assess which matrix is the smaller: the previous one or the new one. Use the smaller dimensions
- * to copy over from the previous one to the new one.
- *
- * @param copy previous GameBoard which to copy the matrix from.
- **/
-void GameBoard::loadGameBoardCopy(const GameBoard& copy)
-{
-  int smallerNumOfRows;
-  int smallerNumOfCols;
-  int currentNumOfRows  = m_gameOptions.getNumOfRows();
-  int currentNumOfCols  = m_gameOptions.getNumOfCols();
-  int copyNumOfRows     = copy.m_currentMatrix.size();
-  int copyNumOfCols     = copy.m_currentMatrix[0].size();
-
-  // Assessment
-  if (currentNumOfRows > copyNumOfRows)
-      smallerNumOfRows = copyNumOfRows;
-  else
-      smallerNumOfRows = currentNumOfRows;
-
-  if (currentNumOfCols > copyNumOfCols)
-      smallerNumOfCols = copyNumOfCols;
-  else
-      smallerNumOfCols = currentNumOfCols;
-
-  // Copy
-  for (int row = 0; row < smallerNumOfRows; ++row)
-  {
-    for (int col = 0; col < smallerNumOfCols; ++col)
-    {
-      m_currentMatrix[row][col] = copy.m_currentMatrix[row][col];
-    }
   }
 }
 
@@ -278,7 +224,7 @@ int GameBoard::countNumOfAliveNeighbours(int row, int col)
 /**
  * @brief Applying Game of Life's rules
  **/
-void GameBoard::calculateNextGeneration(int row, int col, int aliveNeighboursCounter)
+void GameBoard::applyGameRules(int row, int col, int aliveNeighboursCounter)
 {
   const bool rule_1 = aliveNeighboursCounter == m_gameOptions.getDeadOrAliveLowerThreshold() || aliveNeighboursCounter == m_gameOptions.getDeadOrAliveUpperThreshold();
   const bool rule_2 = aliveNeighboursCounter == m_gameOptions.getDeadOrAliveUpperThreshold();
@@ -309,4 +255,16 @@ void GameBoard::calculateNextGeneration(int row, int col, int aliveNeighboursCou
       m_futureMatrix[row][col].kill();
     }
   }
+}
+
+
+bool GameBoard::isNeighbourWithinBounds(int row, int col)
+{
+  return ( row >= 0 && col >= 0 && row < m_gameOptions.getNumOfRows() && col < m_gameOptions.getNumOfCols() );
+}
+
+
+bool GameBoard::isNeighbourAlive(int row, int col)
+{
+  return ( m_currentMatrix[row][col].isAlive() );
 }
