@@ -124,7 +124,7 @@ void GameManager::changeGameState(GameState_ns::GameState_e gameState)
 }
 
 
-GameState_ns::GameState_e GameManager::getGameState(void)
+GameState_ns::GameState_e GameManager::getGameState(void) const
 {
   return m_gameStateMachine->getGameState();
 }

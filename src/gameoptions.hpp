@@ -22,6 +22,7 @@ public:
   int   getDeadOrAliveUpperThreshold(void) const;
 
 private:
+
   void updateNumOfRows(void);
 
   static constexpr int  m_minNumOfRowsAndCols       = 3;

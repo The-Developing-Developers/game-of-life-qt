@@ -39,7 +39,7 @@ private:
   void applyGameRules                       (int row, int col, int aliveNeighboursCounter);
   std::pair<int, int> getRowColFromIndex    (int cellIndex);
 
-  QVector<QVector<Cell>>  m_currentMatrix;
+  QVector<QVector<Cell>>  m_currMatrix;
   QVector<QVector<Cell>>  m_nextMatrix;
   GameManager&            m_gameManager;
   GameOptions&            m_gameOptions;

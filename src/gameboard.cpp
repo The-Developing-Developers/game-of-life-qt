@@ -3,21 +3,21 @@
 #include "cell.hpp"
 #include "gamemanager.hpp"
 
-/**
- * @brief Construct a new GameBoard object with custom size.
- **/
 GameBoard::GameBoard(GameManager& backend)
   : m_gameManager(backend), m_gameOptions(m_gameManager.getGameOptions())
 {
+  const int numOfRows = m_gameOptions.getNumOfRows();
+  const int numOfCols = m_gameOptions.getNumOfCols();
+
   // Number of rows
-  m_currentMatrix.resize(m_gameOptions.getNumOfRows());
-  m_nextMatrix.resize(m_gameOptions.getNumOfRows());
+  m_currMatrix.resize(numOfRows);
+  m_nextMatrix.resize(numOfRows);
 
   // Number of cols
-  for (int i = 0; i != m_gameOptions.getNumOfRows(); ++i)
+  for (int i = 0; i != numOfRows; ++i)
   {
-    m_currentMatrix[i].resize(m_gameOptions.getNumOfCols());
-    m_nextMatrix[i].resize(m_gameOptions.getNumOfCols());
+    m_currMatrix[i].resize(numOfCols);
+    m_nextMatrix[i].resize(numOfCols);
   }
 }
 
@@ -57,7 +57,7 @@ bool GameBoard::getCellStatus(int cellIndex)
   std::pair<int, int> rowCol = getRowColFromIndex(cellIndex);
   int row = rowCol.first;
   int col = rowCol.second;
-  return m_currentMatrix[row][col].isAlive();
+  return m_currMatrix[row][col].isAlive();
 }
 
 
@@ -67,8 +67,8 @@ void GameBoard::clearBoard(void)
   {
     for (int col = 0; col != m_gameOptions.getNumOfCols(); ++col)
     {
-      m_currentMatrix[row][col].kill();
-      m_nextMatrix [row][col].kill();
+      m_currMatrix[row][col].kill();
+      m_nextMatrix[row][col].kill();
     }
   }
 }
@@ -100,8 +100,8 @@ void GameBoard::calculateNextMatrix(void)
 
 void GameBoard::overwriteCurrentMatrixWithNextMatrix(void)
 {
-  if (m_currentMatrix != m_nextMatrix)
-    m_currentMatrix = m_nextMatrix;
+  if (m_currMatrix != m_nextMatrix)
+    m_currMatrix = m_nextMatrix;
   else
     m_gameManager.stopTheTimer();
 }
@@ -134,12 +134,12 @@ void GameBoard::toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY
 
       if (isMouseInCurrentCell())
       {
-        m_currentMatrix[row][col].toggle();
-        m_currentMatrix[row][col].lockToggling();
+        m_currMatrix[row][col].toggle();
+        m_currMatrix[row][col].lockToggling();
       }
       else
       {
-        m_currentMatrix[row][col].unlockToggling();
+        m_currMatrix[row][col].unlockToggling();
       }
     }
   }
@@ -152,7 +152,7 @@ void GameBoard::unlockToggling(void)
   {
     for (int col = 0; col != m_gameOptions.getNumOfCols(); ++col)
     {
-      m_currentMatrix[row][col].unlockToggling();
+      m_currMatrix[row][col].unlockToggling();
     }
   }
 }
@@ -172,17 +172,18 @@ bool GameBoard::doesBoardNeedResizing(void) const
 
 void GameBoard::resizeGameBoard(void)
 {
+  // Here, the number of rows and cols has just been changed by the user in the options screen
   int newNumOfRows = m_gameOptions.getNumOfRows();
   int newNumOfCols = m_gameOptions.getNumOfCols();
 
   // Resize rows
-  m_currentMatrix.resize(newNumOfRows);
+  m_currMatrix.resize(newNumOfRows);
   m_nextMatrix.resize(newNumOfRows);
 
   // Resize cols
   for (int row = 0; row != newNumOfRows; ++row)
   {
-    m_currentMatrix[row].resize(newNumOfCols);
+    m_currMatrix[row].resize(newNumOfCols);
     m_nextMatrix[row].resize(newNumOfCols);
   }
 }
@@ -228,7 +229,7 @@ void GameBoard::applyGameRules(int row, int col, int aliveNeighboursCounter)
   const bool rule_1 = aliveNeighboursCounter == m_gameOptions.getDeadOrAliveLowerThreshold() || aliveNeighboursCounter == m_gameOptions.getDeadOrAliveUpperThreshold();
   const bool rule_2 = aliveNeighboursCounter == m_gameOptions.getDeadOrAliveUpperThreshold();
 
-  if (m_currentMatrix[row][col].isAlive())
+  if (m_currMatrix[row][col].isAlive())
   {
     if (rule_1)
     {
@@ -265,5 +266,5 @@ bool GameBoard::isNeighbourWithinBounds(int row, int col)
 
 bool GameBoard::isNeighbourAlive(int row, int col)
 {
-  return ( m_currentMatrix[row][col].isAlive() );
+  return ( m_currMatrix[row][col].isAlive() );
 }
