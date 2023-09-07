@@ -89,12 +89,41 @@ ScrollView
         width:  scrollView.squareSide
         height: scrollView.squareSide
         border.width: 1
-        color: isAlive === true ? "yellow" : "black"
+        color: {color = isAlive === true ? "yellow" : "black"} // Assignation without binding. Useful for ColorAnimation
+
+        ColorAnimation
+        {
+          id: animationCellAlive;
+
+          target:         cell;
+          alwaysRunToEnd: true;
+          property:       "color";
+          to:             "yellow";
+          duration:       gameManager.getTimerPeriod() * 0.75 // TODO: arbitrarily chosen. Remove hard-coding?
+        }
+
+        ColorAnimation
+        {
+          id: animationCellDead;
+
+          target:         cell;
+          alwaysRunToEnd: true;
+          property:       "color";
+          to:             "black";
+          duration:       gameManager.getTimerPeriod() * 0.75 // TODO: arbitrarily chosen. Remove hard-coding?
+        }
 
         Connections
         {
           target: gameManager
-          function onBoardRecalculated()  { cell.isAlive = gameManager.getCellStatus(index); }
+          function onBoardRecalculated()
+          {
+            cell.isAlive = gameManager.getCellStatus(index);
+            if (cell.isAlive)
+              animationCellAlive.restart();
+            else
+              animationCellDead.restart();
+          }
         }
       } // id: cell
     } // Repeater
