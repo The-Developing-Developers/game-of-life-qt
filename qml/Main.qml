@@ -18,6 +18,9 @@ ApplicationWindow
 
     anchors.fill: root.contentItem
 
+    readonly property string welcomeScreen: "welcomeScreen"
+    readonly property string gameScreen: "gameScreen"
+
     Loader
     {
       id: loader
@@ -26,7 +29,7 @@ ApplicationWindow
       // source: assigned by `state` property
     }
 
-    Connections
+    Connections // equivalent to C++ connect(&gameManager, &GameManager::gameStateChanged, this, &Component::onGameStateChanged)
     {
       target: gameManager
 
@@ -35,11 +38,11 @@ ApplicationWindow
         switch ( currentState )
         {
           case GameState.WelcomeScreen:
-            rootContainer.state = "welcomeScreen"
+            rootContainer.state = rootContainer.welcomeScreen
             break;
 
           case GameState.GameBoard:
-            rootContainer.state = "gameScreen"
+            rootContainer.state = rootContainer.gameScreen
             break;
 
           case GameState.Undefined:
@@ -50,19 +53,19 @@ ApplicationWindow
       }
     }
 
-    state: "welcomeScreen" // default state
+    state: rootContainer.welcomeScreen // default state
 
     states:
     [
       State
       {
-        name: "welcomeScreen"
+        name: rootContainer.welcomeScreen
         PropertyChanges { target: loader; source: "WelcomeScreen.qml"; }
       },
 
       State
       {
-        name: "gameScreen"
+        name: rootContainer.gameScreen
         PropertyChanges { target: loader; source: "GameBoard.qml"; }
       }
     ]
