@@ -1,32 +1,52 @@
-#include <QDebug>
 #include "cell.hpp"
 
-#define NDEBUG
-
 Cell::Cell(void)
-  : m_IsAlive(false)
-  // : m_IsAlive(true)
+{;}
+
+
+void Cell::revive(void)
 {
-  // qDebug() << "Live cell created.";
-  // qDebug() << "Dead cell created.";
+  m_isAlive = true;
 }
 
 
-void Cell::Revive(void)
+void Cell::kill(void)
 {
-  m_IsAlive = true;
-  qDebug() << "Cell revived.";
+  m_isAlive = false;
 }
 
 
-void Cell::Kill(void)
+void Cell::toggle(void)
 {
-  m_IsAlive = false;
-  qDebug() << "Cell killed.";
+  if (!m_isTogglingLocked)
+  {
+    if (m_isAlive)
+      m_isAlive = false;
+    else
+      m_isAlive = true;
+  }
 }
 
 
-bool Cell::IsAlive(void)
+bool Cell::isAlive(void)
 {
-  return m_IsAlive;
+  return m_isAlive;
+}
+
+
+void Cell::lockToggling(void)
+{
+  m_isTogglingLocked = true;
+}
+
+
+void Cell::unlockToggling(void)
+{
+  m_isTogglingLocked = false;
+}
+
+
+bool operator==(const Cell& cell_1, const Cell& cell_2)
+{
+  return cell_1.m_isAlive == cell_2.m_isAlive;
 }

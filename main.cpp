@@ -1,18 +1,18 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "backend.h"
+#include "gamemanager.hpp"
 
 int main(int argc, char *argv[])
 {
-  Backend               backend;
+  GameManager           gameManager;
   QGuiApplication       app(argc, argv);
-  QQmlApplicationEngine engine; // Motore QML
-  QQmlContext*          context = engine.rootContext(); // Root context del motore (serve per agganciare proprietà o classi C++ in run-time, nel nostro caso la classe Scene)
+  QQmlApplicationEngine engine; // QML engine instantiation must go after the instantiation of the back-end class
+  QQmlContext*          context = engine.rootContext(); // Root context of the engine (needed to attach proprieties o C++ classes at run-time)
 
-  context->setContextProperty("backend", &backend); // Aggancio della classe Scene, ora usabile in QML
+  context->setContextProperty("gameManager", &gameManager); // Now the `GameManager` C++ class is usable in QML
   QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed, &app, []() { QCoreApplication::exit(-1); }, Qt::QueuedConnection);
-  const QUrl url(u"qrc:/qml/Main.qml"_qs);
+  const QUrl url(u"qrc:/qml/Main.qml"_qs); // Entry point for the QML engine
   engine.load(url);
 
   if (engine.rootObjects().isEmpty())

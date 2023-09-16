@@ -1,25 +1,25 @@
 #ifndef CELL_HPP
 #define CELL_HPP
 
-#include <iostream>
-#include <string>
-#include <thread>
-#include <chrono>
-#include <limits>
-
-#define NDEBUG
-
 class Cell
 {
-  bool m_IsAlive;
-
-  public:
+public:
 
   Cell(void);
 
-  void Revive(void);
-  void Kill(void);
-  bool IsAlive(void);
+  void revive         (void);
+  void kill           (void);
+  void toggle         (void);
+  bool isAlive        (void);
+  void lockToggling   (void);
+  void unlockToggling (void);
+
+  friend bool operator==(const Cell& cell_1, const Cell& cell_2);
+
+private:
+
+  bool m_isAlive          = false;
+  bool m_isTogglingLocked = false;
 };
 
 #endif // CELL_HPP
