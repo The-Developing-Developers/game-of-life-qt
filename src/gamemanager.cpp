@@ -155,7 +155,7 @@ GameOptions& GameManager::getGameOptions(void) const
 }
 
 
-void GameManager::stopTheTimer(void) const
+void GameManager::stopTheTimer(void)
 {
   emit stopTimer();
 }
