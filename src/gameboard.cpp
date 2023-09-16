@@ -3,8 +3,8 @@
 #include "cell.hpp"
 #include "gamemanager.hpp"
 
-GameBoard::GameBoard(GameManager& backend)
-  : m_gameManager(backend), m_gameOptions(m_gameManager.getGameOptions())
+GameBoard::GameBoard(GameManager& gameManager)
+  : m_gameManager(gameManager), m_gameOptions(m_gameManager.getGameOptions())
 {
   const int numOfRows = m_gameOptions.getNumOfRows();
   const int numOfCols = m_gameOptions.getNumOfCols();

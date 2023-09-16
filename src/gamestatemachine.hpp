@@ -27,9 +27,9 @@ public:
 
   enum class RequiredAction
   {
-    noAction = 0,
+    undefined = 0,
     resizeGameBoard,
-    undefined,
+    noAction,
 
     howMany
   };

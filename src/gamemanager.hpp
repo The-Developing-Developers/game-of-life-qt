@@ -41,7 +41,7 @@ public:
 
 signals:
 
-  void boardRecalculated(void);
+  void boardChanged(void);
   void gameStateChanged (GameState_ns::GameState_e currentState);
   void stopTimer(void) const;
 

@@ -116,7 +116,7 @@ ScrollView
         Connections
         {
           target: gameManager
-          function onBoardRecalculated()
+          function onBoardChanged()
           {
             cell.isAlive = gameManager.getCellStatus(index);
             if (cell.isAlive)

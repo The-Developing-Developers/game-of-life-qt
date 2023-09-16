@@ -22,14 +22,14 @@ void GameManager::resizeGameBoard(void)
 void GameManager::clearBoard(void)
 {
   m_gameBoard->clearBoard();
-  emit boardRecalculated();
+  emit boardChanged();
 }
 
 
 void GameManager::recalculateBoard(void)
 {
   m_gameBoard->recalculateBoard();
-  emit boardRecalculated();
+  emit boardChanged();
 }
 
 
@@ -133,7 +133,7 @@ GameState_ns::GameState_e GameManager::getGameState(void) const
 void GameManager::backgroundInteracted(int mouseX, int mouseY)
 {
   m_gameBoard->toggleCellStatusBecauseOfMouseInteraction(mouseX, mouseY);
-  emit boardRecalculated();
+  emit boardChanged();
 }
 
 

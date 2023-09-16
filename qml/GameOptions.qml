@@ -13,11 +13,11 @@ Grid
 
   Column
   {
-    id: numOfRows
+    id: numOfRowsOption
 
     Text
     {
-      anchors.horizontalCenter: numOfRows.horizontalCenter
+      anchors.horizontalCenter: numOfRowsOption.horizontalCenter
       text: "Num. of rows"
       font.pointSize: fontPointSize
     }
@@ -31,11 +31,11 @@ Grid
 
   Column
   {
-    id: numOfCols
+    id: numOfColsOption
 
     Text
     {
-      anchors.horizontalCenter: numOfCols.horizontalCenter
+      anchors.horizontalCenter: numOfColsOption.horizontalCenter
       text: "Num. of columns"
       font.pointSize: fontPointSize
     }
@@ -49,11 +49,11 @@ Grid
 
   Column
   {
-    id: squareSize
+    id: squareSizeOption
 
     Text
     {
-      anchors.horizontalCenter: squareSize.horizontalCenter
+      anchors.horizontalCenter: squareSizeOption.horizontalCenter
       text: "Square size"
       font.pointSize: fontPointSize
     }
@@ -67,11 +67,11 @@ Grid
 
   Column
   {
-    id: refreshPeriod
+    id: refreshPeriodOption
 
     Text
     {
-      anchors.horizontalCenter: refreshPeriod.horizontalCenter
+      anchors.horizontalCenter: refreshPeriodOption.horizontalCenter
       text: "Refresh period (ms)"
       font.pointSize: fontPointSize
     }
@@ -85,11 +85,11 @@ Grid
 
   Column
   {
-    id: squareSpacing
+    id: squareSpacingOption
 
     Text
     {
-      anchors.horizontalCenter: squareSpacing.horizontalCenter
+      anchors.horizontalCenter: squareSpacingOption.horizontalCenter
       text: "Square spacing"
       font.pointSize: fontPointSize
     }
