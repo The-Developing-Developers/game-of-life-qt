@@ -9,7 +9,7 @@ Grid
   columnSpacing: 50
      rowSpacing: 10
 
-  property int fontPointSize: 14
+  readonly property int fontPointSize: 14
 
   Column
   {

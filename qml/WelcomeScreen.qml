@@ -37,9 +37,9 @@ Rectangle
   {
     id: optionsBackground
 
-    property int someHeightMargin: 70
-    property int someWidthMargin:  20
-    property int applicationWindowMinimumWidth: 800
+    readonly property int someHeightMargin: 70
+    readonly property int someWidthMargin:  20
+    readonly property int applicationWindowMinimumWidth: 800
 
     height: optionsText.height + gameOptions.height + someHeightMargin
     width:  applicationWindowMinimumWidth - someWidthMargin
