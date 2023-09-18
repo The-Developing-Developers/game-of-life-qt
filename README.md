@@ -72,6 +72,8 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 - Consider if GameStateMachine and other classes should be singletons
 - Consider using an asymmetrical fading effect (i.e. only a fade-in, not a fade-out) for better visibility of the toggling of the cells across generations while using fast game speed.
 - Allow the user to disable the fading effect on the cells.
+- Consider adding Doxygen documentation, using Graphviz to generate the structure of the C++ classes.
+- Consider adding the executable for download (using [CPack](https://cmake.org/cmake/help/book/mastering-cmake/chapter/Packaging%20With%20CPack.html)?).
 - ~~Implement an automatic stop once there is no change between the `m_currentMatrix` and the `m_futureMatrix`.~~
 - ~~Add a couple more helper private methods in `gameboard.cpp` to make the code more readable in `calculateFutureMatrix`.~~
 - ~~Consider not clearing the board even if the user goes back to the options and modifies the game board's size. To do this, especially in case the board is shrinked, it is necessary to memorise (save) the cells' status (alive or dead) and reinstate (load) it when a game board of a different size is created. Maybe a vector of `bool` is sufficient: the indices of the vector could correspond to the indices of the recreated game board's matrix. To help with this, consider not destroying the game board when a new game is started, but simply to resize the vector of vectors of `Cell`s whenever the number of rows or columns is modified through the game options.~~
