@@ -22,6 +22,7 @@ qt_add_executable(${PROJECT_NAME}
   qml/CustomButton.qml
     qml/WelcomeScreen.qml
     qml/GameBoard.qml
+    qml/GameCell.qml
     qml/GameOptions.qml
     qml/Main.qml
     qml/WarningPopup.qml

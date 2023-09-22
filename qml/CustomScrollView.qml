@@ -80,52 +80,11 @@ ScrollView
     {
       model: scrollView.numOfSquares
 
-      Rectangle
+      GameCell
       {
-        id: cell
-
-        property bool isAlive: gameManager.getCellStatus(index)
-
         width:  scrollView.squareSide
         height: scrollView.squareSide
-        border.width: 1
-        color: {color = isAlive === true ? "yellow" : "black"} // Assignation without binding. Useful for ColorAnimation
-
-        ColorAnimation
-        {
-          id: animationCellAlive;
-
-          target:         cell;
-          alwaysRunToEnd: true;
-          property:       "color";
-          to:             "yellow";
-          duration:       gameManager.getTimerPeriod() * 0.75 // TODO: arbitrarily chosen. Remove hard-coding?
-        }
-
-        ColorAnimation
-        {
-          id: animationCellDead;
-
-          target:         cell;
-          alwaysRunToEnd: true;
-          property:       "color";
-          to:             "black";
-          duration:       gameManager.getTimerPeriod() * 0.75 // TODO: arbitrarily chosen. Remove hard-coding?
-        }
-
-        Connections
-        {
-          target: gameManager
-          function onBoardChanged()
-          {
-            cell.isAlive = gameManager.getCellStatus(index);
-            if (cell.isAlive)
-              animationCellAlive.restart();
-            else
-              animationCellDead.restart();
-          }
-        }
-      } // id: cell
-    } // Repeater
-  } // id: gameBoard
+      }
+    }
+  }
 } // id: scrollView
