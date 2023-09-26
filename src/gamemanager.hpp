@@ -24,14 +24,12 @@ public:
   Q_INVOKABLE int  getTimerPeriod       (void) const;
   Q_INVOKABLE int  getSquareSize        (void) const;
   Q_INVOKABLE int  getSquareSpacing     (void) const;
-  Q_INVOKABLE bool isGameTimerRunning   (void) const;
   Q_INVOKABLE bool getCellStatus        (int cellIndex);
   Q_INVOKABLE void setNumOfRows         (int numOfRows);
   Q_INVOKABLE void setNumOfCols         (int numOfCols);
   Q_INVOKABLE void setTimerPeriod       (int timerPeriod_ms);
   Q_INVOKABLE void setSquareSize        (int squareSize);
   Q_INVOKABLE void setSquareSpacing     (int squareSpacing);
-  Q_INVOKABLE void setGameTimerStatus   (bool);
   Q_INVOKABLE void backgroundInteracted (int mouseX, int mouseY);
   Q_INVOKABLE void backgroundReleased   (void);
   Q_INVOKABLE void changeGameState      (GameState_ns::GameState_e gameState);
@@ -52,7 +50,6 @@ private:
   QScopedPointer<GameOptions>      m_gameOptions;
   QScopedPointer<GameBoard>        m_gameBoard;
   QScopedPointer<GameStateMachine> m_gameStateMachine;
-  bool                             m_isGameTimerRunning;
 
   void resizeGameBoard(void);
 };

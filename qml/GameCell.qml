@@ -9,8 +9,8 @@ Rectangle
   property bool isAlive: {isAlive = gameManager.getCellStatus(index)}
   color: {color = isAlive === true ? aliveColour : deadColour} // Assignation without binding. Useful for ColorAnimation
 
-  readonly property double aliveDurationFactor: 0.75 // Arbitrarily chosen
-  readonly property double  deadDurationFactor: 0.25 // Arbitrarily chosen
+  readonly property double aliveDurationFactor: 0.25 // Arbitrarily chosen
+  readonly property double  deadDurationFactor: 0.75 // Arbitrarily chosen
   readonly property string aliveColour: "yellow"
   readonly property string  deadColour: "black"
 
@@ -51,18 +51,17 @@ Rectangle
 
     if (cell.isAlive)
     {
-      if (gameManager.isGameTimerRunning())
+      if (timer.running)
         animationCellAlive.restart(); // Use the animation only when the game is running
       else
         cell.color = aliveColour
     }
     else
     {
-      if (gameManager.isGameTimerRunning())
+      if (timer.running)
         animationCellDead.restart(); // Use the animation only when the game is running
       else
         cell.color = deadColour
     }
-
   }
 } // id: cell

@@ -142,15 +142,9 @@ Item
     function toggleTimer()
     {
       if ( timer.running )
-      {
         timer.running = false;
-        gameManager.setGameTimerStatus(false);
-      }
       else
-      {
         timer.running = true
-        gameManager.setGameTimerStatus(true);
-      }
     }
   }
 
@@ -161,7 +155,6 @@ Item
     function onStopTimer()
     {
       timer.running = false
-      gameManager.setGameTimerStatus(false);
       startGameButton.changeText();
     }
   }
