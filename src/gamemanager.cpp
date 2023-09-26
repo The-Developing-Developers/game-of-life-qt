@@ -2,10 +2,11 @@
 #include "gamemanager.hpp"
 
 GameManager::GameManager(QObject *parent)
-  : QObject{parent},
-    m_gameOptions     (new GameOptions),
-    m_gameBoard       (new GameBoard(*this)),
-    m_gameStateMachine(new GameStateMachine(*this))
+  : QObject{parent}
+  , m_gameOptions     (new GameOptions)
+  , m_gameBoard       (new GameBoard(*this))
+  , m_gameStateMachine(new GameStateMachine(*this))
+  , m_isGameTimerRunning(false)
 {;}
 
 
@@ -71,6 +72,12 @@ void GameManager::setSquareSpacing(int squareSpacing)
 }
 
 
+void GameManager::setGameTimerStatus(bool isGameTimerRunning)
+{
+  m_isGameTimerRunning = isGameTimerRunning;
+}
+
+
 int GameManager::getNumOfRows(void) const
 {
   return m_gameOptions->getNumOfRows();
@@ -121,6 +128,12 @@ void GameManager::changeGameState(GameState_ns::GameState_e gameState)
   }
 
   emit gameStateChanged(m_gameStateMachine->getGameState());
+}
+
+
+bool GameManager::isGameTimerRunning (void) const
+{
+  return m_isGameTimerRunning;
 }
 
 
