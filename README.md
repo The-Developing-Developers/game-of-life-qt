@@ -51,10 +51,10 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 1. Clone this repository.
 2. Install Qt 6.5 (or later version) using the web installer. Required packages:
-    - C++ compiler
+    - C++ compiler (at least C++14)
     - Qt Creator 11.0.2 (or later version)
-    - CMake 3.24.2
-    - Ninja 1.10.2
+    - CMake 3.16 (or later version)
+    - Ninja 1.10.2 (or later version)
 3. Open Qt Creator.
 4. Open `CMakeLists.txt`.
 5. Select *Release* configuration.
@@ -63,6 +63,7 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 # To Do List
 
+- Consider comparing `GameManager` to the *Mediator* pattern, and evaluate if `GameManager` can be fully transformed into a *Mediator*.
 - Consider unifying the concept of game board square and `Cell` in the code.
 - Refactor the code to favour readability.
 - A definitive name should be chosen for the Options / Welcome Screen.
