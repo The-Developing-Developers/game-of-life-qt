@@ -75,7 +75,6 @@ void GameManager::setSquareSpacing(int squareSpacing)
 void GameManager::setIsAnimationAllowed(bool isAnimationAllowed)
 {
   m_isAnimationAllowed = isAnimationAllowed;
-  qDebug() << __func__ << ": m_isAnimationAllowed changed to: " << m_isAnimationAllowed; // TODO: debug
 }
 
 
