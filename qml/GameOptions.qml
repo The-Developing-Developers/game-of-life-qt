@@ -5,22 +5,24 @@ Grid
 {
   id: root
 
+  readonly property int fontPointSize:    14
+  readonly property int textBoxWidth:     180
+  readonly property int textBoxHeight:    50
+  readonly property int internalSpacing:  5
+
   columns: 3
   columnSpacing: 50
-     rowSpacing: 20
-
-  readonly property int fontPointSize: 14
-  readonly property int textBoxWidth:  180
-  readonly property int textBoxHeight: 50
+     rowSpacing: 30
 
   Column
   {
     id: numOfRowsOption
+    spacing: internalSpacing
 
     Text
     {
       anchors.horizontalCenter: numOfRowsOption.horizontalCenter
-      text: "Num. of rows"
+      text: "Num. of Rows"
       font.pointSize: fontPointSize
     }
 
@@ -36,11 +38,12 @@ Grid
   Column
   {
     id: numOfColsOption
+    spacing: internalSpacing
 
     Text
     {
       anchors.horizontalCenter: numOfColsOption.horizontalCenter
-      text: "Num. of columns"
+      text: "Num. of Columns"
       font.pointSize: fontPointSize
     }
 
@@ -56,17 +59,18 @@ Grid
   Column
   {
     id: squareSizeOption
+    spacing: internalSpacing
 
     Text
     {
       anchors.horizontalCenter: squareSizeOption.horizontalCenter
-      text: "Square size"
+      text: "Square Size"
       font.pointSize: fontPointSize
     }
 
     CustomTextField
     {
-      placeholderText: "Square size: " + gameManager.getSquareSize().toString()
+      placeholderText: "Square Size: " + gameManager.getSquareSize().toString()
       onTextChanged:  { gameManager.setSquareSize(parseInt(text)) }
       height: textBoxHeight
       width:  textBoxWidth
@@ -76,11 +80,12 @@ Grid
   Column
   {
     id: refreshPeriodOption
+    spacing: internalSpacing
 
     Text
     {
       anchors.horizontalCenter: refreshPeriodOption.horizontalCenter
-      text: "Refresh period (ms)"
+      text: "Refresh Period (ms)"
       font.pointSize: fontPointSize
     }
 
@@ -96,11 +101,12 @@ Grid
   Column
   {
     id: squareSpacingOption
+    spacing: internalSpacing
 
     Text
     {
       anchors.horizontalCenter: squareSpacingOption.horizontalCenter
-      text: "Square spacing"
+      text: "Square Spacing"
       font.pointSize: fontPointSize
     }
 
@@ -116,6 +122,7 @@ Grid
   Column
   {
     id: animationAllowedSelection
+    spacing: internalSpacing
 
     Text
     {
