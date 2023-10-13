@@ -13,13 +13,13 @@ qt_policy(SET QTP0001 NEW) # Suppress warning https://doc.qt.io/qt-6/qt-cmake-po
 
 qt_add_executable(${PROJECT_NAME}
   main.cpp
-  )
+)
 
-  qt_add_qml_module(${PROJECT_NAME}
+qt_add_qml_module(${PROJECT_NAME}
   URI GameOfLife
   VERSION 1.0
   QML_FILES
-  qml/CustomButton.qml
+    qml/CustomButton.qml
     qml/WelcomeScreen.qml
     qml/GameBoard.qml
     qml/GameCell.qml
