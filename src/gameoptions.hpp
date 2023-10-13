@@ -28,7 +28,7 @@ private:
   static constexpr int  m_minNumOfRowsAndCols       = 3;
   static constexpr int  m_minTimerPeriod_ms         = 50;
   static constexpr int  m_minSquareSize             = 10;
-  static constexpr int  m_minSquareSpacing          = 2;
+  static constexpr int  m_minSquareSpacing          = 1;
   static constexpr int  m_DeadOrAliveUpperThreshold = 3; // Game of Life's rule
   static constexpr int  m_DeadOrAliveLowerThreshold = 2; // Game of Life's rule
 

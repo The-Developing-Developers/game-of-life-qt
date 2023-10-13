@@ -7,9 +7,10 @@ Grid
 
   columns: 3
   columnSpacing: 50
-     rowSpacing: 10
+     rowSpacing: 20
 
   readonly property int fontPointSize: 14
+  readonly property int textBoxWidth:  180
   readonly property int textBoxHeight: 50
 
   Column
@@ -28,6 +29,7 @@ Grid
       placeholderText: "Rows: " + gameManager.getNumOfRows().toString()
       onTextChanged:  { gameManager.setNumOfRows(parseInt(text)) }
       height: textBoxHeight
+      width:  textBoxWidth
     }
   }
 
@@ -47,6 +49,7 @@ Grid
       placeholderText: "Columns: " + gameManager.getNumOfCols().toString()
       onTextChanged:  { gameManager.setNumOfCols(parseInt(text)) }
       height: textBoxHeight
+      width:  textBoxWidth
     }
   }
 
@@ -66,6 +69,7 @@ Grid
       placeholderText: "Square size: " + gameManager.getSquareSize().toString()
       onTextChanged:  { gameManager.setSquareSize(parseInt(text)) }
       height: textBoxHeight
+      width:  textBoxWidth
     }
   }
 
@@ -85,6 +89,7 @@ Grid
       placeholderText: "Period: " + gameManager.getTimerPeriod().toString() + " ms"
       onTextChanged:  { gameManager.setTimerPeriod(parseInt(text)) }
       height: textBoxHeight
+      width:  textBoxWidth
     }
   }
 
@@ -104,6 +109,7 @@ Grid
       placeholderText: "Spacing: " + gameManager.getSquareSpacing().toString() + " px"
       onTextChanged:  { gameManager.setSquareSpacing(parseInt(text)) }
       height: textBoxHeight
+      width:  textBoxWidth
     }
   }
 
@@ -133,10 +139,11 @@ Grid
       readonly property string pushedOrange:      "#ffaa00"
       readonly property string hoverOrange:       "#ffcc00"
 
-      width:  animationAllowedSelection.width
+      width:  textBoxWidth
       height: textBoxHeight
       text_a: gameManager.isAnimationAllowed ? allowedString : disallowedString
       pointSize_a: fontPointSize
+
       normalTextColour_a: gameManager.isAnimationAllowed ? white       : black
       hoverTextColour_a:  gameManager.isAnimationAllowed ? white       : black
       hoverColour_a:      gameManager.isAnimationAllowed ? normalGreen : normalOrange
