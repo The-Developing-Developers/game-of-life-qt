@@ -69,7 +69,7 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 - A definitive name should be chosen for the Options / Welcome Screen.
 - Now that the FSM receives the `backend` by reference, should the FSM be directly responsible of carrying out back-end actions such as reinitialising the game board? Or is it better that the FSM just informs the `Backend` that the `Backend` has to perform a certain action, and the `Backend` actually carries out that action?
 - The automatic stop is probably inefficient, because it checks for equality between the `m_currentMatrix` and the `m_nextMatrix` at every game loop. Should a timer be used to rarify the checks?
-- Add the option to enable / disable the cell animation, and to set the percentage with respect to the game timer period.
+- Add the option ~~to enable / disable the cell animation, and~~ to set the percentage with respect to the game timer period.
 - Consider if GameStateMachine and other classes should be singletons
 - Consider using an asymmetrical fading effect (i.e. only a fade-in, not a fade-out) for better visibility of the toggling of the cells across generations while using fast game speed.
 - Allow the user to disable the fading effect on the cells.

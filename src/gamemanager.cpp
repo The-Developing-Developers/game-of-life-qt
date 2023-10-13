@@ -6,6 +6,7 @@ GameManager::GameManager(QObject *parent)
   , m_gameOptions     (new GameOptions)
   , m_gameBoard       (new GameBoard(*this))
   , m_gameStateMachine(new GameStateMachine(*this))
+  , m_isAnimationAllowed(true)
 {;}
 
 
@@ -71,6 +72,13 @@ void GameManager::setSquareSpacing(int squareSpacing)
 }
 
 
+void GameManager::setIsAnimationAllowed(bool isAnimationAllowed)
+{
+  m_isAnimationAllowed = isAnimationAllowed;
+  qDebug() << __func__ << ": m_isAnimationAllowed changed to: " << m_isAnimationAllowed; // TODO: debug
+}
+
+
 int GameManager::getNumOfRows(void) const
 {
   return m_gameOptions->getNumOfRows();
@@ -98,6 +106,12 @@ int GameManager::getSquareSize(void) const
 int GameManager::getSquareSpacing(void) const
 {
   return m_gameOptions->getSquareSpacing();
+}
+
+
+bool GameManager::getIsAnimationAllowed(void)
+{
+  return m_isAnimationAllowed;
 }
 
 

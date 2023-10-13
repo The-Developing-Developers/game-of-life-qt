@@ -100,4 +100,30 @@ Grid
       onTextChanged:  { gameManager.setSquareSpacing(parseInt(text)) }
     }
   }
-} // Row
+
+  Column
+  {
+    id: animationAllowedSelection
+
+    Text
+    {
+      anchors.horizontalCenter: animationAllowedSelection.horizontalCenter
+      text: "Toggle Animation"
+      font.pointSize: fontPointSize
+    }
+
+    CustomButton
+    {
+      id: animationAllowedButton
+
+      width: 100
+      height: 50
+      text_a: "Animation"
+
+      onClicked:
+      {
+        gameManager.isAnimationAllowed = !gameManager.isAnimationAllowed;
+      }
+    }
+  }
+} // Grid

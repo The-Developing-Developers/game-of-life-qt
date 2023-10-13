@@ -17,6 +17,8 @@ public:
   explicit GameManager(QObject *parent = nullptr);
           ~GameManager(void);
 
+  Q_PROPERTY(bool isAnimationAllowed READ getIsAnimationAllowed WRITE setIsAnimationAllowed NOTIFY isAnimationAllowedChanged)
+
   Q_INVOKABLE void clearBoard           (void);
   Q_INVOKABLE void recalculateBoard     (void);
   Q_INVOKABLE int  getNumOfRows         (void) const;
@@ -24,12 +26,14 @@ public:
   Q_INVOKABLE int  getTimerPeriod       (void) const;
   Q_INVOKABLE int  getSquareSize        (void) const;
   Q_INVOKABLE int  getSquareSpacing     (void) const;
+  Q_INVOKABLE bool getIsAnimationAllowed(void);
   Q_INVOKABLE bool getCellStatus        (int cellIndex);
   Q_INVOKABLE void setNumOfRows         (int numOfRows);
   Q_INVOKABLE void setNumOfCols         (int numOfCols);
   Q_INVOKABLE void setTimerPeriod       (int timerPeriod_ms);
   Q_INVOKABLE void setSquareSize        (int squareSize);
   Q_INVOKABLE void setSquareSpacing     (int squareSpacing);
+  Q_INVOKABLE void setIsAnimationAllowed(bool isAnimationAllowed);
   Q_INVOKABLE void backgroundInteracted (int mouseX, int mouseY);
   Q_INVOKABLE void backgroundReleased   (void);
   Q_INVOKABLE void changeGameState      (GameState_ns::GameState_e gameState);
@@ -44,12 +48,14 @@ signals:
   void boardChanged(void);
   void gameStateChanged (GameState_ns::GameState_e currentState);
   void stopTimer(void);
+  void isAnimationAllowedChanged(void);
 
 private:
 
   QScopedPointer<GameOptions>      m_gameOptions;
   QScopedPointer<GameBoard>        m_gameBoard;
   QScopedPointer<GameStateMachine> m_gameStateMachine;
+  bool m_isAnimationAllowed;
 
   void resizeGameBoard(void);
 };

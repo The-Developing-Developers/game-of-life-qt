@@ -51,14 +51,14 @@ Rectangle
 
     if (cell.isAlive)
     {
-      if (timer.running)
+      if (timer.running && gameManager.isAnimationAllowed)
         animationCellAlive.restart(); // Use the animation only when the game is running
       else
         cell.color = aliveColour
     }
     else
     {
-      if (timer.running)
+      if (timer.running && gameManager.isAnimationAllowed)
         animationCellDead.restart(); // Use the animation only when the game is running
       else
         cell.color = deadColour
