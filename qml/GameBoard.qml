@@ -63,9 +63,7 @@ Item
       normalTextColour_a: "white"
       hoverTextColour_a:  "white"
 
-      onClicked: toggleTimerAndChangeText()
-
-      function toggleTimerAndChangeText()
+      onClicked:
       {
         timer.toggleTimer();
         startGameButton.changeText();
