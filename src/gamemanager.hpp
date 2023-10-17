@@ -18,6 +18,8 @@ public:
           ~GameManager(void);
 
   Q_PROPERTY(bool isAnimationAllowed READ getIsAnimationAllowed WRITE setIsAnimationAllowed NOTIFY isAnimationAllowedChanged)
+  Q_PROPERTY(int numOfRows READ getNumOfRows WRITE setNumOfRows NOTIFY numOfRowsChanged)
+  Q_PROPERTY(int numOfCols READ getNumOfCols WRITE setNumOfCols NOTIFY numOfColsChanged)
 
   Q_INVOKABLE void clearBoard           (void);
   Q_INVOKABLE void recalculateBoard     (void);
@@ -49,6 +51,8 @@ signals:
   void gameStateChanged (GameState_ns::GameState_e currentState);
   void stopTimer(void);
   void isAnimationAllowedChanged(void);
+  void numOfRowsChanged(int);
+  void numOfColsChanged(int);
 
 private:
 

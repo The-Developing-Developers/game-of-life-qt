@@ -28,8 +28,8 @@ Grid
 
     CustomTextField
     {
-      placeholderText: "Rows: " + gameManager.getNumOfRows().toString()
-      onTextChanged:  { gameManager.setNumOfRows(parseInt(text)) }
+      placeholderText: "Rows: " + gameManager.numOfRows.toString()
+      onTextChanged:  { gameManager.numOfRows = parseInt(text) }
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -49,8 +49,8 @@ Grid
 
     CustomTextField
     {
-      placeholderText: "Columns: " + gameManager.getNumOfCols().toString()
-      onTextChanged:  { gameManager.setNumOfCols(parseInt(text)) }
+      placeholderText: "Columns: " + gameManager.numOfCols.toString()
+      onTextChanged:  { gameManager.numOfCols = parseInt(text) }
       height: textBoxHeight
       width:  textBoxWidth
     }
