@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQml.Models
 import GameStateEnum
 
 Item
@@ -122,6 +123,18 @@ Item
         }
       }
     } // Row
+
+    ComboBox {
+        textRole: "key"
+        valueRole: "value"
+
+        onActivated: gameManager.numOfRows = currentValue
+
+        model: ListModel {
+            ListElement { key: "Block"; value: 5 }
+            ListElement { key: "Blinker"; value: 6 }
+        }
+    }
   } // Column
 
   WarningPopup
