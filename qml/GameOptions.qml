@@ -29,7 +29,7 @@ Grid
     CustomTextField
     {
       placeholderText: "Rows: " + gameManager.numOfRows.toString()
-      onTextChanged:  { gameManager.numOfRows = parseInt(text) }
+      onAccepted: gameManager.numOfRows = parseInt(text);
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -50,7 +50,7 @@ Grid
     CustomTextField
     {
       placeholderText: "Columns: " + gameManager.numOfCols.toString()
-      onTextChanged:  { gameManager.numOfCols = parseInt(text) }
+      onAccepted: gameManager.numOfCols = parseInt(text)
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -71,7 +71,7 @@ Grid
     CustomTextField
     {
       placeholderText: "Square Size: " + gameManager.getSquareSize().toString()
-      onTextChanged:  { gameManager.setSquareSize(parseInt(text)) }
+      onAccepted: gameManager.setSquareSize(parseInt(text))
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -92,7 +92,7 @@ Grid
     CustomTextField
     {
       placeholderText: "Period: " + gameManager.getTimerPeriod().toString() + " ms"
-      onTextChanged:  { gameManager.setTimerPeriod(parseInt(text)) }
+      onAccepted: gameManager.setTimerPeriod(parseInt(text))
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -113,7 +113,7 @@ Grid
     CustomTextField
     {
       placeholderText: "Spacing: " + gameManager.getSquareSpacing().toString() + " px"
-      onTextChanged:  { gameManager.setSquareSpacing(parseInt(text)) }
+      onAccepted: gameManager.setSquareSpacing(parseInt(text))
       height: textBoxHeight
       width:  textBoxWidth
     }
