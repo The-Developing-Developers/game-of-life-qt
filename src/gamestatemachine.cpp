@@ -18,23 +18,3 @@ GameStateMachine::GameStateMachine(GameManager& backend)
 
 GameStateMachine::~GameStateMachine(void)
 {;}
-
-
-GameStateMachine::RequiredAction GameStateMachine::requestGameStateChangeAndReceiveFeedback(GameState_ns::GameState_e requestedGameState)
-{
-  RequiredAction requiredAction = RequiredAction::noAction;
-
-  if (    requestedGameState == GameState_ns::GameState_e::GameBoard
-      &&  m_gameManager.doesBoardNeedResizing() )
-    requiredAction = RequiredAction::resizeGameBoard;
-
-  m_currentGameState = requestedGameState;
-
-  return requiredAction;
-}
-
-
-GameState_ns::GameState_e GameStateMachine::getGameState(void) const
-{
-  return m_currentGameState;
-}

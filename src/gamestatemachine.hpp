@@ -37,9 +37,6 @@ public:
    GameStateMachine(GameManager& backend);
   ~GameStateMachine(void);
 
-  RequiredAction            requestGameStateChangeAndReceiveFeedback(GameState_ns::GameState_e requestedGameState);
-  GameState_ns::GameState_e getGameState    (void) const;
-
 private:
 
   GameState_ns::GameState_e m_currentGameState = GameState_ns::GameState_e::Undefined;

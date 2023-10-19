@@ -158,18 +158,6 @@ void GameBoard::unlockToggling(void)
 }
 
 
-void GameBoard::flagBoardForResizing(void)
-{
-  m_boardNeedsResizing = true;
-}
-
-
-bool GameBoard::doesBoardNeedResizing(void) const
-{
-  return m_boardNeedsResizing;
-}
-
-
 void GameBoard::resizeGameBoard(void)
 {
   // Here, the number of rows and cols has just been changed by the user in the options screen

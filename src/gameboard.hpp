@@ -23,8 +23,6 @@ public:
   bool getCellStatus        (int cellIndex);
   void clearBoard           (void);
   void unlockToggling       (void);
-  void flagBoardForResizing (void);
-  bool doesBoardNeedResizing(void) const;
   void resizeGameBoard      (void);
   void toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY);
 
@@ -43,7 +41,6 @@ private:
   QVector<QVector<Cell>>  m_nextMatrix;
   GameManager&            m_gameManager;
   GameOptions&            m_gameOptions;
-  bool                    m_boardNeedsResizing = false;
 };
 
 #endif // GAMEBOARD_HPP

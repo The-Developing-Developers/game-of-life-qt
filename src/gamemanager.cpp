@@ -34,7 +34,7 @@ void GameManager::recalculateBoard(void)
 }
 
 
-bool GameManager::getCellStatus(int cellIndex)
+bool GameManager::getCellStatus(int cellIndex) const
 {
   return m_gameBoard->getCellStatus(cellIndex);
 }
@@ -110,38 +110,9 @@ int GameManager::getSquareSpacing(void) const
 }
 
 
-bool GameManager::getIsAnimationAllowed(void)
+bool GameManager::getIsAnimationAllowed(void) const
 {
   return m_isAnimationAllowed;
-}
-
-// // Currently not used
-// void GameManager::changeGameState(GameState_ns::GameState_e gameState)
-// {
-//   GameStateMachine::RequiredAction requiredAction = m_gameStateMachine->requestGameStateChangeAndReceiveFeedback(gameState);
-
-//   switch (requiredAction)
-//   {
-//     case GameStateMachine::RequiredAction::noAction:
-//       break;
-
-//     case GameStateMachine::RequiredAction::resizeGameBoard:
-//       resizeGameBoard();
-//       break;
-
-//     case GameStateMachine::RequiredAction::undefined:
-//     default:
-//       qDebug() << "Error during state change";
-//       break;
-//   }
-
-//   emit gameStateChanged(m_gameStateMachine->getGameState());
-// }
-
-
-GameState_ns::GameState_e GameManager::getGameState(void) const
-{
-  return m_gameStateMachine->getGameState();
 }
 
 
@@ -155,12 +126,6 @@ void GameManager::backgroundInteracted(int mouseX, int mouseY)
 void GameManager::backgroundReleased(void)
 {
   m_gameBoard->unlockToggling();
-}
-
-
-bool GameManager::doesBoardNeedResizing(void) const
-{
-  return m_gameBoard->doesBoardNeedResizing();
 }
 
 
