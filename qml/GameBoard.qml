@@ -119,7 +119,7 @@ Item
 
         onClicked: function()
         {
-          gameManager.changeGameState(GameState.WelcomeScreen);
+          onClicked: rootContainer.isGameActive = false
         }
       }
     } // Row
@@ -128,7 +128,11 @@ Item
         textRole: "key"
         valueRole: "value"
 
-        onActivated: gameManager.numOfRows = currentValue
+        onActivated:
+        {
+          gameManager.numOfRows = currentValue
+          gameManager.numOfCols = currentValue
+        }
 
         model: ListModel {
             ListElement { key: "Block"; value: 5 }

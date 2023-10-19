@@ -63,6 +63,8 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 # To Do List
 
+- There is a small bug when the user turns on some cells, resizes the board using the combo box, goes back to the Welcome Screen, enlarges the Game Board, and starts the game again: some cells that were previously ON are now OFF.
+- Do not use a simple `bool` to manage the game state (`isGameActive` QML property). Consider using a more sophisticated system (enumeratives, or re-enabling the original FSM), in order to accommodate a potential third or fourth state in the future if the need arises.
 - Consider comparing `GameManager` to the *Mediator* pattern, and evaluate if `GameManager` can be fully transformed into a *Mediator*.
 - Consider unifying the concept of game board square and `Cell` in the code.
 - Refactor the code to favour readability.
@@ -71,10 +73,10 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 - The automatic stop is probably inefficient, because it checks for equality between the `m_currentMatrix` and the `m_nextMatrix` at every game loop. Should a timer be used to rarify the checks?
 - Add the option ~~to enable / disable the cell animation, and~~ to set the percentage with respect to the game timer period.
 - Consider if GameStateMachine and other classes should be singletons
-- Consider using an asymmetrical fading effect (i.e. only a fade-in, not a fade-out) for better visibility of the toggling of the cells across generations while using fast game speed.
-- Allow the user to disable the fading effect on the cells.
 - Consider adding Doxygen documentation, using Graphviz to generate the structure of the C++ classes.
 - Consider adding the executable for download (using [CPack](https://cmake.org/cmake/help/book/mastering-cmake/chapter/Packaging%20With%20CPack.html)?).
+- ~~Consider using an asymmetrical fading effect (i.e. only a fade-in, not a fade-out) for better visibility of the toggling of the cells across generations while using fast game speed.~~
+- ~~Allow the user to disable the fading effect on the cells.~~
 - ~~Implement an automatic stop once there is no change between the `m_currentMatrix` and the `m_futureMatrix`.~~
 - ~~Add a couple more helper private methods in `gameboard.cpp` to make the code more readable in `calculateFutureMatrix`.~~
 - ~~Consider not clearing the board even if the user goes back to the options and modifies the game board's size. To do this, especially in case the board is shrinked, it is necessary to memorise (save) the cells' status (alive or dead) and reinstate (load) it when a game board of a different size is created. Maybe a vector of `bool` is sufficient: the indices of the vector could correspond to the indices of the recreated game board's matrix. To help with this, consider not destroying the game board when a new game is started, but simply to resize the vector of vectors of `Cell`s whenever the number of rows or columns is modified through the game options.~~

@@ -108,7 +108,7 @@ Rectangle
       pixelSize_a:  30
       text_a:       "Start Game of Life"
 
-      onClicked: gameManager.changeGameState(GameState.GameBoard)
+      onClicked: rootContainer.isGameActive = true
     }
 
     CustomButton

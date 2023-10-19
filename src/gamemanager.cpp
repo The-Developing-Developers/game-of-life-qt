@@ -43,14 +43,16 @@ bool GameManager::getCellStatus(int cellIndex)
 void GameManager::setNumOfRows(int numOfRows)
 {
   m_gameOptions->setNumOfRows(numOfRows);
-  m_gameBoard->flagBoardForResizing();
+  resizeGameBoard();
+  numOfRowsChanged(numOfRows);
 }
 
 
 void GameManager::setNumOfCols(int numOfCols)
 {
   m_gameOptions->setNumOfCols(numOfCols);
-  m_gameBoard->flagBoardForResizing();
+  resizeGameBoard();
+  numOfColsChanged(numOfCols);
 }
 
 
@@ -113,28 +115,28 @@ bool GameManager::getIsAnimationAllowed(void)
   return m_isAnimationAllowed;
 }
 
+// // Currently not used
+// void GameManager::changeGameState(GameState_ns::GameState_e gameState)
+// {
+//   GameStateMachine::RequiredAction requiredAction = m_gameStateMachine->requestGameStateChangeAndReceiveFeedback(gameState);
 
-void GameManager::changeGameState(GameState_ns::GameState_e gameState)
-{
-  GameStateMachine::RequiredAction requiredAction = m_gameStateMachine->requestGameStateChangeAndReceiveFeedback(gameState);
+//   switch (requiredAction)
+//   {
+//     case GameStateMachine::RequiredAction::noAction:
+//       break;
 
-  switch (requiredAction)
-  {
-    case GameStateMachine::RequiredAction::noAction:
-      break;
+//     case GameStateMachine::RequiredAction::resizeGameBoard:
+//       resizeGameBoard();
+//       break;
 
-    case GameStateMachine::RequiredAction::resizeGameBoard:
-      resizeGameBoard();
-      break;
+//     case GameStateMachine::RequiredAction::undefined:
+//     default:
+//       qDebug() << "Error during state change";
+//       break;
+//   }
 
-    case GameStateMachine::RequiredAction::undefined:
-    default:
-      qDebug() << "Error during state change";
-      break;
-  }
-
-  emit gameStateChanged(m_gameStateMachine->getGameState());
-}
+//   emit gameStateChanged(m_gameStateMachine->getGameState());
+// }
 
 
 GameState_ns::GameState_e GameManager::getGameState(void) const

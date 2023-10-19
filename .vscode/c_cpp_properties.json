@@ -6,7 +6,7 @@
       "includePath":
       [
         "${workspaceFolder}/src",
-        "${env:Qt_VER_DIR}/mingw_64/include/**"
+        "${env:Qt_2_VER_DIR}/mingw_64/include/**"
       ],
       "defines":
       [
@@ -14,7 +14,7 @@
         "UNICODE",
         "_UNICODE"
       ],
-      "compilerPath": "${env:Qt_INST_DIR}/Tools/mingw1120_64/bin/g++.exe",
+      "compilerPath": "${env:Qt_1_INST_DIR}/Tools/mingw1120_64/bin/g++.exe",
       "cStandard": "c17",
       "cppStandard": "c++17",
       "intelliSenseMode": "windows-gcc-x64"

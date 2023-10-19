@@ -38,7 +38,7 @@ public:
   Q_INVOKABLE void setIsAnimationAllowed(bool isAnimationAllowed);
   Q_INVOKABLE void backgroundInteracted (int mouseX, int mouseY);
   Q_INVOKABLE void backgroundReleased   (void);
-  Q_INVOKABLE void changeGameState      (GameState_ns::GameState_e gameState);
+  // Q_INVOKABLE void changeGameState      (GameState_ns::GameState_e gameState); // Currently not used
   Q_INVOKABLE GameState_ns::GameState_e getGameState(void) const;
 
   bool          doesBoardNeedResizing (void) const;
