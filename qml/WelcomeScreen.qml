@@ -4,7 +4,7 @@ import GameStateEnum
 
 Rectangle
 {
-  id: root
+  id: welcomeScreen_root
 
   property bool startGame: false
   anchors.centerIn: parent
@@ -21,8 +21,8 @@ Rectangle
 
     anchors
     {
-      horizontalCenter: root.horizontalCenter
-      top: root.top
+      horizontalCenter: welcomeScreen_root.horizontalCenter
+      top: welcomeScreen_root.top
       topMargin: 20
     }
 
@@ -49,7 +49,7 @@ Rectangle
 
     anchors
     {
-      horizontalCenter: root.horizontalCenter
+      horizontalCenter: welcomeScreen_root.horizontalCenter
       top: introText.bottom
       topMargin: 50
     }
@@ -91,7 +91,7 @@ Rectangle
 
     anchors
     {
-      horizontalCenter: root.horizontalCenter
+      horizontalCenter: welcomeScreen_root.horizontalCenter
       top:              optionsBackground.bottom
       topMargin: 50
     }
@@ -108,7 +108,7 @@ Rectangle
       pixelSize_a:  30
       text_a:       "Start Game of Life"
 
-      onClicked: rootContainer.isGameActive = true
+      onClicked: main_root.isGameActive = true
     }
 
     CustomButton

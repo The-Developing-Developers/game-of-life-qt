@@ -5,7 +5,7 @@ import GameStateEnum
 
 Item
 {
-  id: root
+  id: gameBoard_root
 
   anchors.fill: parent
 
@@ -15,9 +15,9 @@ Item
 
     anchors
     {
-      top:    root.top
-      left:   root.left
-      right:  root.right
+      top:    gameBoard_root.top
+      left:   gameBoard_root.left
+      right:  gameBoard_root.right
       bottom: buttons.top
       leftMargin:   50
       rightMargin:  50
@@ -43,7 +43,7 @@ Item
     id: buttons
 
     anchors.horizontalCenter: scrollView.horizontalCenter
-    anchors.bottom: root.bottom
+    anchors.bottom: gameBoard_root.bottom
     anchors.bottomMargin: 20
 
     spacing: 20
@@ -119,25 +119,70 @@ Item
 
         onClicked: function()
         {
-          onClicked: rootContainer.isGameActive = false
+          onClicked: main_root.isGameActive = false
         }
       }
     } // Row
 
-    ComboBox {
-        textRole: "key"
-        valueRole: "value"
-
-        onActivated:
+    ComboBox
+    {
+      onActivated:
+      {
+        if (currentValue == "Block")
         {
-          gameManager.numOfRows = currentValue
-          gameManager.numOfCols = currentValue
+          gameManager.numOfRows = 4;
+          gameManager.numOfCols = 4;
         }
+        else if (currentValue == "Bee-Hive")
+        {
+          gameManager.numOfRows = 5;
+          gameManager.numOfCols = 6;
+        }
+        else if (currentValue == "Loaf" || currentValue == "Toad" || currentValue == "Beacon")
+        {
+          gameManager.numOfRows = 6;
+          gameManager.numOfCols = 6;
+        }
+        else if (currentValue == "Boat" || currentValue == "Tub" || currentValue == "Blinker")
+        {
+          gameManager.numOfRows = 5;
+          gameManager.numOfCols = 5;
+        }
+        else if (currentValue == "Pulsar")
+        {
+          gameManager.numOfRows = 17;
+          gameManager.numOfCols = 17;
+        }
+        else if (currentValue == "Penta-decathlon")
+        {
+          gameManager.numOfRows = 11;
+          gameManager.numOfCols = 18;
+        }
+        else if (currentValue == "Glider")
+        {
+          gameManager.numOfRows = 20;
+          gameManager.numOfCols = 20;
+        }
+        else
+        {
+          gameManager.numOfRows = 3;
+          gameManager.numOfCols = 3;
+        }
+      }
 
-        model: ListModel {
-            ListElement { key: "Block"; value: 5 }
-            ListElement { key: "Blinker"; value: 6 }
-        }
+      model:
+      [
+        "Block",
+        "Bee-Hive",
+        "Loaf",
+        "Boat",
+        "Tub",
+        "Blinker",
+        "Beacon",
+        "Pulsar",
+        "Penta-decathlon",
+        "Glider"
+      ]
     }
   } // Column
 
@@ -181,4 +226,4 @@ Item
       startGameButton.changeText();
     }
   }
-} // id: root
+} // id: gameBoard_root
