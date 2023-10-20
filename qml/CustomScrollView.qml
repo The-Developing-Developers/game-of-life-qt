@@ -7,12 +7,10 @@ ScrollView
 
   property int squareSpacing: gameManager.squareSpacing
   property int squareSide:    gameManager.squareSize
-  property int rows:          gameManager.numOfRows // TODO: sostituire rows con gameManager.numOfRows
-  property int cols:          gameManager.numOfCols // TODO: sostituire cols con gameManager.numOfCols
-  property int numOfSquares:  rows * cols
+  property int numOfSquares:  gameManager.numOfRows * gameManager.numOfCols
 
-  contentWidth:  squareSpacing + (squareSide + squareSpacing) * cols
-  contentHeight: squareSpacing + (squareSide + squareSpacing) * rows
+  contentWidth:  squareSpacing + (squareSide + squareSpacing) * gameManager.numOfCols
+  contentHeight: squareSpacing + (squareSide + squareSpacing) * gameManager.numOfRows
 
   onWidthChanged: function() { gridBackground.adjustGridPositioning(); }
 
@@ -74,7 +72,7 @@ ScrollView
     }
 
     spacing: squareSpacing
-    columns: cols // size of game board does not vary when resizing the ApplicationWindow
+    columns: gameManager.numOfCols // size of game board does not vary when resizing the ApplicationWindow
 
     Repeater
     {
