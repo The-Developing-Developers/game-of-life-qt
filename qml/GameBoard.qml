@@ -126,39 +126,51 @@ Item
 
     ComboBox
     {
+      readonly property string block:   "Block"
+      readonly property string beeHive: "Bee-Hive"
+      readonly property string loaf:    "Loaf"
+      readonly property string toad:    "Toad"
+      readonly property string beacon:  "Beacon"
+      readonly property string boat:    "Boat"
+      readonly property string tub:     "Tub"
+      readonly property string blinker: "Blinker"
+      readonly property string pulsar:  "Pulsar"
+      readonly property string pentaDecathlon: "Penta-Decathlon"
+      readonly property string glider:  "Glider"
+
       onActivated:
       {
-        if (currentValue == "Block")
+        if (currentValue == block)
         {
           gameManager.numOfRows = 4;
           gameManager.numOfCols = 4;
         }
-        else if (currentValue == "Bee-Hive")
+        else if (currentValue == beeHive)
         {
           gameManager.numOfRows = 5;
           gameManager.numOfCols = 6;
         }
-        else if (currentValue == "Loaf" || currentValue == "Toad" || currentValue == "Beacon")
+        else if (currentValue == loaf || currentValue == toad || currentValue == beacon)
         {
           gameManager.numOfRows = 6;
           gameManager.numOfCols = 6;
         }
-        else if (currentValue == "Boat" || currentValue == "Tub" || currentValue == "Blinker")
+        else if (currentValue == boat || currentValue == tub || currentValue == blinker)
         {
           gameManager.numOfRows = 5;
           gameManager.numOfCols = 5;
         }
-        else if (currentValue == "Pulsar")
+        else if (currentValue == pulsar)
         {
           gameManager.numOfRows = 17;
           gameManager.numOfCols = 17;
         }
-        else if (currentValue == "Penta-decathlon")
+        else if (currentValue == pentaDecathlon)
         {
           gameManager.numOfRows = 11;
           gameManager.numOfCols = 18;
         }
-        else if (currentValue == "Glider")
+        else if (currentValue == glider)
         {
           gameManager.numOfRows = 20;
           gameManager.numOfCols = 20;
@@ -172,16 +184,17 @@ Item
 
       model:
       [
-        "Block",
-        "Bee-Hive",
-        "Loaf",
-        "Boat",
-        "Tub",
-        "Blinker",
-        "Beacon",
-        "Pulsar",
-        "Penta-decathlon",
-        "Glider"
+        block,
+        beeHive,
+        loaf,
+        toad,
+        boat,
+        tub,
+        blinker,
+        beacon,
+        pulsar,
+        pentaDecathlon,
+        glider
       ]
     }
   } // Column
