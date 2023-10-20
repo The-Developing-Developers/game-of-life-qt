@@ -63,6 +63,7 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 # To Do List
 
+- Try changing some `Q_INVOKABLE`s (the ones which are used in a `Q_PROPERTY`) to private slots, to enforce encapsulation.
 - Consider using an `onEditingFinished` instead of `onAccepted` for convenience in `GameOptions.qml` for the option buttons. However, automatic focus on the "number of rows" `CustomTextField` must be removed, because going back to the Options screen triggers an undesired modification if `onEditingFinished` is used: the rows are changed to the minimum value.
 - Consider adding a checkmark or changing the text to green colour when a value is accepted in the Options screen.
 - Do not use a simple `bool` to manage the game state (`isGameActive` QML property). Consider using a more sophisticated system (enumeratives, or re-enabling the original FSM), in order to accommodate a potential third or fourth state in the future if the need arises.

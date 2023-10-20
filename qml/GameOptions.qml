@@ -70,8 +70,8 @@ Grid
 
     CustomTextField
     {
-      placeholderText: "Square Size: " + gameManager.getSquareSize().toString()
-      onAccepted: gameManager.setSquareSize(parseInt(text))
+      placeholderText: "Square Size: " + gameManager.squareSize.toString()
+      onAccepted: gameManager.squareSize = parseInt(text)
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -91,8 +91,8 @@ Grid
 
     CustomTextField
     {
-      placeholderText: "Period: " + gameManager.getTimerPeriod().toString() + " ms"
-      onAccepted: gameManager.setTimerPeriod(parseInt(text))
+      placeholderText: "Period: " + gameManager.timerPeriod.toString() + " ms"
+      onAccepted: gameManager.timerPeriod = parseInt(text)
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -112,8 +112,8 @@ Grid
 
     CustomTextField
     {
-      placeholderText: "Spacing: " + gameManager.getSquareSpacing().toString() + " px"
-      onAccepted: gameManager.setSquareSpacing(parseInt(text))
+      placeholderText: "Spacing: " + gameManager.squareSpacing.toString() + " px"
+      onAccepted: gameManager.squareSpacing = parseInt(text)
       height: textBoxHeight
       width:  textBoxWidth
     }

@@ -59,18 +59,21 @@ void GameManager::setNumOfCols(int numOfCols)
 void GameManager::setTimerPeriod(int timerPeriod_ms)
 {
   m_gameOptions->setTimerPeriod(timerPeriod_ms);
+  timerPeriodChanged(timerPeriod_ms);
 }
 
 
 void GameManager::setSquareSize(int squareSize)
 {
   m_gameOptions->setSquareSize(squareSize);
+  squareSizeChanged(squareSize);
 }
 
 
 void GameManager::setSquareSpacing(int squareSpacing)
 {
   m_gameOptions->setSquareSpacing(squareSpacing);
+  squareSpacingChanged(squareSpacing);
 }
 
 

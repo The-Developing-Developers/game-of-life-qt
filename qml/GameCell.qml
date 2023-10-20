@@ -22,7 +22,7 @@ Rectangle
     alwaysRunToEnd: true;
     property:       "color";
     to:             aliveColour;
-    duration:       gameManager.getTimerPeriod() * aliveDurationFactor
+    duration:       gameManager.timerPeriod * aliveDurationFactor
   }
 
   ColorAnimation
@@ -33,7 +33,7 @@ Rectangle
     alwaysRunToEnd: true;
     property:       "color";
     to:             deadColour;
-    duration:       gameManager.getTimerPeriod() * deadDurationFactor
+    duration:       gameManager.timerPeriod * deadDurationFactor
   }
 
   Connections

@@ -5,8 +5,8 @@ ScrollView
 {
   id: scrollView
 
-  property int squareSpacing: gameManager.getSquareSpacing()
-  property int squareSide:    gameManager.getSquareSize()
+  property int squareSpacing: gameManager.squareSpacing
+  property int squareSide:    gameManager.squareSize
   property int rows:          gameManager.numOfRows // TODO: sostituire rows con gameManager.numOfRows
   property int cols:          gameManager.numOfCols // TODO: sostituire cols con gameManager.numOfCols
   property int numOfSquares:  rows * cols

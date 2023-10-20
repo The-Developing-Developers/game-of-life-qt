@@ -202,7 +202,7 @@ Item
   {
     id: timer
 
-    interval: gameManager.getTimerPeriod();
+    interval: gameManager.timerPeriod;
     running:  false;
     repeat:   true
     onTriggered: function() { gameManager.recalculateBoard(); }

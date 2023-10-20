@@ -17,9 +17,12 @@ public:
   explicit GameManager(QObject *parent = nullptr);
           ~GameManager(void);
 
-  Q_PROPERTY(bool isAnimationAllowed READ getIsAnimationAllowed WRITE setIsAnimationAllowed NOTIFY isAnimationAllowedChanged);
-  Q_PROPERTY(int numOfRows           READ getNumOfRows          WRITE setNumOfRows          NOTIFY numOfRowsChanged);
-  Q_PROPERTY(int numOfCols           READ getNumOfCols          WRITE setNumOfCols          NOTIFY numOfColsChanged);
+  Q_PROPERTY(bool isAnimationAllowed  READ getIsAnimationAllowed  WRITE setIsAnimationAllowed NOTIFY isAnimationAllowedChanged);
+  Q_PROPERTY(int  numOfRows           READ getNumOfRows           WRITE setNumOfRows          NOTIFY numOfRowsChanged);
+  Q_PROPERTY(int  numOfCols           READ getNumOfCols           WRITE setNumOfCols          NOTIFY numOfColsChanged);
+  Q_PROPERTY(int  squareSize          READ getSquareSize          WRITE setSquareSize         NOTIFY squareSizeChanged);
+  Q_PROPERTY(int  squareSpacing       READ getSquareSpacing       WRITE setSquareSpacing      NOTIFY squareSpacingChanged);
+  Q_PROPERTY(int  timerPeriod         READ getTimerPeriod         WRITE setTimerPeriod        NOTIFY timerPeriodChanged);
 
   Q_INVOKABLE void clearBoard           (void);
   Q_INVOKABLE void recalculateBoard     (void);
@@ -32,9 +35,9 @@ public:
   Q_INVOKABLE bool getCellStatus        (int cellIndex) const;
   Q_INVOKABLE void setNumOfRows         (int numOfRows);
   Q_INVOKABLE void setNumOfCols         (int numOfCols);
-  Q_INVOKABLE void setTimerPeriod       (int timerPeriod_ms);
   Q_INVOKABLE void setSquareSize        (int squareSize);
   Q_INVOKABLE void setSquareSpacing     (int squareSpacing);
+  Q_INVOKABLE void setTimerPeriod       (int timerPeriod_ms);
   Q_INVOKABLE void setIsAnimationAllowed(bool isAnimationAllowed);
   Q_INVOKABLE void backgroundInteracted (int mouseX, int mouseY);
   Q_INVOKABLE void backgroundReleased   (void);
@@ -44,12 +47,15 @@ public:
 
 signals:
 
-  void boardChanged     (void);
-  void gameStateChanged (GameState_ns::GameState_e currentState);
-  void stopTimer        (void);
+  void boardChanged             (void);
+  void gameStateChanged         (GameState_ns::GameState_e currentState);
+  void stopTimer                (void);
   void isAnimationAllowedChanged(void);
-  void numOfRowsChanged(int);
-  void numOfColsChanged(int);
+  void numOfRowsChanged         (int);
+  void numOfColsChanged         (int);
+  void squareSizeChanged        (int);
+  void squareSpacingChanged     (int);
+  void timerPeriodChanged       (int);
 
 private:
 
