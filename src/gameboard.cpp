@@ -177,6 +177,32 @@ void GameBoard::resizeGameBoard(void)
 }
 
 
+void GameBoard::setCurrentShape(const QVector<QVector<bool>> newShape)
+{
+  const int numOfRows = m_gameOptions.getNumOfRows();
+  const int numOfCols = m_gameOptions.getNumOfCols();
+
+  for (int row = 0; row != numOfRows; ++row)
+  {
+    for (int col = 0; col != numOfCols; ++col)
+    {
+      if (newShape[row][col])
+        m_currMatrix[row][col].revive();
+      else
+        m_currMatrix[row][col].kill();
+    }
+  }
+
+  for (auto& rowOfCells : m_nextMatrix)
+  {
+    for (auto& cell : rowOfCells)
+    {
+      cell.kill();
+    }
+  }
+}
+
+
 int GameBoard::countNumOfAliveNeighbours(int row, int col)
 {
   int aliveNeighboursCounter = 0;

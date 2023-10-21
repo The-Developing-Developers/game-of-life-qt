@@ -8,16 +8,16 @@ public:
    GameOptions(void);
   ~GameOptions(void);
 
-  void  setNumOfRows          (int numOfRows);
-  void  setNumOfCols          (int numOfCols);
-  void  setTimerPeriod        (int timerPeriod_ms);
-  void  setSquareSize         (int squareSize);
-  void  setSquareSpacing      (int squareSpacing);
-  int   getNumOfRows          (void) const;
-  int   getNumOfCols          (void) const;
-  int   getTimerPeriod        (void) const;
-  int   getSquareSize         (void) const;
-  int   getSquareSpacing      (void) const;
+  void  setNumOfRows                (int numOfRows);
+  void  setNumOfCols                (int numOfCols);
+  void  setTimerPeriod              (int timerPeriod_ms);
+  void  setSquareSize               (int squareSize);
+  void  setSquareSpacing            (int squareSpacing);
+  int   getNumOfRows                (void) const;
+  int   getNumOfCols                (void) const;
+  int   getTimerPeriod              (void) const;
+  int   getSquareSize               (void) const;
+  int   getSquareSpacing            (void) const;
   int   getDeadOrAliveLowerThreshold(void) const;
   int   getDeadOrAliveUpperThreshold(void) const;
 

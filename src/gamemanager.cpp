@@ -6,6 +6,7 @@ GameManager::GameManager(QObject *parent)
   , m_gameOptions     (new GameOptions)
   , m_gameBoard       (new GameBoard(*this))
   , m_gameStateMachine(new GameStateMachine(*this))
+  , m_shapes          (new Shapes)
   , m_isAnimationAllowed(true)
 {;}
 
@@ -17,6 +18,23 @@ GameManager::~GameManager(void)
 void GameManager::resizeGameBoard(void)
 {
   m_gameBoard->resizeGameBoard();
+}
+
+
+int GameManager::getShapeIndex(void) const
+{
+  return 0;
+}
+
+
+void GameManager::setShapeIndex(int index)
+{
+  m_shapes->setShapeIndex(index);
+  setNumOfRows(m_shapes->getCurrentShapeNumOfRows());
+  setNumOfCols(m_shapes->getCurrentShapeNumOfCols());
+  resizeGameBoard();
+  m_gameBoard->setCurrentShape(m_shapes->getCurrentShapeMatrix());
+  boardChanged();
 }
 
 
@@ -37,6 +55,12 @@ void GameManager::recalculateBoard(void)
 bool GameManager::getCellStatus(int cellIndex) const
 {
   return m_gameBoard->getCellStatus(cellIndex);
+}
+
+
+const QStringList GameManager::getListOfShapes(void) const
+{
+  return m_shapes->getListOfShapes();
 }
 
 
