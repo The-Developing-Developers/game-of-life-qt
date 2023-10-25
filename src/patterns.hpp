@@ -8,11 +8,11 @@ class Patterns
 public:
   Patterns(void);
 
-  void                          setShapeIndex           (int index);
-  const QStringList             getListOfShapes         (void) const;
-  int                           getCurrentShapeNumOfRows(void) const;
-  int                           getCurrentShapeNumOfCols(void) const;
-  const QVector<QVector<bool>>  getCurrentShapeMatrix   (void) const;
+  void                          setPatternIndex           (int index);
+  const QStringList             getListOfPatterns         (void) const;
+  int                           getCurrentPatternNumOfRows(void) const;
+  int                           getCurrentPatternNumOfCols(void) const;
+  const QVector<QVector<bool>>  getCurrentPatternMatrix   (void) const;
 
 private:
 
@@ -31,11 +31,11 @@ private:
   const QString spaceships      = "--- Spaceships ---";
   const QString glider          = "Glider";
 
-  const QStringList m_listOfShapes;
-  QVector<QVector<bool>> m_shapeMatrix;
+  const QStringList m_listOfPatterns;
+  QVector<QVector<bool>> m_patternMatrix;
   int m_currentIndex;
-  int m_shapeRows;
-  int m_shapeCols;
+  int m_patternRows;
+  int m_patternCols;
 };
 
 #endif // PATTERNS_HPP

@@ -177,7 +177,7 @@ void GameBoard::resizeGameBoard(void)
 }
 
 
-void GameBoard::setCurrentShape(const QVector<QVector<bool>> newShape)
+void GameBoard::setCurrentPattern(const QVector<QVector<bool>> newPattern)
 {
   const int numOfRows = m_gameOptions.getNumOfRows();
   const int numOfCols = m_gameOptions.getNumOfCols();
@@ -186,7 +186,7 @@ void GameBoard::setCurrentShape(const QVector<QVector<bool>> newShape)
   {
     for (int col = 0; col != numOfCols; ++col)
     {
-      if (newShape[row][col])
+      if (newPattern[row][col])
         m_currMatrix[row][col].revive();
       else
         m_currMatrix[row][col].kill();

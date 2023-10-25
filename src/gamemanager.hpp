@@ -23,8 +23,8 @@ public:
   Q_PROPERTY(int          squareSize          READ getSquareSize          WRITE setSquareSize         NOTIFY squareSizeChanged);
   Q_PROPERTY(int          squareSpacing       READ getSquareSpacing       WRITE setSquareSpacing      NOTIFY squareSpacingChanged);
   Q_PROPERTY(int          timerPeriod         READ getTimerPeriod         WRITE setTimerPeriod        NOTIFY timerPeriodChanged);
-  Q_PROPERTY(int          currentShapeIndex   READ getShapeIndex          WRITE setCurrentShape       NOTIFY shapeIndexChanged);
-  Q_PROPERTY(QStringList  listOfShapes        READ getListOfShapes CONSTANT);
+  Q_PROPERTY(int          currentPatternIndex   READ getPatternIndex          WRITE setCurrentPattern       NOTIFY patternIndexChanged);
+  Q_PROPERTY(QStringList  listOfPatterns      READ getListOfPatterns CONSTANT);
 
   Q_INVOKABLE void              clearBoard            (void);
   Q_INVOKABLE void              recalculateBoard      (void);
@@ -35,15 +35,15 @@ public:
   Q_INVOKABLE int               getSquareSpacing      (void)          const;
   Q_INVOKABLE bool              getIsAnimationAllowed (void)          const;
   Q_INVOKABLE bool              getCellStatus         (int cellIndex) const;
-  Q_INVOKABLE const QStringList getListOfShapes       (void)          const;
-  Q_INVOKABLE int               getShapeIndex         (void)          const;
+  Q_INVOKABLE const QStringList getListOfPatterns     (void)          const;
+  Q_INVOKABLE int               getPatternIndex         (void)          const;
   Q_INVOKABLE void              setNumOfRows          (int numOfRows);
   Q_INVOKABLE void              setNumOfCols          (int numOfCols);
   Q_INVOKABLE void              setSquareSize         (int squareSize);
   Q_INVOKABLE void              setSquareSpacing      (int squareSpacing);
   Q_INVOKABLE void              setTimerPeriod        (int timerPeriod_ms);
   Q_INVOKABLE void              setIsAnimationAllowed (bool isAnimationAllowed);
-  Q_INVOKABLE void              setCurrentShape       (int shapeIndex);
+  Q_INVOKABLE void              setCurrentPattern       (int patternIndex);
   Q_INVOKABLE void              backgroundInteracted  (int mouseX, int mouseY);
   Q_INVOKABLE void              backgroundReleased    (void);
 
@@ -60,13 +60,13 @@ signals:
   void squareSizeChanged        (int);
   void squareSpacingChanged     (int);
   void timerPeriodChanged       (int);
-  void shapeIndexChanged        (int);
+  void patternIndexChanged        (int);
 
 private:
 
-  QScopedPointer<GameOptions>       m_gameOptions;
-  QScopedPointer<GameBoard>         m_gameBoard;
-  QScopedPointer<Patterns>            m_shapes;
+  QScopedPointer<GameOptions> m_gameOptions;
+  QScopedPointer<GameBoard>   m_gameBoard;
+  QScopedPointer<Patterns>    m_patterns;
   bool m_isAnimationAllowed;
 
   void resizeGameBoard(void);

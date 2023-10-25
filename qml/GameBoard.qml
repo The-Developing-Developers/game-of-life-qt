@@ -124,8 +124,8 @@ Item
 
     ComboBox
     {
-      model:        gameManager.listOfShapes;
-      onActivated:  gameManager.currentShapeIndex = currentIndex
+      model:        gameManager.listOfPatterns;
+      onActivated:  gameManager.currentPatternIndex = currentIndex
     }
   } // Column
 

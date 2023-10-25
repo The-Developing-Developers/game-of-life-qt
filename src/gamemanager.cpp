@@ -5,7 +5,7 @@ GameManager::GameManager(QObject *parent)
   : QObject           (parent)
   , m_gameOptions     (new GameOptions)
   , m_gameBoard       (new GameBoard(*this))
-  , m_shapes          (new Patterns)
+  , m_patterns          (new Patterns)
   , m_isAnimationAllowed(true)
 {;}
 
@@ -20,22 +20,22 @@ void GameManager::resizeGameBoard(void)
 }
 
 
-int GameManager::getShapeIndex(void) const
+int GameManager::getPatternIndex(void) const
 {
   return 0;
 }
 
 
-void GameManager::setCurrentShape(int index)
+void GameManager::setCurrentPattern(int index)
 {
   if (index == 0 || index == 6 || index == 12)
     return; // separators in the combo box (i.e., do nothing)
 
-  m_shapes->setShapeIndex(index);
-  setNumOfRows(m_shapes->getCurrentShapeNumOfRows());
-  setNumOfCols(m_shapes->getCurrentShapeNumOfCols());
+  m_patterns->setPatternIndex(index);
+  setNumOfRows(m_patterns->getCurrentPatternNumOfRows());
+  setNumOfCols(m_patterns->getCurrentPatternNumOfCols());
   resizeGameBoard();
-  m_gameBoard->setCurrentShape(m_shapes->getCurrentShapeMatrix());
+  m_gameBoard->setCurrentPattern(m_patterns->getCurrentPatternMatrix());
   boardChanged();
 }
 
@@ -60,9 +60,9 @@ bool GameManager::getCellStatus(int cellIndex) const
 }
 
 
-const QStringList GameManager::getListOfShapes(void) const
+const QStringList GameManager::getListOfPatterns(void) const
 {
-  return m_shapes->getListOfShapes();
+  return m_patterns->getListOfPatterns();
 }
 
 

@@ -1,56 +1,56 @@
 #include "patterns.hpp"
 
 Patterns::Patterns(void)
-  : m_listOfShapes(QStringList()  << stillLifes
-                                  << block
-                                  << beeHive
-                                  << loaf
-                                  << boat
-                                  << tub
-                                  << oscillators
-                                  << blinker
-                                  << toad
-                                  << beacon
-                                  << pulsar
-                                  << pentaDecathlon
-                                  << spaceships
-                                  << glider)
+  : m_listOfPatterns(QStringList()  << stillLifes
+                                    << block
+                                    << beeHive
+                                    << loaf
+                                    << boat
+                                    << tub
+                                    << oscillators
+                                    << blinker
+                                    << toad
+                                    << beacon
+                                    << pulsar
+                                    << pentaDecathlon
+                                    << spaceships
+                                    << glider)
 {;}
 
-void Patterns::setShapeIndex(int index)
+void Patterns::setPatternIndex(int index)
 {
   m_currentIndex = index;
-  const QString currentShape(m_listOfShapes[m_currentIndex]);
+  const QString currentPattern(m_listOfPatterns[m_currentIndex]);
 
   QVector<QVector<bool>> newMatrix;
 
-  if (currentShape == stillLifes || currentShape == oscillators || currentShape == spaceships)
+  if (currentPattern == stillLifes || currentPattern == oscillators || currentPattern == spaceships)
   {
     return; // do nothing
   }
-  if (currentShape == block)
+  if (currentPattern == block)
   {
-    m_shapeRows = 4;
-    m_shapeCols = 4;
+    m_patternRows = 4;
+    m_patternCols = 4;
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 1, 1, 0});
     newMatrix.push_back(QVector<bool>{0, 1, 1, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0});
   }
-  else if (currentShape == beeHive)
+  else if (currentPattern == beeHive)
   {
-    m_shapeRows = 5;
-    m_shapeCols = 6;
+    m_patternRows = 5;
+    m_patternCols = 6;
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 1, 1, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 1, 0, 0, 1, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 1, 1, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0});
   }
-  else if (currentShape == loaf)
+  else if (currentPattern == loaf)
   {
-    m_shapeRows = 6;
-    m_shapeCols = 6;
+    m_patternRows = 6;
+    m_patternCols = 6;
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 1, 1, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 1, 0, 0, 1, 0});
@@ -58,30 +58,30 @@ void Patterns::setShapeIndex(int index)
     newMatrix.push_back(QVector<bool>{0, 0, 0, 1, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0});
   }
-  else if (currentShape == boat)
+  else if (currentPattern == boat)
   {
-    m_shapeRows = 5;
-    m_shapeCols = 5;
+    m_patternRows = 5;
+    m_patternCols = 5;
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 1, 1, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 1, 0, 1, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 1, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0});
   }
-  else if (currentShape == tub)
+  else if (currentPattern == tub)
   {
-    m_shapeRows = 5;
-    m_shapeCols = 5;
+    m_patternRows = 5;
+    m_patternCols = 5;
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 1, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 1, 0, 1, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 1, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0});
   }
-  else if (currentShape == toad)
+  else if (currentPattern == toad)
   {
-    m_shapeRows = 6;
-    m_shapeCols = 6;
+    m_patternRows = 6;
+    m_patternCols = 6;
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 1, 1, 1, 0});
@@ -89,20 +89,20 @@ void Patterns::setShapeIndex(int index)
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0});
   }
-  else if (currentShape == blinker)
+  else if (currentPattern == blinker)
   {
-    m_shapeRows = 5;
-    m_shapeCols = 5;
+    m_patternRows = 5;
+    m_patternCols = 5;
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 1, 1, 1, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0});
   }
-  else if (currentShape == beacon)
+  else if (currentPattern == beacon)
   {
-    m_shapeRows = 6;
-    m_shapeCols = 6;
+    m_patternRows = 6;
+    m_patternCols = 6;
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 1, 1, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 1, 1, 0, 0, 0});
@@ -110,10 +110,10 @@ void Patterns::setShapeIndex(int index)
     newMatrix.push_back(QVector<bool>{0, 0, 0, 1, 1, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0});
   }
-  else if (currentShape == pulsar)
+  else if (currentPattern == pulsar)
   {
-    m_shapeRows = 17;
-    m_shapeCols = 17;
+    m_patternRows = 17;
+    m_patternCols = 17;
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0});
@@ -132,10 +132,10 @@ void Patterns::setShapeIndex(int index)
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
   }
-  else if (currentShape == pentaDecathlon)
+  else if (currentPattern == pentaDecathlon)
   {
-    m_shapeRows = 18;
-    m_shapeCols = 11;
+    m_patternRows = 18;
+    m_patternCols = 11;
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
@@ -155,10 +155,10 @@ void Patterns::setShapeIndex(int index)
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
   }
-  else if (currentShape == glider)
+  else if (currentPattern == glider)
   {
-    m_shapeRows = 20;
-    m_shapeCols = 20;
+    m_patternRows = 20;
+    m_patternCols = 20;
     newMatrix.push_back(QVector<bool>{0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
     newMatrix.push_back(QVector<bool>{1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
@@ -182,32 +182,32 @@ void Patterns::setShapeIndex(int index)
   }
   else
   {
-    m_shapeRows = 3;
-    m_shapeCols = 3;
+    m_patternRows = 3;
+    m_patternCols = 3;
     newMatrix.push_back(QVector<bool>{0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0});
     newMatrix.push_back(QVector<bool>{0, 0, 0});
   }
 
-  m_shapeMatrix = newMatrix;
+  m_patternMatrix = newMatrix;
 }
 
-const QStringList Patterns::getListOfShapes(void) const
+const QStringList Patterns::getListOfPatterns(void) const
 {
-  return m_listOfShapes;
+  return m_listOfPatterns;
 }
 
-int Patterns::getCurrentShapeNumOfRows(void) const
+int Patterns::getCurrentPatternNumOfRows(void) const
 {
-  return m_shapeRows;
+  return m_patternRows;
 }
 
-int Patterns::getCurrentShapeNumOfCols(void) const
+int Patterns::getCurrentPatternNumOfCols(void) const
 {
-  return m_shapeCols;
+  return m_patternCols;
 }
 
-const QVector<QVector<bool>> Patterns::getCurrentShapeMatrix(void) const
+const QVector<QVector<bool>> Patterns::getCurrentPatternMatrix(void) const
 {
-  return m_shapeMatrix;
+  return m_patternMatrix;
 }
