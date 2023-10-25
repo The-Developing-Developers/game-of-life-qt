@@ -27,8 +27,11 @@ int GameManager::getShapeIndex(void) const
 }
 
 
-void GameManager::setShapeIndex(int index)
+void GameManager::setCurrentShape(int index)
 {
+  if (index == 0 || index == 6 || index == 12)
+    return; // separators in the combo box (i.e., do nothing)
+
   m_shapes->setShapeIndex(index);
   setNumOfRows(m_shapes->getCurrentShapeNumOfRows());
   setNumOfCols(m_shapes->getCurrentShapeNumOfCols());

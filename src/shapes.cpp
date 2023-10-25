@@ -1,19 +1,21 @@
 #include "shapes.hpp"
 
 Shapes::Shapes(void)
-  : m_listOfShapes(QStringList() << block
-                                 << beeHive
-                                 << loaf
-                                 << toad
-                                 << beacon
-                                 << boat
-                                 << tub
-                                 << blinker
-                                 << pulsar
-                                 << glider
-                                 << pentaDecathlon)
+  : m_listOfShapes(QStringList()  << stillLifes
+                                  << block
+                                  << beeHive
+                                  << loaf
+                                  << boat
+                                  << tub
+                                  << oscillators
+                                  << blinker
+                                  << toad
+                                  << beacon
+                                  << pulsar
+                                  << pentaDecathlon
+                                  << spaceships
+                                  << glider)
 {;}
-
 
 void Shapes::setShapeIndex(int index)
 {
@@ -22,6 +24,10 @@ void Shapes::setShapeIndex(int index)
 
   QVector<QVector<bool>> newMatrix;
 
+  if (currentShape == stillLifes || currentShape == oscillators || currentShape == spaceships)
+  {
+    return; // do nothing
+  }
   if (currentShape == block)
   {
     m_shapeRows = 4;
@@ -191,18 +197,15 @@ const QStringList Shapes::getListOfShapes(void) const
   return m_listOfShapes;
 }
 
-
 int Shapes::getCurrentShapeNumOfRows(void) const
 {
   return m_shapeRows;
 }
 
-
 int Shapes::getCurrentShapeNumOfCols(void) const
 {
   return m_shapeCols;
 }
-
 
 const QVector<QVector<bool>> Shapes::getCurrentShapeMatrix(void) const
 {

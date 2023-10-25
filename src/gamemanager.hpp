@@ -24,7 +24,7 @@ public:
   Q_PROPERTY(int          squareSize          READ getSquareSize          WRITE setSquareSize         NOTIFY squareSizeChanged);
   Q_PROPERTY(int          squareSpacing       READ getSquareSpacing       WRITE setSquareSpacing      NOTIFY squareSpacingChanged);
   Q_PROPERTY(int          timerPeriod         READ getTimerPeriod         WRITE setTimerPeriod        NOTIFY timerPeriodChanged);
-  Q_PROPERTY(int          currentShapeIndex   READ getShapeIndex          WRITE setShapeIndex         NOTIFY shapeIndexChanged);
+  Q_PROPERTY(int          currentShapeIndex   READ getShapeIndex          WRITE setCurrentShape       NOTIFY shapeIndexChanged);
   Q_PROPERTY(QStringList  listOfShapes        READ getListOfShapes CONSTANT);
 
   Q_INVOKABLE void              clearBoard            (void);
@@ -44,7 +44,7 @@ public:
   Q_INVOKABLE void              setSquareSpacing      (int squareSpacing);
   Q_INVOKABLE void              setTimerPeriod        (int timerPeriod_ms);
   Q_INVOKABLE void              setIsAnimationAllowed (bool isAnimationAllowed);
-  Q_INVOKABLE void              setShapeIndex         (int shapeIndex);
+  Q_INVOKABLE void              setCurrentShape       (int shapeIndex);
   Q_INVOKABLE void              backgroundInteracted  (int mouseX, int mouseY);
   Q_INVOKABLE void              backgroundReleased    (void);
 

@@ -16,17 +16,20 @@ public:
 
 private:
 
-  const QString block   = "Block";
-  const QString beeHive = "Bee-Hive";
-  const QString loaf    = "Loaf";
-  const QString toad    = "Toad";
-  const QString beacon  = "Beacon";
-  const QString boat    = "Boat";
-  const QString tub     = "Tub";
-  const QString blinker = "Blinker";
-  const QString pulsar  = "Pulsar";
-  const QString glider  = "Glider";
-  const QString pentaDecathlon = "Penta-Decathlon";
+  const QString stillLifes      = "--- Still Lifes ---";
+  const QString block           = "Block";
+  const QString beeHive         = "Bee-Hive";
+  const QString loaf            = "Loaf";
+  const QString boat            = "Boat";
+  const QString tub             = "Tub";
+  const QString oscillators     = "--- Oscillators ---";
+  const QString blinker         = "Blinker";
+  const QString toad            = "Toad";
+  const QString beacon          = "Beacon";
+  const QString pulsar          = "Pulsar";
+  const QString pentaDecathlon  = "Penta-Decathlon";
+  const QString spaceships      = "--- Spaceships ---";
+  const QString glider          = "Glider";
 
   const QStringList m_listOfShapes;
   QVector<QVector<bool>> m_shapeMatrix;
