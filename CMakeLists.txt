@@ -33,7 +33,6 @@ qt_add_qml_module(${PROJECT_NAME}
     src/gamemanager.hpp       src/gamemanager.cpp
     src/cell.hpp              src/cell.cpp
     src/gameboard.hpp         src/gameboard.cpp
-    src/gamestatemachine.hpp  src/gamestatemachine.cpp
     src/gameoptions.hpp       src/gameoptions.cpp
     src/shapes.hpp            src/shapes.cpp
 )

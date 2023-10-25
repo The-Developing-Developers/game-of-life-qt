@@ -5,7 +5,6 @@
 #include <qqmlintegration.h>
 #include "gameboard.hpp"
 #include "gameoptions.hpp"
-#include "gamestatemachine.hpp"
 #include "shapes.hpp"
 
 class GameManager : public QObject
@@ -54,7 +53,6 @@ public:
 signals:
 
   void boardChanged             (void);
-  void gameStateChanged         (GameState_ns::GameState_e currentState);
   void stopTimer                (void);
   void isAnimationAllowedChanged(void);
   void numOfRowsChanged         (int);
@@ -68,7 +66,6 @@ private:
 
   QScopedPointer<GameOptions>       m_gameOptions;
   QScopedPointer<GameBoard>         m_gameBoard;
-  QScopedPointer<GameStateMachine>  m_gameStateMachine;
   QScopedPointer<Shapes>            m_shapes;
   bool m_isAnimationAllowed;
 
