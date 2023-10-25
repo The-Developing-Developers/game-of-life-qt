@@ -5,7 +5,7 @@
 #include <qqmlintegration.h>
 #include "gameboard.hpp"
 #include "gameoptions.hpp"
-#include "shapes.hpp"
+#include "patterns.hpp"
 
 class GameManager : public QObject
 {
@@ -66,7 +66,7 @@ private:
 
   QScopedPointer<GameOptions>       m_gameOptions;
   QScopedPointer<GameBoard>         m_gameBoard;
-  QScopedPointer<Shapes>            m_shapes;
+  QScopedPointer<Patterns>            m_shapes;
   bool m_isAnimationAllowed;
 
   void resizeGameBoard(void);

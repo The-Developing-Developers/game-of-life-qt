@@ -1,12 +1,12 @@
-#ifndef SHAPES_HPP
-#define SHAPES_HPP
+#ifndef PATTERNS_HPP
+#define PATTERNS_HPP
 
 #include <QStringList>
 
-class Shapes
+class Patterns
 {
 public:
-  Shapes(void);
+  Patterns(void);
 
   void                          setShapeIndex           (int index);
   const QStringList             getListOfShapes         (void) const;
@@ -38,4 +38,4 @@ private:
   int m_shapeCols;
 };
 
-#endif // SHAPES_HPP
+#endif // PATTERNS_HPP

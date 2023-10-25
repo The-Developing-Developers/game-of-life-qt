@@ -1,6 +1,6 @@
-#include "shapes.hpp"
+#include "patterns.hpp"
 
-Shapes::Shapes(void)
+Patterns::Patterns(void)
   : m_listOfShapes(QStringList()  << stillLifes
                                   << block
                                   << beeHive
@@ -17,7 +17,7 @@ Shapes::Shapes(void)
                                   << glider)
 {;}
 
-void Shapes::setShapeIndex(int index)
+void Patterns::setShapeIndex(int index)
 {
   m_currentIndex = index;
   const QString currentShape(m_listOfShapes[m_currentIndex]);
@@ -192,22 +192,22 @@ void Shapes::setShapeIndex(int index)
   m_shapeMatrix = newMatrix;
 }
 
-const QStringList Shapes::getListOfShapes(void) const
+const QStringList Patterns::getListOfShapes(void) const
 {
   return m_listOfShapes;
 }
 
-int Shapes::getCurrentShapeNumOfRows(void) const
+int Patterns::getCurrentShapeNumOfRows(void) const
 {
   return m_shapeRows;
 }
 
-int Shapes::getCurrentShapeNumOfCols(void) const
+int Patterns::getCurrentShapeNumOfCols(void) const
 {
   return m_shapeCols;
 }
 
-const QVector<QVector<bool>> Shapes::getCurrentShapeMatrix(void) const
+const QVector<QVector<bool>> Patterns::getCurrentShapeMatrix(void) const
 {
   return m_shapeMatrix;
 }
