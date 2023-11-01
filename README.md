@@ -63,10 +63,11 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 # To Do List
 
+- Implement an upper limit for the Game Options (i.e., the user cannot request a Game Board with millions of rows or columns).
 - Fix the centering of the Game Board when the user selects a shape through the Combo Box.
 - Find a better way to filter the indices that should do nothing in `GameManager::setCurrentShape`. `GameManager` should know nothing about the numeric indices of the separators, and yet it should still be able to do nothing if a separator is selected. Maybe perform a check in `GameBoard.qml` before assigning `gameManager.currentShapeIndex` in `ComboBox`?
 - Try changing some `Q_INVOKABLE`s (the ones which are used in a `Q_PROPERTY`) to private slots, to enforce encapsulation.
-- Consider using an `onEditingFinished` instead of `onAccepted` for convenience in `GameOptions.qml` for the option buttons. However, automatic focus on the "number of rows" `CustomTextField` must be removed, because going back to the Options screen triggers an undesired modification if `onEditingFinished` is used: the rows are changed to the minimum value.
+- ~~Consider using an `onEditingFinished` instead of `onAccepted` for convenience in `GameOptions.qml` for the option buttons. However, automatic focus on the "number of rows" `CustomTextField` must be removed, because going back to the Options screen triggers an undesired modification if `onEditingFinished` is used: the rows are changed to the minimum value.~~
 - Consider adding a checkmark or changing the text to green colour when a value is accepted in the Options screen.
 - Do not use a simple `bool` to manage the game state (`isGameActive` QML property). Consider using a more sophisticated system (enumeratives, or re-enabling the original FSM), in order to accommodate a potential third or fourth state in the future if the need arises.
 - Consider comparing `GameManager` to the *Mediator* pattern, and evaluate if `GameManager` can be fully transformed into a *Mediator*.

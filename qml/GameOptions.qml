@@ -22,10 +22,16 @@ Grid
     CustomTextField
     {
       placeholderText: "Rows: " + gameManager.numOfRows.toString()
-      onAccepted: function()
+      onEditingFinished: function()
       {
-        gameManager.numOfRows = parseInt(text);
-        clear();
+        let parsedNumber = parseInt(text);
+        if (Number.isNaN(parsedNumber));
+        {;} // Avoid overwriting the previous value with an illegal value (has the user clicked elsewhere without entering any input?)
+        else
+        {
+          gameManager.numOfRows = parsedNumber;
+          clear();
+        }
       }
       height: textBoxHeight
       width:  textBoxWidth
@@ -40,10 +46,16 @@ Grid
     CustomTextField
     {
       placeholderText: "Columns: " + gameManager.numOfCols.toString()
-      onAccepted:
+      onEditingFinished: function()
       {
-        gameManager.numOfCols = parseInt(text)
-        clear();
+        let parsedNumber = parseInt(text);
+        if (Number.isNaN(parsedNumber));
+        {;} // Avoid overwriting the previous value with an illegal value (has the user clicked elsewhere without entering any input?)
+        else
+        {
+          gameManager.numOfCols = parseInt(text);
+          clear();
+        }
       }
       height: textBoxHeight
       width:  textBoxWidth
@@ -58,10 +70,16 @@ Grid
     CustomTextField
     {
       placeholderText: "Square Size: " + gameManager.squareSize.toString()
-      onAccepted:
+      onEditingFinished: function()
       {
-        gameManager.squareSize = parseInt(text)
-        clear();
+        let parsedNumber = parseInt(text);
+        if (Number.isNaN(parsedNumber));
+        {;} // Avoid overwriting the previous value with an illegal value (has the user clicked elsewhere without entering any input?)
+        else
+        {
+          gameManager.squareSize = parseInt(text);
+          clear();
+        }
       }
       height: textBoxHeight
       width:  textBoxWidth
@@ -76,10 +94,16 @@ Grid
     CustomTextField
     {
       placeholderText: "Period: " + gameManager.timerPeriod.toString() + " ms"
-      onAccepted:
+      onEditingFinished: function()
       {
-        gameManager.timerPeriod = parseInt(text)
-        clear();
+        let parsedNumber = parseInt(text);
+        if (Number.isNaN(parsedNumber));
+        {;} // Avoid overwriting the previous value with an illegal value (has the user clicked elsewhere without entering any input?)
+        else
+        {
+          gameManager.timerPeriod = parseInt(text);
+          clear();
+        }
       }
       height: textBoxHeight
       width:  textBoxWidth
@@ -94,10 +118,16 @@ Grid
     CustomTextField
     {
       placeholderText: "Spacing: " + gameManager.squareSpacing.toString() + " px"
-      onAccepted:
+      onEditingFinished: function()
       {
-        gameManager.squareSpacing = parseInt(text)
-        clear();
+        let parsedNumber = parseInt(text);
+        if (Number.isNaN(parsedNumber));
+        {;} // Avoid overwriting the previous value with an illegal value (has the user clicked elsewhere without entering any input?)
+        else
+        {
+          gameManager.squareSpacing = parseInt(text);
+          clear();
+        }
       }
       height: textBoxHeight
       width:  textBoxWidth
