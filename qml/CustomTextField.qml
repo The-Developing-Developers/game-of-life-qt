@@ -11,11 +11,14 @@ TextField
   font.pointSize: 14
   wrapMode: TextInput.Wrap
 
+  placeholderTextColor: "grey"
+  color: "black"
+
   background: Rectangle
   {
     radius: 5
-    color:        parent.enabled      ? "lightGrey"   : "#353637"
-    border.color: parent.activeFocus  ? "teal"        : "black"
+    color:        parent.activeFocus  ? "white" : "lightgrey"
+    border.color: parent.activeFocus  ? "teal"  : "black"
     border.width: parent.activeFocus  ? 3 : 1
   }
 }
