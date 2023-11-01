@@ -19,17 +19,14 @@ Grid
     id: numOfRowsOption
     spacing: internalSpacing
 
-    Text
-    {
-      anchors.horizontalCenter: numOfRowsOption.horizontalCenter
-      text: "Num. of Rows"
-      font.pointSize: fontPointSize
-    }
-
     CustomTextField
     {
       placeholderText: "Rows: " + gameManager.numOfRows.toString()
-      onAccepted: gameManager.numOfRows = parseInt(text);
+      onAccepted: function()
+      {
+        gameManager.numOfRows = parseInt(text);
+        clear();
+      }
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -40,17 +37,14 @@ Grid
     id: numOfColsOption
     spacing: internalSpacing
 
-    Text
-    {
-      anchors.horizontalCenter: numOfColsOption.horizontalCenter
-      text: "Num. of Columns"
-      font.pointSize: fontPointSize
-    }
-
     CustomTextField
     {
       placeholderText: "Columns: " + gameManager.numOfCols.toString()
-      onAccepted: gameManager.numOfCols = parseInt(text)
+      onAccepted:
+      {
+        gameManager.numOfCols = parseInt(text)
+        clear();
+      }
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -61,17 +55,14 @@ Grid
     id: squareSizeOption
     spacing: internalSpacing
 
-    Text
-    {
-      anchors.horizontalCenter: squareSizeOption.horizontalCenter
-      text: "Square Size"
-      font.pointSize: fontPointSize
-    }
-
     CustomTextField
     {
       placeholderText: "Square Size: " + gameManager.squareSize.toString()
-      onAccepted: gameManager.squareSize = parseInt(text)
+      onAccepted:
+      {
+        gameManager.squareSize = parseInt(text)
+        clear();
+      }
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -82,17 +73,14 @@ Grid
     id: refreshPeriodOption
     spacing: internalSpacing
 
-    Text
-    {
-      anchors.horizontalCenter: refreshPeriodOption.horizontalCenter
-      text: "Refresh Period (ms)"
-      font.pointSize: fontPointSize
-    }
-
     CustomTextField
     {
       placeholderText: "Period: " + gameManager.timerPeriod.toString() + " ms"
-      onAccepted: gameManager.timerPeriod = parseInt(text)
+      onAccepted:
+      {
+        gameManager.timerPeriod = parseInt(text)
+        clear();
+      }
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -103,17 +91,14 @@ Grid
     id: squareSpacingOption
     spacing: internalSpacing
 
-    Text
-    {
-      anchors.horizontalCenter: squareSpacingOption.horizontalCenter
-      text: "Square Spacing"
-      font.pointSize: fontPointSize
-    }
-
     CustomTextField
     {
       placeholderText: "Spacing: " + gameManager.squareSpacing.toString() + " px"
-      onAccepted: gameManager.squareSpacing = parseInt(text)
+      onAccepted:
+      {
+        gameManager.squareSpacing = parseInt(text)
+        clear();
+      }
       height: textBoxHeight
       width:  textBoxWidth
     }
@@ -123,13 +108,6 @@ Grid
   {
     id: animationAllowedSelection
     spacing: internalSpacing
-
-    Text
-    {
-      anchors.horizontalCenter: animationAllowedSelection.horizontalCenter
-      text: "Toggle Animation"
-      font.pointSize: fontPointSize
-    }
 
     CustomButton
     {
