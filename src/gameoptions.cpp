@@ -10,46 +10,71 @@ GameOptions::~GameOptions(void)
 
 void GameOptions::setNumOfRows(int numOfRows)
 {
-  if (numOfRows >= m_minNumOfRowsAndCols)
-    m_numOfRows = numOfRows;
+  if (numOfRows > m_maxNumOfRowsAndCols)
+    m_numOfRows = m_maxNumOfRowsAndCols;
   else
-    m_numOfRows = m_minNumOfRowsAndCols;
+  {
+    if (numOfRows < m_minNumOfRowsAndCols)
+      m_numOfRows = m_minNumOfRowsAndCols;
+    else
+      m_numOfRows = numOfRows;
+  }
 }
 
 
 void GameOptions::setNumOfCols(int numOfCols)
 {
-  if (numOfCols >= m_minNumOfRowsAndCols)
-    m_numOfCols = numOfCols;
+  if (numOfCols > m_maxNumOfRowsAndCols)
+    m_numOfCols = m_maxNumOfRowsAndCols;
   else
-    m_numOfCols = m_minNumOfRowsAndCols;
+  {
+    if (numOfCols < m_minNumOfRowsAndCols)
+      m_numOfCols = m_minNumOfRowsAndCols;
+    else
+      m_numOfCols = numOfCols;
+  }
 }
 
 
 void GameOptions::setTimerPeriod(int timerPeriod_ms)
 {
-  if (timerPeriod_ms >= m_minTimerPeriod_ms)
-    m_timerPeriod_ms = timerPeriod_ms;
+  if (timerPeriod_ms > m_maxTimerPeriod_ms)
+    m_timerPeriod_ms = m_maxTimerPeriod_ms;
   else
-    m_timerPeriod_ms = m_minTimerPeriod_ms;
+  {
+    if (timerPeriod_ms < m_minTimerPeriod_ms)
+      m_timerPeriod_ms = m_minTimerPeriod_ms;
+    else
+      m_timerPeriod_ms = timerPeriod_ms;
+  }
 }
 
 
 void GameOptions::setSquareSize(int squareSize)
 {
-  if (squareSize >= m_minSquareSize)
-    m_squareSize = squareSize;
+  if (squareSize > m_maxSquareSize)
+    m_squareSize = m_maxSquareSize;
   else
-    m_squareSize = m_minSquareSize;
+  {
+    if (squareSize < m_minSquareSize)
+      m_squareSize = m_minSquareSize;
+    else
+      m_squareSize = squareSize;
+  }
 }
 
 
 void GameOptions::setSquareSpacing(int squareSpacing)
 {
-  if (squareSpacing >= m_minSquareSpacing)
-    m_squareSpacing = squareSpacing;
+  if (squareSpacing > m_maxSquareSpacing)
+    m_squareSpacing = m_maxSquareSpacing;
   else
-    m_squareSpacing = m_minSquareSpacing;
+  {
+    if (squareSpacing < m_minSquareSpacing)
+      m_squareSpacing = m_minSquareSpacing;
+    else
+      m_squareSpacing = squareSpacing;
+  }
 }
 
 
