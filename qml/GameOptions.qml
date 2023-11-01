@@ -13,6 +13,8 @@ Grid
 
   CustomTextField
   {
+    height: textBoxHeight
+    width:  textBoxWidth
     placeholderText: "Rows: " + gameManager.numOfRows.toString()
     onEditingFinished: function()
     {
@@ -25,12 +27,12 @@ Grid
         clear();
       }
     }
-    height: textBoxHeight
-    width:  textBoxWidth
   }
 
   CustomTextField
   {
+    height: textBoxHeight
+    width:  textBoxWidth
     placeholderText: "Columns: " + gameManager.numOfCols.toString()
     onEditingFinished: function()
     {
@@ -43,12 +45,12 @@ Grid
         clear();
       }
     }
-    height: textBoxHeight
-    width:  textBoxWidth
   }
 
   CustomTextField
   {
+    height: textBoxHeight
+    width:  textBoxWidth
     placeholderText: "Square Size: " + gameManager.squareSize.toString()
     onEditingFinished: function()
     {
@@ -61,12 +63,12 @@ Grid
         clear();
       }
     }
-    height: textBoxHeight
-    width:  textBoxWidth
   }
 
   CustomTextField
   {
+    height: textBoxHeight
+    width:  textBoxWidth
     placeholderText: "Period: " + gameManager.timerPeriod.toString() + " ms"
     onEditingFinished: function()
     {
@@ -79,12 +81,12 @@ Grid
         clear();
       }
     }
-    height: textBoxHeight
-    width:  textBoxWidth
   }
 
   CustomTextField
   {
+    height: textBoxHeight
+    width:  textBoxWidth
     placeholderText: "Spacing: " + gameManager.squareSpacing.toString() + " px"
     onEditingFinished: function()
     {
@@ -97,8 +99,6 @@ Grid
         clear();
       }
     }
-    height: textBoxHeight
-    width:  textBoxWidth
   }
 
   CustomButton
