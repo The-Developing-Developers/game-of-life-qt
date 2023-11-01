@@ -66,6 +66,54 @@ const QStringList GameManager::getListOfPatterns(void) const
 }
 
 
+int GameManager::getMinNumOfRowsAndCols(void) const
+{
+  m_gameOptions->getMinNumOfRowsAndCols();
+}
+
+
+int GameManager::getMaxNumOfRowsAndCols(void) const
+{
+  m_gameOptions->getMaxNumOfRowsAndCols();
+}
+
+
+int GameManager::getMinTimerPeriod_ms(void) const
+{
+  m_gameOptions->getMinTimerPeriod_ms();
+}
+
+
+int GameManager::getMaxTimerPeriod_ms(void) const
+{
+  m_gameOptions->getMaxTimerPeriod_ms();
+}
+
+
+int GameManager::getMinSquareSize(void) const
+{
+  m_gameOptions->getMinSquareSize();
+}
+
+
+int GameManager::getMaxSquareSize(void) const
+{
+  m_gameOptions->getMaxSquareSize();
+}
+
+
+int GameManager::getMinSquareSpacing(void) const
+{
+  m_gameOptions->getMinSquareSpacing();
+}
+
+
+int GameManager::getMaxSquareSpacing(void) const
+{
+  m_gameOptions->getMaxSquareSpacing();
+}
+
+
 void GameManager::setNumOfRows(int numOfRows)
 {
   m_gameOptions->setNumOfRows(numOfRows);

@@ -118,3 +118,51 @@ int GameOptions::getDeadOrAliveUpperThreshold(void) const
 {
   return m_DeadOrAliveUpperThreshold;
 }
+
+
+int GameOptions::getMinNumOfRowsAndCols(void) const
+{
+  return m_minNumOfRowsAndCols;
+}
+
+
+int GameOptions::getMaxNumOfRowsAndCols(void) const
+{
+  return m_maxNumOfRowsAndCols;
+}
+
+
+int GameOptions::getMinTimerPeriod_ms(void) const
+{
+  return m_minTimerPeriod_ms;
+}
+
+
+int GameOptions::getMaxTimerPeriod_ms(void) const
+{
+  return m_maxTimerPeriod_ms;
+}
+
+
+int GameOptions::getMinSquareSize(void) const
+{
+  return m_minSquareSize;
+}
+
+
+int GameOptions::getMaxSquareSize(void) const
+{
+  return m_maxSquareSize;
+}
+
+
+int GameOptions::getMinSquareSpacing(void) const
+{
+  return m_minSquareSpacing;
+}
+
+
+int GameOptions::getMaxSquareSpacing(void) const
+{
+  return m_maxSquareSpacing;
+}

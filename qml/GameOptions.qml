@@ -15,6 +15,7 @@ Grid
   {
     height: textBoxHeight
     width:  textBoxWidth
+    validator: IntValidator{ bottom: gameManager.minNumOfRowsAndCols; top: gameManager.maxNumOfRowsAndCols; }
     placeholderText: "Rows: " + gameManager.numOfRows.toString()
     onEditingFinished: function()
     {
@@ -33,6 +34,7 @@ Grid
   {
     height: textBoxHeight
     width:  textBoxWidth
+    validator: IntValidator{ bottom: gameManager.minNumOfRowsAndCols; top: gameManager.maxNumOfRowsAndCols; }
     placeholderText: "Columns: " + gameManager.numOfCols.toString()
     onEditingFinished: function()
     {
@@ -51,6 +53,7 @@ Grid
   {
     height: textBoxHeight
     width:  textBoxWidth
+    validator: IntValidator{ bottom: gameManager.minSquareSize; top: gameManager.maxSquareSize; }
     placeholderText: "Square Size: " + gameManager.squareSize.toString()
     onEditingFinished: function()
     {
@@ -69,6 +72,7 @@ Grid
   {
     height: textBoxHeight
     width:  textBoxWidth
+    validator: IntValidator{ bottom: gameManager.minTimerPeriod_ms; top: gameManager.maxTimerPeriod_ms; }
     placeholderText: "Period: " + gameManager.timerPeriod.toString() + " ms"
     onEditingFinished: function()
     {
@@ -87,6 +91,7 @@ Grid
   {
     height: textBoxHeight
     width:  textBoxWidth
+    validator: IntValidator{ bottom: gameManager.minSquareSpacing; top: gameManager.maxSquareSpacing; }
     placeholderText: "Spacing: " + gameManager.squareSpacing.toString() + " px"
     onEditingFinished: function()
     {

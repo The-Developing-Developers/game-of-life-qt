@@ -63,7 +63,6 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 # To Do List
 
-- Consider using the `Validator` feature of the `TextField` to limit the values of the Game Options instead of clamping manually in the setter methods in the backend.
 - Fix the centering of the Game Board when the user selects a shape through the Combo Box.
 - Find a better way to filter the indices that should do nothing in `GameManager::setCurrentShape`. `GameManager` should know nothing about the numeric indices of the separators, and yet it should still be able to do nothing if a separator is selected. Maybe perform a check in `GameBoard.qml` before assigning `gameManager.currentShapeIndex` in `ComboBox`?
 - Try changing some `Q_INVOKABLE`s (the ones which are used in a `Q_PROPERTY`) to private slots, to enforce encapsulation.
@@ -79,6 +78,7 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 - Consider if GameStateMachine and other classes should be singletons
 - Consider adding Doxygen documentation, using Graphviz to generate the structure of the C++ classes.
 - Consider adding the executable for download (using [CPack](https://cmake.org/cmake/help/book/mastering-cmake/chapter/Packaging%20With%20CPack.html)?).
+- ~~Consider using the `Validator` feature of the `TextField` to limit the values of the Game Options instead of clamping manually in the setter methods in the backend.~~
 - ~~- Implement an upper limit for the Game Options (i.e., the user cannot request a Game Board with millions of rows or columns).~~
 - ~~There is a small bug when the user turns on some cells, resizes the board using the combo box, goes back to the Welcome Screen, enlarges the Game Board, and starts the game again: some cells that were previously ON are now OFF.~~
 - ~~Consider using an asymmetrical fading effect (i.e. only a fade-in, not a fade-out) for better visibility of the toggling of the cells across generations while using fast game speed.~~

@@ -20,6 +20,14 @@ public:
   int   getSquareSpacing            (void) const;
   int   getDeadOrAliveLowerThreshold(void) const;
   int   getDeadOrAliveUpperThreshold(void) const;
+  int   getMinNumOfRowsAndCols      (void) const;
+  int   getMaxNumOfRowsAndCols      (void) const;
+  int   getMinTimerPeriod_ms        (void) const;
+  int   getMaxTimerPeriod_ms        (void) const;
+  int   getMinSquareSize            (void) const;
+  int   getMaxSquareSize            (void) const;
+  int   getMinSquareSpacing         (void) const;
+  int   getMaxSquareSpacing         (void) const;
 
 private:
 
