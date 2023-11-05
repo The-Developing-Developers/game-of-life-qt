@@ -14,10 +14,31 @@ TextField
   placeholderTextColor: "grey"
   color: "black"
 
+  property bool acceptableInputOrEmpty: acceptableInput || !text
+
   background: Rectangle
   {
     radius: 5
-    color:        parent.activeFocus  ? "white" : "lightgrey"
+    color:
+    {
+      if (parent.activeFocus)
+      {
+        if(acceptableInputOrEmpty)
+        {
+          return "white";
+        }
+      }
+      else
+      {
+        if(acceptableInputOrEmpty)
+        {
+          return "lightgrey";
+        }
+      }
+
+      return "red";
+    }
+
     border.color: parent.activeFocus  ? "teal"  : "black"
     border.width: parent.activeFocus  ? 3 : 1
   }
