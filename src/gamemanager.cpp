@@ -36,7 +36,7 @@ void GameManager::setCurrentPattern(int index)
   setNumOfCols(m_patterns->getCurrentPatternNumOfCols());
   resizeGameBoard();
   m_gameBoard->setCurrentPattern(m_patterns->getCurrentPatternMatrix());
-  boardChanged();
+  emit boardChanged();
 }
 
 
@@ -68,49 +68,49 @@ const QStringList GameManager::getListOfPatterns(void) const
 
 int GameManager::getMinNumOfRowsAndCols(void) const
 {
-  m_gameOptions->getMinNumOfRowsAndCols();
+  return m_gameOptions->getMinNumOfRowsAndCols();
 }
 
 
 int GameManager::getMaxNumOfRowsAndCols(void) const
 {
-  m_gameOptions->getMaxNumOfRowsAndCols();
+  return m_gameOptions->getMaxNumOfRowsAndCols();
 }
 
 
 int GameManager::getMinTimerPeriod_ms(void) const
 {
-  m_gameOptions->getMinTimerPeriod_ms();
+  return m_gameOptions->getMinTimerPeriod_ms();
 }
 
 
 int GameManager::getMaxTimerPeriod_ms(void) const
 {
-  m_gameOptions->getMaxTimerPeriod_ms();
+  return m_gameOptions->getMaxTimerPeriod_ms();
 }
 
 
 int GameManager::getMinSquareSize(void) const
 {
-  m_gameOptions->getMinSquareSize();
+  return m_gameOptions->getMinSquareSize();
 }
 
 
 int GameManager::getMaxSquareSize(void) const
 {
-  m_gameOptions->getMaxSquareSize();
+  return m_gameOptions->getMaxSquareSize();
 }
 
 
 int GameManager::getMinSquareSpacing(void) const
 {
-  m_gameOptions->getMinSquareSpacing();
+  return m_gameOptions->getMinSquareSpacing();
 }
 
 
 int GameManager::getMaxSquareSpacing(void) const
 {
-  m_gameOptions->getMaxSquareSpacing();
+  return m_gameOptions->getMaxSquareSpacing();
 }
 
 
@@ -118,7 +118,7 @@ void GameManager::setNumOfRows(int numOfRows)
 {
   m_gameOptions->setNumOfRows(numOfRows);
   resizeGameBoard();
-  numOfRowsChanged(numOfRows);
+  emit numOfRowsChanged(numOfRows);
 }
 
 
@@ -126,28 +126,28 @@ void GameManager::setNumOfCols(int numOfCols)
 {
   m_gameOptions->setNumOfCols(numOfCols);
   resizeGameBoard();
-  numOfColsChanged(numOfCols);
+  emit numOfColsChanged(numOfCols);
 }
 
 
 void GameManager::setTimerPeriod(int timerPeriod_ms)
 {
   m_gameOptions->setTimerPeriod(timerPeriod_ms);
-  timerPeriodChanged(timerPeriod_ms);
+  emit timerPeriodChanged(timerPeriod_ms);
 }
 
 
 void GameManager::setSquareSize(int squareSize)
 {
   m_gameOptions->setSquareSize(squareSize);
-  squareSizeChanged(squareSize);
+  emit squareSizeChanged(squareSize);
 }
 
 
 void GameManager::setSquareSpacing(int squareSpacing)
 {
   m_gameOptions->setSquareSpacing(squareSpacing);
-  squareSpacingChanged(squareSpacing);
+  emit squareSpacingChanged(squareSpacing);
 }
 
 
