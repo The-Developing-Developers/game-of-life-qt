@@ -33,19 +33,19 @@ ScrollView
 
       onPressed: function(mouse)
       {
-        if (timer.running === false)
+        if (! timer.running)
           gameManager.backgroundInteracted(mouse.x, mouse.y) // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
       }
 
       onPositionChanged: function(mouse)
       {
-        if (timer.running === false)
+        if (! timer.running)
           gameManager.backgroundInteracted(mouse.x, mouse.y) // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
       }
 
       onReleased: function()
       {
-        if (timer.running === false)
+        if (! timer.running)
           gameManager.backgroundReleased() // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
       }
     }
