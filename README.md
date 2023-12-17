@@ -64,6 +64,7 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 # To Do List
 
 - A pop-up selector of shapes has been implemented in the Game Board. However, we could not find a way to directly connect `gameManager.listOfPatterns` to the `ShapesModel`, unlike the `ComboBox` in `GameBoard.qml`, which accepts `gameManager.listOfPatterns` as a `model` without any issues. Therefore, a dedicated model has been created in QML, `ShapesModel.qml`. This solutions works correctly, but it duplicates the maintenance of the list of shapes, that now are defined both in C++ (in `patterns.hpp`). There should be a way to associate a simple `QStringList` as a model of a `ListView`.
+- The name of the `Patterns::setPatternIndex` method is poorly chosen, because it does much more than setting the current pattern's index. Consider changing the name, and even refactoring the whole function, maybe splitting it into smaller functions.
 - Fix the centering of the Game Board when the user selects a shape through the Combo Box.
 - Find a better way to filter the indices that should do nothing in `GameManager::setCurrentShape`. `GameManager` should know nothing about the numeric indices of the separators, and yet it should still be able to do nothing if a separator is selected. Maybe perform a check in `GameBoard.qml` before assigning `gameManager.currentShapeIndex` in `ComboBox`?
 - Try changing some `Q_INVOKABLE`s (the ones which are used in a `Q_PROPERTY`) to private slots, to enforce encapsulation.

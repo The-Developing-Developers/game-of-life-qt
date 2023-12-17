@@ -17,6 +17,7 @@ Patterns::Patterns(void)
                                     << glider)
 {;}
 
+// TODO: the name of this method is poorly chosen.
 void Patterns::setPatternIndex(int index)
 {
   m_currentIndex = index;
