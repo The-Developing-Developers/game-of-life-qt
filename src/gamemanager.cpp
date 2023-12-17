@@ -5,7 +5,7 @@ GameManager::GameManager(QObject *parent)
   : QObject           (parent)
   , m_gameOptions     (new GameOptions)
   , m_gameBoard       (new GameBoard(*this))
-  , m_patterns          (new Patterns)
+  , m_patterns        (new Patterns)
   , m_isAnimationAllowed(true)
 {;}
 

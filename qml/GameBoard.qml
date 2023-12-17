@@ -52,7 +52,7 @@ Item
 
       anchors.horizontalCenter: buttons.horizontalCenter
 
-      width:        200
+      width:        250
       pixelSize_a:  30
       text_a:       "Start Game"
 
@@ -89,7 +89,7 @@ Item
     {
       id: otherButtons
 
-      spacing: 100
+      spacing: 50
 
       CustomButton
       {
@@ -112,12 +112,27 @@ Item
 
         width:        250
         pixelSize_a:  24
-        text_a: "Go back to options"
+        text_a: "Go Back To Options"
         enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
 
         onClicked: function()
         {
           onClicked: main_root.isGameActive = false
+        }
+      }
+
+      CustomButton
+      {
+        id: shapeSelectorPopupButton
+
+        width:        250
+        pixelSize_a:  24
+        text_a: "Select Shape"
+        enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
+
+        onClicked: function()
+        {
+          shapeSelectorPopup.open()
         }
       }
     } // Row
@@ -134,11 +149,26 @@ Item
     id: popup
   }
 
+  ShapeSelectorPopup
+  {
+    id: shapeSelectorPopup
+  }
+
   Connections
   {
     target: popup
 
     function onYesClicked() { gameManager.clearBoard(); }
+  }
+
+  Connections
+  {
+    target: shapeSelectorPopup
+
+    function onYesClicked()
+    {
+      gameManager.currentPatternIndex = shapeSelectorPopup.currentIndex_a
+    }
   }
 
   Timer
