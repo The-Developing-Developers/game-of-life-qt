@@ -24,7 +24,7 @@ public:
   void clearBoard           (void);
   void unlockToggling       (void);
   void resizeGameBoard      (void);
-  void setCurrentPattern    (const QVector<QVector<bool>>);
+  void setCurrentPattern    (const QVector<QVector<bool>>& newPattern);
   void toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY);
 
 private:

@@ -176,8 +176,8 @@ void GameBoard::resizeGameBoard(void)
   }
 }
 
-// TODO: make parameter a reference?
-void GameBoard::setCurrentPattern(const QVector<QVector<bool>> newPattern)
+
+void GameBoard::setCurrentPattern(const QVector<QVector<bool>>& newPattern)
 {
   const int numOfRows = m_gameOptions.getNumOfRows();
   const int numOfCols = m_gameOptions.getNumOfCols();
