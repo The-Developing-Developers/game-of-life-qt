@@ -50,12 +50,12 @@ Popup
             id: wrapper
             x: list.spacing // anchors here don't work
             width: rect.width - list.spacing * 2 // width is exact for centering
-            height: contactInfo.height
+            height: contactInfo.height // TODO: change `contactInfo` to something meaningful
             color: ListView.isCurrentItem ? "yellow" : "red"
 
             Text // Formats the text from `ShapesModel.qml`
             {
-              id: contactInfo
+              id: contactInfo // TODO: change `contactInfo` to something meaningful
               text: model.name
               color: wrapper.ListView.isCurrentItem ? "red" : "white"
               font.pointSize: 20

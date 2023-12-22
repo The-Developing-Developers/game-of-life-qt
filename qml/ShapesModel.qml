@@ -4,7 +4,7 @@ ListModel
 {
   ListElement
   {
-    name: "--- Still Lifes ---";
+    name: "--- Still Lifes ---"; // TODO: consider using another role for the separators
   }
 
   ListElement
@@ -34,7 +34,7 @@ ListModel
 
   ListElement
   {
-    name: "--- Oscillators ---";
+    name: "--- Oscillators ---"; // TODO: consider using another role for the separators
   }
 
   ListElement
@@ -64,7 +64,7 @@ ListModel
 
   ListElement
   {
-    name: "--- Spaceships ---";
+    name: "--- Spaceships ---"; // TODO: consider using another role for the separators
   }
 
   ListElement
