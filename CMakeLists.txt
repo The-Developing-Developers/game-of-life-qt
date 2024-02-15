@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(GameOfLife VERSION 1.0 LANGUAGES CXX)
+project(gameOfLife VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTORCC ON)
@@ -16,7 +16,7 @@ qt_add_executable(${PROJECT_NAME}
 )
 
 qt_add_qml_module(${PROJECT_NAME}
-  URI GameOfLife
+  URI gameOfLifeUri
   VERSION 1.0
   QML_FILES
     qml/CustomButton.qml
