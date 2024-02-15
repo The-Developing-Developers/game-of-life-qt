@@ -2,7 +2,7 @@
   "configurations":
   [
     {
-      "name": "GS Qt Current Version",
+      "name": "GS Qt Current Version Windows",
       "includePath":
       [
         "${workspaceFolder}/src",
@@ -18,6 +18,24 @@
       "cStandard": "c17",
       "cppStandard": "c++17",
       "intelliSenseMode": "windows-gcc-x64"
+    },
+
+    {
+      "name": "GS Qt Current Version Linux",
+      "includePath":
+      [
+        "${workspaceFolder}/src"
+      ],
+      "defines":
+      [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE"
+      ],
+      "compilerPath": "/usr/bin/g++",
+      "cStandard": "c17",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "linux-gcc-x64"
     },
 
     {
