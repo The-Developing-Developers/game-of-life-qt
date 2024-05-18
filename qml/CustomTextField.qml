@@ -7,7 +7,6 @@ TextField
   width:  160
   height: 50
 
-  focus: true
   font.pointSize: 14
   wrapMode: TextInput.Wrap
 

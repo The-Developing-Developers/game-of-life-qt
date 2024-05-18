@@ -9,7 +9,6 @@ Popup
   width:  300
   height: 300
   modal: true
-  focus: true
   closePolicy: Popup.NoAutoClose
   padding:  0
 

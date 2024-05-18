@@ -129,6 +129,7 @@ Item
         pixelSize_a:  24
         text_a: "Select Shape"
         enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
+        Keys.forwardTo: [shapeSelectorPopup.currentItem_a];
 
         onClicked: function()
         {
