@@ -20,7 +20,7 @@ Popup
 
   contentItem: Rectangle
   {
-    id: rect
+    id: popupContent
 
     color: "red"
     border.color: "blue"
@@ -31,31 +31,31 @@ Popup
     {
       id: background
 
-      anchors.centerIn: rect
+      anchors.centerIn: popupContent
       spacing: 20
 
       ListView
       {
         id: list
-        width:  600 /* rect.width */
-        height: 600 /* rect.height */
+        width:  600
+        height: 600
         spacing: 5
 
-        Component // Represents every single element of the ListView
+        Component // It is used to represent every single element of the ListView: it is used as the delegate of the ListView
         {
-          id: contactsDelegate
+          id: availableShapes
 
           Rectangle
           {
             id: wrapper
-            x: list.spacing // anchors here don't work
-            width: rect.width - list.spacing * 2 // width is exact for centering
-            height: contactInfo.height // TODO: change `contactInfo` to something meaningful
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: ListView.view.width - (popupContent.border.width * 2) // 'ListView.view.width' (instead of 'list.width') is always safe to use within a delegate, because it always refers to the 'ListView' that the delegate is currently attached to.
+            height: shapeName_string.height
             color: ListView.isCurrentItem ? "yellow" : "red"
 
             Text // Formats the text from `ShapesModel.qml`
             {
-              id: contactInfo // TODO: change `contactInfo` to something meaningful
+              id: shapeName_string
               text: model.name
               color: wrapper.ListView.isCurrentItem ? "red" : "white"
               font.pointSize: 20
@@ -71,7 +71,7 @@ Popup
 
         // model: gameManager.listOfPatterns; // Trying to use the list defined in C++ returns an error
         model: ShapesModel {} // Loads `ShapesModel.qml` (data container)
-        delegate: contactsDelegate
+        delegate: availableShapes
         focus: true
       }
 
@@ -120,5 +120,5 @@ Popup
         }
       } // id: yesNoButtons
     } // id: background
-  } // id: rect
+  } // id: popupContent
 } // id: popup
