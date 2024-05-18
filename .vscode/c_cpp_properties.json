@@ -14,7 +14,7 @@
         "UNICODE",
         "_UNICODE"
       ],
-      "compilerPath": "${env:Qt_1_INST_DIR}/Tools/mingw1120_64/bin/g++.exe",
+      "compilerPath": "${env:Qt_4_MinGW_DIR}/bin/g++.exe",
       "cStandard": "c17",
       "cppStandard": "c++17",
       "intelliSenseMode": "windows-gcc-x64"
