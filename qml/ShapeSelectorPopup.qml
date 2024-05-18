@@ -76,8 +76,7 @@ Popup
           Keys.onDownPressed:   listView.incrementCurrentIndex()
         }
 
-        // model: gameManager.listOfPatterns; // TODO: trying to use the list defined in C++ returns an error
-        model: ShapesModel {} // Loads `ShapesModel.qml` (data container)
+        model: patternsModel;
       }
 
       Text

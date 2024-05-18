@@ -20,7 +20,6 @@ qt_add_qml_module(${PROJECT_NAME}
   VERSION 1.0
   QML_FILES
     qml/CustomButton.qml
-    qml/ShapesModel.qml
     qml/WelcomeScreen.qml
     qml/GameBoard.qml
     qml/GameCell.qml

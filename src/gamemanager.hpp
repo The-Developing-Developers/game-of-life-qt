@@ -17,6 +17,8 @@ public:
   explicit GameManager(QObject *parent = nullptr);
           ~GameManager(void);
 
+  Patterns* getPatternPointerForQmlContext(void) const;
+
   Q_PROPERTY(bool         isAnimationAllowed    READ getIsAnimationAllowed  WRITE setIsAnimationAllowed NOTIFY isAnimationAllowedChanged);
   Q_PROPERTY(int          numOfRows             READ getNumOfRows           WRITE setNumOfRows          NOTIFY numOfRowsChanged);
   Q_PROPERTY(int          numOfCols             READ getNumOfCols           WRITE setNumOfCols          NOTIFY numOfColsChanged);

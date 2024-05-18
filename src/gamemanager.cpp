@@ -14,6 +14,11 @@ GameManager::~GameManager(void)
 {;}
 
 
+Patterns* GameManager::getPatternPointerForQmlContext(void) const
+{
+  return m_patterns.data();
+}
+
 void GameManager::resizeGameBoard(void)
 {
   m_gameBoard->resizeGameBoard();
