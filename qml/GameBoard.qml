@@ -52,7 +52,7 @@ Item
 
       anchors.horizontalCenter: buttons.horizontalCenter
 
-      width:        250
+      width:        230
       pixelSize_a:  30
       text_a:       "Start Game"
 
@@ -89,13 +89,13 @@ Item
     {
       id: otherButtons
 
-      spacing: 50
+      spacing: 30
 
       CustomButton
       {
         id: clearBoardButton
 
-        width:        250
+        width:        230
         pixelSize_a:  24
         text_a: "Clear Game Board"
         enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
@@ -110,7 +110,7 @@ Item
       {
         id: backToOptionsButton
 
-        width:        250
+        width:        230
         pixelSize_a:  24
         text_a: "Go Back To Options"
         enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
@@ -125,7 +125,7 @@ Item
       {
         id: shapeSelectorPopupButton
 
-        width:        250
+        width:        230
         pixelSize_a:  24
         text_a: "Select Shape"
         enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
@@ -136,13 +136,9 @@ Item
           shapeSelectorPopup.open()
         }
       }
+
     } // Row
 
-    ComboBox
-    {
-      model:        gameManager.listOfPatterns;
-      onActivated:  gameManager.currentPatternIndex = currentIndex
-    }
   } // Column
 
   WarningPopup
@@ -171,6 +167,10 @@ Item
     function onYesClicked() // called when "shapeSelectorPopup" raises "yesClicked" signal
     {
       gameManager.currentPatternIndex = shapeSelectorPopup.currentIndex_a
+
+      // Forces the `Loader` in `main_root` to reload the `gameScreen`, to redraw the `GameBoard` and make it centered in its parent object
+      main_root.resetGameBoard = true;
+      main_root.resetGameBoard = false;
     }
   }
 

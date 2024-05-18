@@ -107,7 +107,7 @@ Rectangle
       pixelSize_a:  30
       text_a:       "Start Game of Life"
 
-      onClicked: main_root.isGameActive = true
+      onClicked: main_root.isGameActive = true // Forces the `Loader` in `main_root` to load the `gameScreen`
     }
 
     CustomButton
