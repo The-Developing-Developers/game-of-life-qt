@@ -102,7 +102,7 @@ Item
 
         onClicked: function()
         {
-          popup.open()
+          warningPopup.open()
         }
       }
 
@@ -146,26 +146,28 @@ Item
 
   WarningPopup
   {
-    id: popup
+    id: warningPopup
   }
 
   ShapeSelectorPopup
   {
     id: shapeSelectorPopup
+    width:  parent.width  * 0.50
+    height: parent.height * 0.90
   }
 
   Connections
   {
-    target: popup
+    target: warningPopup
 
-    function onYesClicked() { gameManager.clearBoard(); }
+    function onYesClicked() { gameManager.clearBoard(); }  // called when "warningPopup" raises "yesClicked" signal
   }
 
   Connections
   {
     target: shapeSelectorPopup
 
-    function onYesClicked()
+    function onYesClicked() // called when "shapeSelectorPopup" raises "yesClicked" signal
     {
       gameManager.currentPatternIndex = shapeSelectorPopup.currentIndex_a
     }
