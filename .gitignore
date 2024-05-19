@@ -95,5 +95,6 @@ Thumbs.db
 # Python byte code
 *.pyc
 
-# Miscellaneous - "!Build_Strings" aggiunto perché confligge con l'esclusione di "build" nella sezione "Qt6"
-Commit_Message.md
+# Documentation
+doc/**
+!Doxyfile
