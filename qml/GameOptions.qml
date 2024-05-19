@@ -2,6 +2,8 @@
   Instantiated by the `WelcomeScreen`. Contains the buttons and text boxes to set up the game options.
 */
 
+// TODO: Consider adding a checkmark or changing the text to green colour when a value is accepted in the Options screen.
+
 import QtQuick
 import QtQuick.Controls
 

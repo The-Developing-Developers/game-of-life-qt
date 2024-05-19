@@ -1,60 +1,60 @@
 <!-- omit in toc -->
-# Game Of Life
+# John Conway's Game Of Life
 
 - [Description](#description)
 - [Implementation](#implementation)
-- [How To Build](#how-to-build)
+- [How To Build (Windows / Linux)](#how-to-build-windows--linux)
 - [To Do List](#to-do-list)
+  - [To Do](#to-do)
+  - [Done](#done)
 
 
 # Description
 
 
-<p style="color:red;">**NOTE**: THIS DOCUMENT IS STILL WORK IN PROGRESS</p>
+**NOTE**: THIS DOCUMENT IS STILL WORK IN PROGRESS
 
 The **Game Of Life**, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine. (*from [Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)*)
 
 
 # Implementation
 
-<p style="color:red;">TO BE REVISED</p>
-
 This is a simplified sequence of events when the application is started:
 
 1. `main.cpp`:
-    - The `main` function instantiates the `Backend` class, which will be the only one that can interact with the QML front-end.
+    - The `main` function instantiates the `GameManager` class, which will be the only one that can interact with the QML front-end.
     - A QML engine, `QQmlApplicationEngine`, is created.
     - From the QML engine, a `QQmlContext` is obtained.
-    - The context is used to set the `Backend` instance as a context property of the engine. That is, from now on the `Backend` class can interact with the QML front-end, by using the `backend` keyword in any QML document (`backend` has now global visibility in QML).
+    - The context is used to set the `GameManager` instance as a context property of the engine. That is, from now on the `GameManager` class can interact with the QML front-end, by using the `gameManager` keyword in any QML document (`gameManager` has now global visibility in QML).
     - The engine loads the entry point of the QML front-end, `Main.qml`.
 2. `Main.qml`:
-    - A root container (`rootContainer`) is created. It is necessary because the `ApplicationWindow` does not have `states`.
-    - A `Loader` is created. The `Loader` will be used to dynamically load the Welcome screen first, and the Game Board second. The `Loader` is governed by the `states` of the `rootContainer`.
+     - A `Loader` is created. The `Loader` will be used to dynamically load the `WelcomeScreen` first, and the `GameBoard` second. The `Loader` is governed by the value of its `source` property, which in turn is governed by two boolean values, `isGameActive` and `resetGameBoard`.
 3. `WelcomeScreen.qml`
-    - This file is loaded by default, because it is tied to the default `state` of `rootContainer`.
+    - Welcomes the users, and also contains the game options.
     - To avoid cluttering this QML document, the game options are managed by an external QML document, `GameOptions.qml`.
 4. `GameOptions.qml`
     - Here, the user can modify the game's default properties (game options).
-    - When the user modifies a value, this is immediately communicated to the back-end via the `backend` keyword.
+    - When the user modifies a value, this is immediately communicated to the back-end via the `gameManager` keyword.
 5. `WelcomeScreen.qml`
-    - When the user clicks on the "Start Game" button, the button informs the `backend` that a state change has been requested. `backend` changes the state and emits an appropriate signal, which is in turn caught by `Main.qml`. Therefore, `Loader` can load `GameBoard.qml`.
+    - When the user clicks on the "Start Game" button, the button asserts `isGameActive`. As a consequence, this change is received by the `Loader` in `Main.qml`, which can therefore load `GameBoard.qml`.
 6. `GameBoard.qml`
-    - This QML document reads the values typed in earlier by the user, if any (otherwise, it will use the defaults, which are defined in `backend.h`)
-    - The values are used to instantiate the Game Board, first as a visual element, and then as a C++ back-end in the `Component.onCompleted` section.
+    - This QML document instantiates `CustomScrollView`, which is the actual game grid.
+    - `CustomScrollView` reads the `GameOptions` indirectly, through the `gameManager`.
     - The user can click on any dead cell on the Game Board to revive it.
     - When the user is satisfied with the selection, the evolution can start by pressing the "Start Game" button.
+    - The users can pause the simulation at any time and go back to the "game options" screen to make any desired change. When the users go back to the game screen, the game will "remember" the previous state of the simulation.
 
-Communication with the backend from QML to C++ and vice-versa is always and exclusively managed via the `backend` instance.
+Communication with the backend from QML to C++ and vice-versa is always and exclusively managed via the `gameManager` instance.
 
 
-# How To Build
+# How To Build (Windows / Linux)
 
 1. Clone this repository.
 2. Install Qt 6.5 (or later version) using the web installer. Required packages:
-    - C++ compiler (at least C++14)
-    - Qt Creator 11.0.2 (or later version)
-    - CMake 3.16 (or later version)
-    - Ninja 1.10.2 (or later version)
+  - C++ compiler (at least C++14)
+  - Qt Creator 11.0.2 (or later version)
+  - CMake 3.16 (or later version)
+  - Ninja 1.10.2 (or later version)
 3. Open Qt Creator.
 4. Open `CMakeLists.txt`.
 5. Select *Release* configuration.
@@ -63,23 +63,25 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 # To Do List
 
-- A pop-up selector of shapes has been implemented in the Game Board. However, we could not find a way to directly connect `gameManager.listOfPatterns` to the `ShapesModel`, unlike the `ComboBox` in `GameBoard.qml`, which accepts `gameManager.listOfPatterns` as a `model` without any issues. Therefore, a dedicated model has been created in QML, `ShapesModel.qml`. This solutions works correctly, but it duplicates the maintenance of the list of shapes, that now are defined both in C++ (in `patterns.hpp`). There should be a way to associate a simple `QStringList` as a model of a `ListView`.
-- The name of the `Patterns::setPatternIndex` method is poorly chosen, because it does much more than setting the current pattern's index. Consider changing the name, and even refactoring the whole function, maybe splitting it into smaller functions.
-- Fix the centering of the Game Board when the user selects a shape through the Combo Box.
-- Find a better way to filter the indices that should do nothing in `GameManager::setCurrentShape`. `GameManager` should know nothing about the numeric indices of the separators, and yet it should still be able to do nothing if a separator is selected. Maybe perform a check in `GameBoard.qml` before assigning `gameManager.currentShapeIndex` in `ComboBox`?
-- Try changing some `Q_INVOKABLE`s (the ones which are used in a `Q_PROPERTY`) to private slots, to enforce encapsulation.
-- ~~Consider using an `onEditingFinished` instead of `onAccepted` for convenience in `GameOptions.qml` for the option buttons. However, automatic focus on the "number of rows" `CustomTextField` must be removed, because going back to the Options screen triggers an undesired modification if `onEditingFinished` is used: the rows are changed to the minimum value.~~
-- Consider adding a checkmark or changing the text to green colour when a value is accepted in the Options screen.
+## To Do
+
 - Do not use a simple `bool` to manage the game state (`isGameActive` QML property). Consider using a more sophisticated system (enumeratives, or re-enabling the original FSM), in order to accommodate a potential third or fourth state in the future if the need arises.
-- Consider comparing `GameManager` to the *Mediator* pattern, and evaluate if `GameManager` can be fully transformed into a *Mediator*.
+- Consider comparing `GameManager` to the *Mediator* programming pattern, and evaluate if `GameManager` can be fully transformed into a *Mediator*.
 - Consider unifying the concept of game board square and `Cell` in the code.
 - A definitive name should be chosen for the Options / Welcome Screen.
-- Now that the FSM receives the `backend` by reference, should the FSM be directly responsible of carrying out back-end actions such as reinitialising the game board? Or is it better that the FSM just informs the `Backend` that the `Backend` has to perform a certain action, and the `Backend` actually carries out that action?
-- The automatic stop is probably inefficient, because it checks for equality between the `m_currentMatrix` and the `m_nextMatrix` at every game loop. Should a timer be used to rarify the checks?
 - Add the option ~~to enable / disable the cell animation, and~~ to set the percentage with respect to the game timer period.
-- Consider if GameStateMachine and other classes should be singletons
 - Consider adding Doxygen documentation, using Graphviz to generate the structure of the C++ classes.
 - Consider adding the executable for download (using [CPack](https://cmake.org/cmake/help/book/mastering-cmake/chapter/Packaging%20With%20CPack.html)?).
+
+## Done
+
+- ~~Consider if GameStateMachine and other classes should be singletons~~
+- ~~The automatic stop is probably inefficient, because it checks for equality between the `m_currentMatrix` and the `m_nextMatrix` at every game loop. Should a timer be used to rarify the checks?~~
+- ~~Now that the FSM receives the `gameManager` by reference, should the FSM be directly responsible of carrying out back-end actions such as reinitialising the game board? Or is it better that the FSM just informs the `GameManager` that the `GameManager` has to perform a certain action, and the `GameManager` actually carries out that action?~~
+- ~~The name of the `Patterns::setPatternIndex` method is poorly chosen, because it does much more than setting the current pattern's index. Consider changing the name, and even refactoring the whole function, maybe splitting it into smaller functions.~~
+- ~~- Fix the centering of the Game Board when the user selects a shape through the Combo Box.~~
+~~- A pop-up selector of shapes has been implemented in the Game Board. However, we could not find a way to directly connect `gameManager.listOfPatterns` to the `ShapesModel`, unlike the `ComboBox` in `GameBoard.qml`, which accepts `gameManager.listOfPatterns` as a `model` without any issues. Therefore, a dedicated model has been created in QML, `ShapesModel.qml`. This solutions works correctly, but it duplicates the maintenance of the list of shapes, that now are defined both in C++ (in `patterns.hpp`). There should be a way to associate a simple `QStringList` as a model of a `ListView`.~~
+- ~~Consider using an `onEditingFinished` instead of `onAccepted` for convenience in `GameOptions.qml` for the option buttons. However, automatic focus on the "number of rows" `CustomTextField` must be removed, because going back to the Options screen triggers an undesired modification if `onEditingFinished` is used: the rows are changed to the minimum value.~~
 - ~~Consider using the `Validator` feature of the `TextField` to limit the values of the Game Options instead of clamping manually in the setter methods in the backend.~~
 - ~~- Implement an upper limit for the Game Options (i.e., the user cannot request a Game Board with millions of rows or columns).~~
 - ~~There is a small bug when the user turns on some cells, resizes the board using the combo box, goes back to the Welcome Screen, enlarges the Game Board, and starts the game again: some cells that were previously ON are now OFF.~~

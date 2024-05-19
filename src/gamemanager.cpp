@@ -57,7 +57,7 @@ int GameManager::getPatternIndex(void) const
  **/
 void GameManager::setCurrentPattern(int index)
 {
-  if (index == 0 || index == 6 || index == 12) // TODO: maybe use enumeratives instead of integers to skip the separators in the ListView?
+  if (index == 0 || index == 6 || index == 12) // TODO: Find a better way to filter the indices that should do nothing in `GameManager::setCurrentShape`. `GameManager` should know nothing about the numeric indices of the separators, and yet it should still be able to do nothing if a separator is selected. Maybe perform a check in `GameBoard.qml` before assigning `gameManager.currentShapeIndex` in `ComboBox`? Maybe use enumeratives instead of integers to skip the separators in the `ListView`?
     return; // The user has mistakenly chosen a separator instead of a shape pattern in the ListView (i.e., do nothing)
 
   m_patterns->setPatternIndex(index);

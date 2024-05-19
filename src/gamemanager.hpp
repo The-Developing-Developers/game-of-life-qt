@@ -44,6 +44,7 @@ public:
   Q_PROPERTY(int          maxSquareSpacing      READ getMaxSquareSpacing    CONSTANT);
   // Q_PROPERTY(QStringList  listOfPatterns        READ getListOfPatterns      CONSTANT); // TODO: unused --> remove
 
+  // TODO: Try changing some `Q_INVOKABLE`s (the ones which are used in a `Q_PROPERTY`) to private slots, to enforce encapsulation.
   // These methods will be made available in QML
   Q_INVOKABLE void              clearBoard            (void);
   Q_INVOKABLE void              recalculateBoard      (void);

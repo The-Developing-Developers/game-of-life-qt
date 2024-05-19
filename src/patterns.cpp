@@ -68,7 +68,8 @@ QHash<int, QByteArray> Patterns::roleNames() const
 
 /**
  * @brief TODO: the name of this method is poorly chosen, because it also generates the new pattern matrix that will be read by the
- * 'GameManager' with the 'getCurrentPatternMatrix' method.
+ * 'GameManager' with the 'getCurrentPatternMatrix' method. Consider changing the name, and even refactoring the whole function, maybe by
+ * splitting it into smaller functions.
  *
  * @param index Index of the shape pattern chosen by the user in the QML front-end.
  **/

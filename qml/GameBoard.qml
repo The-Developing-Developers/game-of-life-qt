@@ -11,7 +11,7 @@ Item
 
   anchors.fill: parent
 
-  CustomScrollView
+  CustomScrollView // The actual game grid
   {
     id: scrollView
 
