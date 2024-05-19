@@ -1,3 +1,7 @@
+/**
+  Instantiated by the `WelcomeScreen`. Contains the buttons and text boxes to set up the game options.
+*/
+
 import QtQuick
 import QtQuick.Controls
 
@@ -21,7 +25,7 @@ Grid
     {
       let parsedNumber = parseInt(text);
       if (Number.isNaN(parsedNumber))
-      {;} // Avoid overwriting the previous value with an illegal value (has the user clicked elsewhere without entering any input?)
+      {;} // Avoids overwriting the previous value with an illegal value (for example, has the user clicked elsewhere without entering any input?)
       else
       {
         gameManager.numOfRows = parsedNumber;
@@ -40,7 +44,7 @@ Grid
     {
       let parsedNumber = parseInt(text);
       if (Number.isNaN(parsedNumber))
-      {;} // Avoid overwriting the previous value with an illegal value (has the user clicked elsewhere without entering any input?)
+      {;} // Avoids overwriting the previous value with an illegal value (for example, has the user clicked elsewhere without entering any input?)
       else
       {
         gameManager.numOfCols = parseInt(text);
@@ -59,7 +63,7 @@ Grid
     {
       let parsedNumber = parseInt(text);
       if (Number.isNaN(parsedNumber))
-      {;} // Avoid overwriting the previous value with an illegal value (has the user clicked elsewhere without entering any input?)
+      {;} // Avoids overwriting the previous value with an illegal value (for example, has the user clicked elsewhere without entering any input?)
       else
       {
         gameManager.squareSize = parseInt(text);
@@ -78,7 +82,7 @@ Grid
     {
       let parsedNumber = parseInt(text);
       if (Number.isNaN(parsedNumber))
-      {;} // Avoid overwriting the previous value with an illegal value (has the user clicked elsewhere without entering any input?)
+      {;} // Avoids overwriting the previous value with an illegal value (for example, has the user clicked elsewhere without entering any input?)
       else
       {
         gameManager.timerPeriod = parseInt(text);
@@ -97,7 +101,7 @@ Grid
     {
       let parsedNumber = parseInt(text);
       if (Number.isNaN(parsedNumber))
-      {;} // Avoid overwriting the previous value with an illegal value (has the user clicked elsewhere without entering any input?)
+      {;} // Avoids overwriting the previous value with an illegal value (for example, has the user clicked elsewhere without entering any input?)
       else
       {
         gameManager.squareSpacing = parseInt(text);

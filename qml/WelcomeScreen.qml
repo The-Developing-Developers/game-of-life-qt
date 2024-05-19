@@ -1,3 +1,7 @@
+/**
+  One of the two QML documents loaded by the `Loader`. Greets the users and allows them to set up the game options.
+*/
+
 import QtQuick
 import QtQuick.Controls
 
@@ -5,7 +9,7 @@ Rectangle
 {
   id: welcomeScreen_root
 
-  property bool startGame: false
+  // property bool startGame: false // TODO: unused
   anchors.centerIn: parent
   gradient: Gradient
   {
@@ -32,6 +36,7 @@ Rectangle
     color: "#205050"
   }
 
+  // Game options graphical elements
   Rectangle
   {
     id: optionsBackground

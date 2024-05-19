@@ -1,3 +1,7 @@
+/**
+  One of the two QML documents loaded by the `Loader`. It represents the actual game screen, where the users can interact with the game board.
+*/
+
 import QtQuick
 import QtQuick.Controls
 
@@ -22,6 +26,8 @@ Item
       bottomMargin: 20
     }
   }
+
+  // Buttons and game controls
 
   Rectangle
   {
@@ -174,6 +180,8 @@ Item
     }
   }
 
+  // Game timer: when it expires, the game board is recalculated, beacuse a new cycle of the Game of Life begins. It can be started and
+  // stopped by external factors, by using the dedicated `toggleTimer` function.
   Timer
   {
     id: timer

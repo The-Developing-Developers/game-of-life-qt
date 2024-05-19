@@ -1,3 +1,7 @@
+/**
+  Instantiated by the `GameBoard`. It is a personalised `ScrollView` used to represent the actual game grid.
+*/
+
 import QtQuick
 import QtQuick.Controls
 
@@ -23,6 +27,8 @@ ScrollView
     color: "lightGrey"
     border.width: 2
 
+    // The mouse area fills the whole game grid instead of being defined for each single cell. This allows the user to click and drag the
+    // mouse to quickly and conveniently toggle multiple cells with a single mouse action (see `GameManager::backgroundInteracted`).
     MouseArea
     {
       id: backMouseArea
@@ -78,7 +84,7 @@ ScrollView
     {
       model: scrollView.numOfSquares
 
-      GameCell
+      GameCell // TODO: use the `delegate` keyword here for clarity's sake
       {
         width:  scrollView.squareSide
         height: scrollView.squareSide
