@@ -1,3 +1,7 @@
+/**
+  Instantiated by the `GameBoard`. It is a personalised `Popup` used to warn the user that the board is going to be reset.
+*/
+
 import QtQuick
 import QtQuick.Controls
 
@@ -15,12 +19,12 @@ Popup
   Overlay.modal: Rectangle
   {
     // color: "#aacfdbe7"
-    color: "#AAAAAAAA" // Background is greyed out when Popup is active
+    color: "#AAAAAAAA" // Background is greyed out when Popup is active.
   }
 
-  signal yesClicked() // Raised when the user clicks the "Yes" button in 'yesButton'
+  signal yesClicked() // Raised when the user clicks the "Yes" button in 'yesButton'.
 
-  contentItem: Rectangle
+  contentItem: Rectangle // The actual content of the `Popup`.
   {
     id: rect
 
@@ -79,7 +83,11 @@ Popup
             warningPopup.close()
           }
         }
+
       } // id: yesNoButtons
+
     } // id: background
+
   } // id: rect
+
 } // id: warningPopup

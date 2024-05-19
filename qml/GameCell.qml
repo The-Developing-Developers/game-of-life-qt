@@ -1,3 +1,8 @@
+/**
+  Instantiated by the `CustomScrollView`. It graphically represents an individual cell in the game grid. Uses `ColorAnimation`s to animate
+  the transition between the "dead" colour and the "alive" colour.
+*/
+
 import QtQuick
 import QtQuick.Controls
 
@@ -7,7 +12,7 @@ Rectangle
 
   border.width: 1
   property bool isAlive: {isAlive = gameManager.getCellStatus(index)}
-  color: {color = isAlive === true ? aliveColour : deadColour} // Assignation without binding. Useful for ColorAnimation
+  color: {color = isAlive === true ? aliveColour : deadColour} // Assignation without binding. Useful for `ColorAnimation`
 
   readonly property double aliveDurationFactor: 0.25 // Arbitrarily chosen
   readonly property double  deadDurationFactor: 0.75 // Arbitrarily chosen
@@ -39,7 +44,8 @@ Rectangle
   Connections
   {
     target: gameManager
-    function onBoardChanged()
+
+    function onBoardChanged() // This slot reacts to the `boardChanged` signal raised by the `gameManager`.
     {
       changeCellColour()
     }
@@ -51,17 +57,18 @@ Rectangle
 
     if (cell.isAlive)
     {
-      if (timer.running && gameManager.isAnimationAllowed)
+      if (timer.running && gameManager.isAnimationAllowed) // TODO: encapsulate `timer.running` into a boolean value for ease of use?
         animationCellAlive.restart(); // Use the animation only when the game is running
       else
         cell.color = aliveColour
     }
     else
     {
-      if (timer.running && gameManager.isAnimationAllowed)
+      if (timer.running && gameManager.isAnimationAllowed) // TODO: encapsulate `timer.running` into a boolean value for ease of use?
         animationCellDead.restart(); // Use the animation only when the game is running
       else
         cell.color = deadColour
     }
   }
+
 } // id: cell

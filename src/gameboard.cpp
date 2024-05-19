@@ -4,7 +4,8 @@
 #include "gamemanager.hpp"
 
 GameBoard::GameBoard(GameManager& gameManager)
-  : m_gameManager(gameManager), m_gameOptions(m_gameManager.getGameOptions())
+  : m_gameManager(gameManager)
+  , m_gameOptions(m_gameManager.getGameOptions())
 {
   const int numOfRows = m_gameOptions.getNumOfRows();
   const int numOfCols = m_gameOptions.getNumOfCols();
@@ -26,21 +27,31 @@ GameBoard::~GameBoard(void)
 {;}
 
 
-int GameBoard::getIndexFromRowCol(int row, int col)
-{
-  return row * m_gameOptions.getNumOfCols() + col;
-}
+// // TODO: unused
+// int GameBoard::getIndexFromRowCol(int row, int col)
+// {
+//   return row * m_gameOptions.getNumOfCols() + col;
+// }
 
 
+/**
+ * @brief Receives an index from the QML front-end and returns the correspondent position inside the current game matrix.
+ *
+ * @param cellIndex index coming from the QML front-end, when it needs to access a certain cell in the game grid.
+ * @return `std::pair<int, int>` The index is transformed into a pair of `int` values, representing the row and column of the current game
+ * matrix respectively.
+ **/
 std::pair<int, int> GameBoard::getRowColFromIndex(int cellIndex)
 {
   int row = 0;
   int col = 0;
 
+  // If `cellIndex` is 0, the loop is skipped
   for (int i = 0; i != cellIndex; ++i)
   {
     ++col;
 
+    // Last element of the column has been encountered: go to the next row and reset the column number
     if (col == m_gameOptions.getNumOfCols())
     {
       ++row;
@@ -82,8 +93,8 @@ void GameBoard::recalculateBoard(void)
 
 
 /**
- * @brief For each cell in a given matrix, checks the cell's neighbours and
- * applies Game Of Life's rules. Also, decides the fate of the examined cell.
+ * @brief For each cell in a given matrix, checks the cell's neighbours and applies Game Of Life's rules. Also, decides the fate of the
+ * examined cell.
  **/
 void GameBoard::calculateNextMatrix(void)
 {
@@ -98,6 +109,11 @@ void GameBoard::calculateNextMatrix(void)
 }
 
 
+/**
+ * @brief If the newly calculated matrix is actually different from the previous one, the new one replaces the old one and the game cycle
+ * continues. Otherwise, it means that the game has come to a halt (for example because all the cells have died, or an equilibrium point has
+ * been reached), and the game timer must be stopped.
+ **/
 void GameBoard::overwriteCurrentMatrixWithNextMatrix(void)
 {
   if (m_currMatrix != m_nextMatrix)
@@ -108,15 +124,16 @@ void GameBoard::overwriteCurrentMatrixWithNextMatrix(void)
 
 
 /**
- * @brief Receives mouse position (x, y) from the front-end. Calculates every cell's position on the
- * game board, and toggles whichever cell the mouse is currently interacting with. Until mouse exits
- * a cell, locks that cell to prevent rapid-fire toggling.
+ * @brief Receives mouse position (x, y) from the front-end. Calculates every cell's position on the game board, and toggles whichever cell
+ * the mouse is currently interacting with. Until mouse exits a cell, locks that cell to prevent rapid-fire toggling.
  *
  * @param mouseX mouse x position on the game board (coming from the front-end)
  * @param mouseY mouse y position on the game board (coming from the front-end)
  **/
 void GameBoard::toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY)
 {
+  // TODO: instead of constantly recalculating the position of every single cell, consider making this calculation whenever the game grid is
+  // created or resized, store the newly calculated positions, and then read the positions from the storage.
   for (int row = 0; row != m_gameOptions.getNumOfRows(); ++row)
   {
     for (int col = 0; col != m_gameOptions.getNumOfCols(); ++col)
@@ -146,6 +163,9 @@ void GameBoard::toggleCellStatusBecauseOfMouseInteraction(int mouseX, int mouseY
 }
 
 
+// TODO: since this function unlocks the toggling for all of the cells in the board, consider renaming it to something like
+// `unlockAllCells`, because the homonymous function in `Cell` (`Cell::unlockToggling`) only unlocks a single cell, and sharing the same
+// name could generate confusion.
 void GameBoard::unlockToggling(void)
 {
   for (int row = 0; row != m_gameOptions.getNumOfRows(); ++row)
@@ -160,9 +180,9 @@ void GameBoard::unlockToggling(void)
 
 void GameBoard::resizeGameBoard(void)
 {
-  // Here, the number of rows and cols has just been changed by the user in the options screen
-  int newNumOfRows = m_gameOptions.getNumOfRows();
-  int newNumOfCols = m_gameOptions.getNumOfCols();
+  // Here, the number of rows and cols has just been changed by the user in the options screen, so we can safely read from `m_gameOptions`.
+  int newNumOfRows = m_gameOptions.getNumOfRows(); // TODO: add `const`
+  int newNumOfCols = m_gameOptions.getNumOfCols(); // TODO: add `const`
 
   // Resize rows
   m_currMatrix.resize(newNumOfRows);
@@ -203,6 +223,14 @@ void GameBoard::setCurrentPattern(const QVector<QVector<bool>>& newPattern)
 }
 
 
+/**
+ * @brief Used to apply the rules of the Game of Life. A cell becomes dead or alive in the next generation based on the number of dead or
+ * alive neighbouring cells.
+ *
+ * @param row The row number of the currently analysed cell.
+ * @param col The column number of the currently analysed cell.
+ * @return `int` The total number of alive neighbours for the currently analysed cell.
+ **/
 int GameBoard::countNumOfAliveNeighbours(int row, int col)
 {
   int aliveNeighboursCounter = 0;
@@ -236,7 +264,7 @@ int GameBoard::countNumOfAliveNeighbours(int row, int col)
 
 
 /**
- * @brief Applying Game of Life's rules
+ * @brief Applies Game of Life's rules for a single cell, based on the number of dead or alive neighbours.
  **/
 void GameBoard::applyGameRules(int row, int col, int aliveNeighboursCounter)
 {

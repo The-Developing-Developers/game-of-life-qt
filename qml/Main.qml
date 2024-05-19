@@ -1,3 +1,7 @@
+/**
+  The entry point of the QML front-end.
+*/
+
 import QtQuick
 import QtQuick.Controls
 
@@ -16,6 +20,7 @@ ApplicationWindow
            property bool    isGameActive:   false
            property bool    resetGameBoard: false
 
+  // Dynamically loads QML documents. Here, it is used to load either the welcome screen (options page) or the actual game screen.
   Loader
   {
     id: loader

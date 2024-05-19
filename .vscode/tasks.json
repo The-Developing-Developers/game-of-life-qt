@@ -20,12 +20,12 @@
 			"type": "shell",
 			"label": "Test QML file",
 			"dependsOn": [ "TrimTrailingWhitespace", "SaveAllFiles" ],
-			"command": "${env:Qt_BIN_DIR}\\qml.exe",
+			"command": "${env:Qt_3_BIN_DIR}/qml.exe",
 			"args": [ "${file}" ],
 			"options": {"cwd": "${fileDirname}"},
 			"group": "none",
 			"problemMatcher": [],
-			"detail": "Esegue \"qml.exe\" per testare il file QML attualmente aperto in VSC"
+			"detail": "Executes \"qml.exe\" to test the QML file currently open in VSC"
 		}
 	]
 }
