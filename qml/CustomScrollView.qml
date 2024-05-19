@@ -5,14 +5,12 @@ ScrollView
 {
   id: scrollView
 
-  property int squareSpacing: gameManager.getSquareSpacing()
-  property int squareSide:    gameManager.getSquareSize()
-  property int rows:          gameManager.getNumOfRows()
-  property int cols:          gameManager.getNumOfCols()
-  property int numOfSquares:  rows * cols
+  property int squareSpacing: gameManager.squareSpacing
+  property int squareSide:    gameManager.squareSize
+  property int numOfSquares:  gameManager.numOfRows * gameManager.numOfCols
 
-  contentWidth:  squareSpacing + (squareSide + squareSpacing) * cols
-  contentHeight: squareSpacing + (squareSide + squareSpacing) * rows
+  contentWidth:  squareSpacing + (squareSide + squareSpacing) * gameManager.numOfCols
+  contentHeight: squareSpacing + (squareSide + squareSpacing) * gameManager.numOfRows
 
   onWidthChanged: function() { gridBackground.adjustGridPositioning(); }
 
@@ -35,19 +33,19 @@ ScrollView
 
       onPressed: function(mouse)
       {
-        if (timer.running === false)
+        if (! timer.running)
           gameManager.backgroundInteracted(mouse.x, mouse.y) // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
       }
 
       onPositionChanged: function(mouse)
       {
-        if (timer.running === false)
+        if (! timer.running)
           gameManager.backgroundInteracted(mouse.x, mouse.y) // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
       }
 
       onReleased: function()
       {
-        if (timer.running === false)
+        if (! timer.running)
           gameManager.backgroundReleased() // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
       }
     }
@@ -74,58 +72,17 @@ ScrollView
     }
 
     spacing: squareSpacing
-    columns: cols // size of game board does not vary when resizing the ApplicationWindow
+    columns: gameManager.numOfCols // size of game board does not vary when resizing the ApplicationWindow
 
     Repeater
     {
       model: scrollView.numOfSquares
 
-      Rectangle
+      GameCell
       {
-        id: cell
-
-        property bool isAlive: gameManager.getCellStatus(index)
-
         width:  scrollView.squareSide
         height: scrollView.squareSide
-        border.width: 1
-        color: {color = isAlive === true ? "yellow" : "black"} // Assignation without binding. Useful for ColorAnimation
-
-        ColorAnimation
-        {
-          id: animationCellAlive;
-
-          target:         cell;
-          alwaysRunToEnd: true;
-          property:       "color";
-          to:             "yellow";
-          duration:       gameManager.getTimerPeriod() * 0.75 // TODO: arbitrarily chosen. Remove hard-coding?
-        }
-
-        ColorAnimation
-        {
-          id: animationCellDead;
-
-          target:         cell;
-          alwaysRunToEnd: true;
-          property:       "color";
-          to:             "black";
-          duration:       gameManager.getTimerPeriod() * 0.75 // TODO: arbitrarily chosen. Remove hard-coding?
-        }
-
-        Connections
-        {
-          target: gameManager
-          function onBoardChanged()
-          {
-            cell.isAlive = gameManager.getCellStatus(index);
-            if (cell.isAlive)
-              animationCellAlive.restart();
-            else
-              animationCellDead.restart();
-          }
-        }
-      } // id: cell
-    } // Repeater
-  } // id: gameBoard
+      }
+    }
+  }
 } // id: scrollView

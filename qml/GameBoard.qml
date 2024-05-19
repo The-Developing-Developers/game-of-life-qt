@@ -1,10 +1,9 @@
 import QtQuick
 import QtQuick.Controls
-import GameStateEnum
 
 Item
 {
-  id: root
+  id: gameBoard_root
 
   anchors.fill: parent
 
@@ -14,9 +13,9 @@ Item
 
     anchors
     {
-      top:    root.top
-      left:   root.left
-      right:  root.right
+      top:    gameBoard_root.top
+      left:   gameBoard_root.left
+      right:  gameBoard_root.right
       bottom: buttons.top
       leftMargin:   50
       rightMargin:  50
@@ -42,7 +41,7 @@ Item
     id: buttons
 
     anchors.horizontalCenter: scrollView.horizontalCenter
-    anchors.bottom: root.bottom
+    anchors.bottom: gameBoard_root.bottom
     anchors.bottomMargin: 20
 
     spacing: 20
@@ -53,19 +52,25 @@ Item
 
       anchors.horizontalCenter: buttons.horizontalCenter
 
-      width:        200
+      width:        230
       pixelSize_a:  30
       text_a:       "Start Game"
 
-      normalColour_a:     timer.running? "#ff8800" : "#007F00"
-      hoverColour_a:      timer.running? "#ffaa00" : "#00AF00"
-      pushedColour_a:     timer.running? "#ffcc00" : "#00FF00"
-      normalTextColour_a: "white"
-      hoverTextColour_a:  "white"
+      readonly property string white:             "white"
+      readonly property string normalGreen:       "#007F00"
+      readonly property string pushedGreen:       "#00AF00"
+      readonly property string hoverGreen:        "#00FF00"
+      readonly property string normalOrange:      "#ff8800"
+      readonly property string pushedOrange:      "#ffaa00"
+      readonly property string hoverOrange:       "#ffcc00"
 
-      onClicked: toggleTimerAndChangeText()
+      normalColour_a:     timer.running ? normalOrange : normalGreen
+      hoverColour_a:      timer.running ? pushedOrange : pushedGreen
+      pushedColour_a:     timer.running ? hoverOrange  : hoverGreen
+      normalTextColour_a: white
+      hoverTextColour_a:  white
 
-      function toggleTimerAndChangeText()
+      onClicked:
       {
         timer.toggleTimer();
         startGameButton.changeText();
@@ -84,20 +89,20 @@ Item
     {
       id: otherButtons
 
-      spacing: 100
+      spacing: 30
 
       CustomButton
       {
         id: clearBoardButton
 
-        width:        250
+        width:        230
         pixelSize_a:  24
         text_a: "Clear Game Board"
         enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
 
         onClicked: function()
         {
-          popup.open()
+          warningPopup.open()
         }
       }
 
@@ -105,36 +110,75 @@ Item
       {
         id: backToOptionsButton
 
-        width:        250
+        width:        230
         pixelSize_a:  24
-        text_a: "Go back to options"
+        text_a: "Go Back To Options"
         enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
 
         onClicked: function()
         {
-          gameManager.changeGameState(GameState.WelcomeScreen);
+          onClicked: main_root.isGameActive = false
         }
       }
+
+      CustomButton
+      {
+        id: shapeSelectorPopupButton
+
+        width:        230
+        pixelSize_a:  24
+        text_a: "Select Shape"
+        enabled: timer.running ? false : true // When the game has started (i.e., the timer is running), the cells are no longer modifiable by the user
+        Keys.forwardTo: [shapeSelectorPopup.currentItem_a];
+
+        onClicked: function()
+        {
+          shapeSelectorPopup.open()
+        }
+      }
+
     } // Row
+
   } // Column
 
   WarningPopup
   {
-    id: popup
+    id: warningPopup
+  }
+
+  ShapeSelectorPopup
+  {
+    id: shapeSelectorPopup
+    width:  parent.width  * 0.50
+    height: parent.height * 0.90
   }
 
   Connections
   {
-    target: popup
+    target: warningPopup
 
-    function onYesClicked() { gameManager.clearBoard(); }
+    function onYesClicked() { gameManager.clearBoard(); }  // called when "warningPopup" raises "yesClicked" signal
+  }
+
+  Connections
+  {
+    target: shapeSelectorPopup
+
+    function onYesClicked() // called when "shapeSelectorPopup" raises "yesClicked" signal
+    {
+      gameManager.currentPatternIndex = shapeSelectorPopup.currentIndex_a
+
+      // Forces the `Loader` in `main_root` to reload the `gameScreen`, to redraw the `GameBoard` and make it centered in its parent object
+      main_root.resetGameBoard = true;
+      main_root.resetGameBoard = false;
+    }
   }
 
   Timer
   {
     id: timer
 
-    interval: gameManager.getTimerPeriod();
+    interval: gameManager.timerPeriod;
     running:  false;
     repeat:   true
     onTriggered: function() { gameManager.recalculateBoard(); }
@@ -158,4 +202,4 @@ Item
       startGameButton.changeText();
     }
   }
-} // id: root
+} // id: gameBoard_root

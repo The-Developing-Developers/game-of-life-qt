@@ -7,6 +7,7 @@ Button
   id: customButton
 
   property alias pixelSize_a:         theText.font.pixelSize
+  property alias pointSize_a:         theText.font.pointSize
   property alias text_a:              theText.text
   property alias normalTextColour_a:  theText.normalTextColour
   property alias hoverTextColour_a:   theText.hoverTextColour
@@ -38,7 +39,6 @@ Button
     property string hoverTextColour:  "black"
 
     text: "Text here..."
-    font.pixelSize: 12
     opacity: enabled ? 1.0 : 0.3
     color: customButton.hovered ? hoverTextColour : normalTextColour
     horizontalAlignment: Text.AlignHCenter

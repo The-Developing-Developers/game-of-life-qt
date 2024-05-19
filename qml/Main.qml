@@ -1,79 +1,27 @@
 import QtQuick
 import QtQuick.Controls
-import GameStateEnum
 
 ApplicationWindow
 {
-  id: root
+  id: main_root
 
   minimumWidth:  800
   minimumHeight: 600
   visible: true
   visibility: Qt.WindowFullScreen
-  title: qsTr("Game Of Life")
+  title: "Game Of Life"
 
-  Item // needed for the `state` property
+  readonly property string  welcomeScreen: "WelcomeScreen.qml"
+  readonly property string  gameScreen:    "GameBoard.qml"
+           property bool    isGameActive:   false
+           property bool    resetGameBoard: false
+
+  Loader
   {
-    id: rootContainer
+    id: loader
 
-    anchors.fill: root.contentItem
-
-    readonly property string welcomeScreen: "welcomeScreen"
-    readonly property string gameScreen: "gameScreen"
-
-    Loader
-    {
-      id: loader
-
-      anchors.fill: rootContainer
-      // source: assigned by `state` property
-    }
-
-    Connections // equivalent to C++ connect(&gameManager, &GameManager::gameStateChanged, this, &Component::onGameStateChanged)
-    {
-      target: gameManager
-
-      function onGameStateChanged(currentState)
-      {
-        switch ( currentState )
-        {
-          case GameState.WelcomeScreen:
-            rootContainer.state = rootContainer.welcomeScreen
-            break;
-
-          case GameState.GameBoard:
-            rootContainer.state = rootContainer.gameScreen
-            break;
-
-          case GameState.Undefined:
-          default:
-            console.log("Main.qml: unknown error during state change")
-            break;
-        }
-      }
-    }
-
-    state: rootContainer.welcomeScreen // default state
-
-    states:
-    [
-      State
-      {
-        name: rootContainer.welcomeScreen
-        PropertyChanges { target: loader; source: "WelcomeScreen.qml"; }
-      },
-
-      State
-      {
-        name: rootContainer.gameScreen
-        PropertyChanges { target: loader; source: "GameBoard.qml"; }
-      }
-    ]
-  } // rootContainer
-
-  Component.onCompleted:
-  {
-    // The finite-state machine is kick-started here
-    gameManager.changeGameState(GameState.WelcomeScreen);
+    anchors.fill: main_root.contentItem // So that the Loader completely fills the `main_root`
+    source:       main_root.isGameActive ? (main_root.resetGameBoard ? "" : gameScreen) : welcomeScreen // The application starts on the `welcomeScreen`. When a new shape is selected in the `shapeSelectorPopup`, the `GameBoard` will raise and lower the `resetGameBoard` to redraw the game grid
   }
-} // id: root
+
+} // id: main_root

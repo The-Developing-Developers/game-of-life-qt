@@ -158,18 +158,6 @@ void GameBoard::unlockToggling(void)
 }
 
 
-void GameBoard::flagBoardForResizing(void)
-{
-  m_boardNeedsResizing = true;
-}
-
-
-bool GameBoard::doesBoardNeedResizing(void) const
-{
-  return m_boardNeedsResizing;
-}
-
-
 void GameBoard::resizeGameBoard(void)
 {
   // Here, the number of rows and cols has just been changed by the user in the options screen
@@ -185,6 +173,32 @@ void GameBoard::resizeGameBoard(void)
   {
     m_currMatrix[row].resize(newNumOfCols);
     m_nextMatrix[row].resize(newNumOfCols);
+  }
+}
+
+
+void GameBoard::setCurrentPattern(const QVector<QVector<bool>>& newPattern)
+{
+  const int numOfRows = m_gameOptions.getNumOfRows();
+  const int numOfCols = m_gameOptions.getNumOfCols();
+
+  for (int row = 0; row != numOfRows; ++row)
+  {
+    for (int col = 0; col != numOfCols; ++col)
+    {
+      if (newPattern[row][col])
+        m_currMatrix[row][col].revive();
+      else
+        m_currMatrix[row][col].kill();
+    }
+  }
+
+  for (auto& rowOfCells : m_nextMatrix)
+  {
+    for (auto& cell : rowOfCells)
+    {
+      cell.kill();
+    }
   }
 }
 

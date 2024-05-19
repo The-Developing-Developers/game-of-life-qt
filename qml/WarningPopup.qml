@@ -3,13 +3,12 @@ import QtQuick.Controls
 
 Popup
 {
-  id: popup
+  id: warningPopup
 
   anchors.centerIn: Overlay.overlay
   width:  300
   height: 300
   modal: true
-  focus: true
   closePolicy: Popup.NoAutoClose
   padding:  0
 
@@ -19,7 +18,7 @@ Popup
     color: "#AAAAAAAA" // Background is greyed out when Popup is active
   }
 
-  signal yesClicked()
+  signal yesClicked() // Raised when the user clicks the "Yes" button in 'yesButton'
 
   contentItem: Rectangle
   {
@@ -62,8 +61,8 @@ Popup
 
           onClicked: function()
           {
-            popup.yesClicked();
-            popup.close()
+            warningPopup.yesClicked();
+            warningPopup.close()
           }
         }
 
@@ -77,10 +76,10 @@ Popup
 
           onClicked: function()
           {
-            popup.close()
+            warningPopup.close()
           }
         }
       } // id: yesNoButtons
     } // id: background
   } // id: rect
-} // id: popup
+} // id: warningPopup

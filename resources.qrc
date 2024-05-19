@@ -3,9 +3,11 @@
         <file>qml/CustomButton.qml</file>
         <file>qml/WelcomeScreen.qml</file>
         <file>qml/GameBoard.qml</file>
+        <file>qml/GameCell.qml</file>
         <file>qml/GameOptions.qml</file>
         <file>qml/Main.qml</file>
         <file>qml/WarningPopup.qml</file>
+        <file>qml/ShapeSelectorPopup.qml</file>
         <file>qml/CustomScrollView.qml</file>
         <file>qml/CustomTextField.qml</file>
     </qresource>

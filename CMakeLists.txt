@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(GameOfLife VERSION 1.0 LANGUAGES CXX)
+project(gameOfLife VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTORCC ON)
@@ -13,27 +13,29 @@ qt_policy(SET QTP0001 NEW) # Suppress warning https://doc.qt.io/qt-6/qt-cmake-po
 
 qt_add_executable(${PROJECT_NAME}
   main.cpp
-  )
+)
 
-  qt_add_qml_module(${PROJECT_NAME}
-  URI GameOfLife
+qt_add_qml_module(${PROJECT_NAME}
+  URI gameOfLifeUri
   VERSION 1.0
   QML_FILES
-  qml/CustomButton.qml
+    qml/CustomButton.qml
     qml/WelcomeScreen.qml
     qml/GameBoard.qml
+    qml/GameCell.qml
     qml/GameOptions.qml
     qml/Main.qml
     qml/WarningPopup.qml
+    qml/ShapeSelectorPopup.qml
     qml/CustomScrollView.qml
     qml/CustomTextField.qml
   RESOURCES resources.qrc
   SOURCES
-    src/gamemanager.hpp src/gamemanager.cpp
-    src/cell.hpp src/cell.cpp
-    src/gameboard.hpp src/gameboard.cpp
-    src/gamestatemachine.hpp src/gamestatemachine.cpp
-    src/gameoptions.hpp src/gameoptions.cpp
+    src/gamemanager.hpp       src/gamemanager.cpp
+    src/cell.hpp              src/cell.cpp
+    src/gameboard.hpp         src/gameboard.cpp
+    src/gameoptions.hpp       src/gameoptions.cpp
+    src/patterns.hpp          src/patterns.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

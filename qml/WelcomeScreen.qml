@@ -1,10 +1,9 @@
 import QtQuick
 import QtQuick.Controls
-import GameStateEnum
 
 Rectangle
 {
-  id: root
+  id: welcomeScreen_root
 
   property bool startGame: false
   anchors.centerIn: parent
@@ -21,8 +20,8 @@ Rectangle
 
     anchors
     {
-      horizontalCenter: root.horizontalCenter
-      top: root.top
+      horizontalCenter: welcomeScreen_root.horizontalCenter
+      top: welcomeScreen_root.top
       topMargin: 20
     }
 
@@ -49,7 +48,7 @@ Rectangle
 
     anchors
     {
-      horizontalCenter: root.horizontalCenter
+      horizontalCenter: welcomeScreen_root.horizontalCenter
       top: introText.bottom
       topMargin: 50
     }
@@ -91,7 +90,7 @@ Rectangle
 
     anchors
     {
-      horizontalCenter: root.horizontalCenter
+      horizontalCenter: welcomeScreen_root.horizontalCenter
       top:              optionsBackground.bottom
       topMargin: 50
     }
@@ -108,7 +107,7 @@ Rectangle
       pixelSize_a:  30
       text_a:       "Start Game of Life"
 
-      onClicked: gameManager.changeGameState(GameState.GameBoard)
+      onClicked: main_root.isGameActive = true // Forces the `Loader` in `main_root` to load the `gameScreen`
     }
 
     CustomButton

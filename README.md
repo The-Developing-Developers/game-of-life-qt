@@ -51,10 +51,10 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 1. Clone this repository.
 2. Install Qt 6.5 (or later version) using the web installer. Required packages:
-    - C++ compiler
+    - C++ compiler (at least C++14)
     - Qt Creator 11.0.2 (or later version)
-    - CMake 3.24.2
-    - Ninja 1.10.2
+    - CMake 3.16 (or later version)
+    - Ninja 1.10.2 (or later version)
 3. Open Qt Creator.
 4. Open `CMakeLists.txt`.
 5. Select *Release* configuration.
@@ -63,15 +63,28 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 # To Do List
 
+- A pop-up selector of shapes has been implemented in the Game Board. However, we could not find a way to directly connect `gameManager.listOfPatterns` to the `ShapesModel`, unlike the `ComboBox` in `GameBoard.qml`, which accepts `gameManager.listOfPatterns` as a `model` without any issues. Therefore, a dedicated model has been created in QML, `ShapesModel.qml`. This solutions works correctly, but it duplicates the maintenance of the list of shapes, that now are defined both in C++ (in `patterns.hpp`). There should be a way to associate a simple `QStringList` as a model of a `ListView`.
+- The name of the `Patterns::setPatternIndex` method is poorly chosen, because it does much more than setting the current pattern's index. Consider changing the name, and even refactoring the whole function, maybe splitting it into smaller functions.
+- Fix the centering of the Game Board when the user selects a shape through the Combo Box.
+- Find a better way to filter the indices that should do nothing in `GameManager::setCurrentShape`. `GameManager` should know nothing about the numeric indices of the separators, and yet it should still be able to do nothing if a separator is selected. Maybe perform a check in `GameBoard.qml` before assigning `gameManager.currentShapeIndex` in `ComboBox`?
+- Try changing some `Q_INVOKABLE`s (the ones which are used in a `Q_PROPERTY`) to private slots, to enforce encapsulation.
+- ~~Consider using an `onEditingFinished` instead of `onAccepted` for convenience in `GameOptions.qml` for the option buttons. However, automatic focus on the "number of rows" `CustomTextField` must be removed, because going back to the Options screen triggers an undesired modification if `onEditingFinished` is used: the rows are changed to the minimum value.~~
+- Consider adding a checkmark or changing the text to green colour when a value is accepted in the Options screen.
+- Do not use a simple `bool` to manage the game state (`isGameActive` QML property). Consider using a more sophisticated system (enumeratives, or re-enabling the original FSM), in order to accommodate a potential third or fourth state in the future if the need arises.
+- Consider comparing `GameManager` to the *Mediator* pattern, and evaluate if `GameManager` can be fully transformed into a *Mediator*.
 - Consider unifying the concept of game board square and `Cell` in the code.
-- Refactor the code to favour readability.
 - A definitive name should be chosen for the Options / Welcome Screen.
 - Now that the FSM receives the `backend` by reference, should the FSM be directly responsible of carrying out back-end actions such as reinitialising the game board? Or is it better that the FSM just informs the `Backend` that the `Backend` has to perform a certain action, and the `Backend` actually carries out that action?
 - The automatic stop is probably inefficient, because it checks for equality between the `m_currentMatrix` and the `m_nextMatrix` at every game loop. Should a timer be used to rarify the checks?
-- Add the option to enable / disable the cell animation, and to set the percentage with respect to the game timer period.
+- Add the option ~~to enable / disable the cell animation, and~~ to set the percentage with respect to the game timer period.
 - Consider if GameStateMachine and other classes should be singletons
-- Consider using an asymmetrical fading effect (i.e. only a fade-in, not a fade-out) for better visibility of the toggling of the cells across generations while using fast game speed.
-- Allow the user to disable the fading effect on the cells.
+- Consider adding Doxygen documentation, using Graphviz to generate the structure of the C++ classes.
+- Consider adding the executable for download (using [CPack](https://cmake.org/cmake/help/book/mastering-cmake/chapter/Packaging%20With%20CPack.html)?).
+- ~~Consider using the `Validator` feature of the `TextField` to limit the values of the Game Options instead of clamping manually in the setter methods in the backend.~~
+- ~~- Implement an upper limit for the Game Options (i.e., the user cannot request a Game Board with millions of rows or columns).~~
+- ~~There is a small bug when the user turns on some cells, resizes the board using the combo box, goes back to the Welcome Screen, enlarges the Game Board, and starts the game again: some cells that were previously ON are now OFF.~~
+- ~~Consider using an asymmetrical fading effect (i.e. only a fade-in, not a fade-out) for better visibility of the toggling of the cells across generations while using fast game speed.~~
+- ~~Allow the user to disable the fading effect on the cells.~~
 - ~~Implement an automatic stop once there is no change between the `m_currentMatrix` and the `m_futureMatrix`.~~
 - ~~Add a couple more helper private methods in `gameboard.cpp` to make the code more readable in `calculateFutureMatrix`.~~
 - ~~Consider not clearing the board even if the user goes back to the options and modifies the game board's size. To do this, especially in case the board is shrinked, it is necessary to memorise (save) the cells' status (alive or dead) and reinstate (load) it when a game board of a different size is created. Maybe a vector of `bool` is sufficient: the indices of the vector could correspond to the indices of the recreated game board's matrix. To help with this, consider not destroying the game board when a new game is started, but simply to resize the vector of vectors of `Cell`s whenever the number of rows or columns is modified through the game options.~~
