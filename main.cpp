@@ -1,3 +1,11 @@
+/**
+ * @file main.cpp
+ *
+ * @brief Entry point of the application. The C++ class 'GameManager' is instantiated here, and passed to the QML engine front-end to be
+ * used in QML code. The 'GameManager' acts as a coordinator of the whole application, relaying information from the QML front-end to the
+ * C++ back-end.
+ **/
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>

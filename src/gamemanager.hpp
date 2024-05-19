@@ -1,12 +1,19 @@
+/**
+ * @file gamemanager.hpp
+ **/
+
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 
 #include <QObject>
-#include <qqmlintegration.h>
+#include <qqmlintegration.h> // Integration between QML and C++. It contains forward declarations of structs and functions defined in QtQml. Often included when we want to expose C++ classes to QML or when we want to use C++ functions in QML. Defines 'QML_ELEMENT'.
 #include "gameboard.hpp"
 #include "gameoptions.hpp"
 #include "patterns.hpp"
 
+/**
+ * @brief The central hub of the whole application: all information from the QML front-end to the C++ back-end pass through here.
+ **/
 class GameManager : public QObject
 {
   Q_OBJECT
@@ -19,6 +26,7 @@ public:
 
   Patterns* getPatternPointerForQmlContext(void) const;
 
+  // These properties will be made available in QML
   Q_PROPERTY(bool         isAnimationAllowed    READ getIsAnimationAllowed  WRITE setIsAnimationAllowed NOTIFY isAnimationAllowedChanged);
   Q_PROPERTY(int          numOfRows             READ getNumOfRows           WRITE setNumOfRows          NOTIFY numOfRowsChanged);
   Q_PROPERTY(int          numOfCols             READ getNumOfCols           WRITE setNumOfCols          NOTIFY numOfColsChanged);
@@ -34,8 +42,9 @@ public:
   Q_PROPERTY(int          maxSquareSize         READ getMaxSquareSize       CONSTANT);
   Q_PROPERTY(int          minSquareSpacing      READ getMinSquareSpacing    CONSTANT);
   Q_PROPERTY(int          maxSquareSpacing      READ getMaxSquareSpacing    CONSTANT);
-  Q_PROPERTY(QStringList  listOfPatterns        READ getListOfPatterns      CONSTANT);
+  // Q_PROPERTY(QStringList  listOfPatterns        READ getListOfPatterns      CONSTANT); // TODO: unused --> remove
 
+  // These methods will be made available in QML
   Q_INVOKABLE void              clearBoard            (void);
   Q_INVOKABLE void              recalculateBoard      (void);
   Q_INVOKABLE int               getNumOfRows          (void)          const;
@@ -45,7 +54,7 @@ public:
   Q_INVOKABLE int               getSquareSpacing      (void)          const;
   Q_INVOKABLE bool              getIsAnimationAllowed (void)          const;
   Q_INVOKABLE bool              getCellStatus         (int cellIndex) const;
-  Q_INVOKABLE const QStringList getListOfPatterns     (void)          const;
+  // Q_INVOKABLE const QStringList getListOfPatterns     (void)          const; // TODO: unused --> remove
   Q_INVOKABLE int               getPatternIndex       (void)          const;
   Q_INVOKABLE int               getMinNumOfRowsAndCols(void)          const;
   Q_INVOKABLE int               getMaxNumOfRowsAndCols(void)          const;
@@ -70,7 +79,7 @@ public:
 
 signals:
 
-  void boardChanged             (void);
+  void boardChanged             (void); // Used by the QML front-end to trigger the cell animation or change of colour every time the board changes for any reason
   void stopTimer                (void);
   void isAnimationAllowedChanged(void);
   void numOfRowsChanged         (int);
@@ -78,13 +87,15 @@ signals:
   void squareSizeChanged        (int);
   void squareSpacingChanged     (int);
   void timerPeriodChanged       (int);
-  void patternIndexChanged        (int);
+  void patternIndexChanged      (int);
 
 private:
 
+  // `QScopedPointer` does not support move semantics or custom deleters. It is the recommended choice to use in Qt if we don't need the additional features of `std::unique_ptr`.
   QScopedPointer<GameOptions> m_gameOptions;
   QScopedPointer<GameBoard>   m_gameBoard;
   QScopedPointer<Patterns>    m_patterns;
+
   bool m_isAnimationAllowed;
 
   void resizeGameBoard(void);

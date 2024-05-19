@@ -66,17 +66,22 @@ QHash<int, QByteArray> Patterns::roleNames() const
 }
 
 
-// TODO: the name of this method is poorly chosen, because it also generates the new pattern matrix that will be read by the 'GameManager' with the 'getCurrentPatternMatrix' method.
+/**
+ * @brief TODO: the name of this method is poorly chosen, because it also generates the new pattern matrix that will be read by the
+ * 'GameManager' with the 'getCurrentPatternMatrix' method.
+ *
+ * @param index Index of the shape pattern chosen by the user in the QML front-end.
+ **/
 void Patterns::setPatternIndex(int index)
 {
-  m_currentIndex = index;
+  m_currentIndex = index; // TODO: is this assignation necessary? Can't `index` be used instead in the following line of code?
   const QString currentPattern(m_listOfPatterns[m_currentIndex]);
 
   QVector<QVector<bool>> newMatrix;
 
   if (currentPattern == stillLifes || currentPattern == oscillators || currentPattern == spaceships)
   {
-    return; // do nothing
+    return; // do nothing: they are just list separators, not patterns
   }
   if (currentPattern == block)
   {
@@ -242,20 +247,25 @@ void Patterns::setPatternIndex(int index)
   m_patternMatrix = newMatrix;
 }
 
-const QStringList Patterns::getListOfPatterns(void) const
-{
-  return m_listOfPatterns;
-}
+
+// // TODO: unused
+// const QStringList Patterns::getListOfPatterns(void) const
+// {
+//   return m_listOfPatterns;
+// }
+
 
 int Patterns::getCurrentPatternNumOfRows(void) const
 {
   return m_patternRows;
 }
 
+
 int Patterns::getCurrentPatternNumOfCols(void) const
 {
   return m_patternCols;
 }
+
 
 const QVector<QVector<bool>> Patterns::getCurrentPatternMatrix(void) const
 {

@@ -1,3 +1,10 @@
+/**
+ * @file gameoptions.hpp
+ *
+ * @brief Stores the game options during the game session, so that the player can go back and forth between the game screen and the option
+ * (welcome) screen.
+ **/
+
 #ifndef GAMEOPTIONS_HPP
 #define GAMEOPTIONS_HPP
 
@@ -44,6 +51,7 @@ private:
   static constexpr int  m_DeadOrAliveUpperThreshold = 3; // Game of Life's rule
   static constexpr int  m_DeadOrAliveLowerThreshold = 2; // Game of Life's rule
 
+  // Default options, loaded at startup
   int m_numOfRows       = 10;
   int m_numOfCols       = 10;
   int m_timerPeriod_ms  = 100;
