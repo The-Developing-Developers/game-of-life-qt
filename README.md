@@ -2,19 +2,27 @@
 # John Conway's Game Of Life
 
 - [Description](#description)
+- [Download (Windows Only)](#download-windows-only)
 - [Implementation](#implementation)
 - [How To Build (Windows / Linux)](#how-to-build-windows--linux)
 - [To Do List](#to-do-list)
-  - [To Do](#to-do)
-  - [Done](#done)
 
 
 # Description
 
+**John Conway's Game Of Life**, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine. (*from [Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)*)
 
-**NOTE**: THIS DOCUMENT IS STILL WORK IN PROGRESS
+This is a simple graphical application that implements the rules of John Conway's Game Of Life.
 
-The **Game Of Life**, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves. It is Turing complete and can simulate a universal constructor or any other Turing machine. (*from [Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)*)
+
+# Download (Windows Only)
+
+The executable for Windows can be downloaded from the [Releases](https://github.com/The-Developing-Developers/game-of-life-qt/releases) page. The latest release is 1.0.2.
+
+- Windows 10 or later is required.
+- Download and unpack the ZIP archive.
+- Launch `gameOfLife.exe`.
+- You might need to (re)install the latest Microsoft Visual C++ Redistributable in order for the executable to start properly.
 
 
 # Implementation
@@ -51,10 +59,10 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 1. Clone this repository.
 2. Install Qt 6.5 (or later version) using the web installer. Required packages:
-  - C++ compiler (at least C++14)
-  - Qt Creator 11.0.2 (or later version)
-  - CMake 3.16 (or later version)
-  - Ninja 1.10.2 (or later version)
+     - C++ compiler (at least C++14)
+     - Qt Creator 11.0.2 (or later version)
+     - CMake 3.16 (or later version)
+     - Ninja 1.10.2 (or later version)
 3. Open Qt Creator.
 4. Open `CMakeLists.txt`.
 5. Select *Release* configuration.
@@ -63,8 +71,7 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 
 # To Do List
 
-## To Do
-
+- Check the `TODO`s in the code, and consider opening dedicated issues.
 - Do not use a simple `bool` to manage the game state (`isGameActive` QML property). Consider using a more sophisticated system (enumeratives, or re-enabling the original FSM), in order to accommodate a potential third or fourth state in the future if the need arises.
 - Consider comparing `GameManager` to the *Mediator* programming pattern, and evaluate if `GameManager` can be fully transformed into a *Mediator*.
 - Consider unifying the concept of game board square and `Cell` in the code.
@@ -73,6 +80,7 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 - Consider adding Doxygen documentation, using Graphviz to generate the structure of the C++ classes.
 - Consider adding the executable for download (using [CPack](https://cmake.org/cmake/help/book/mastering-cmake/chapter/Packaging%20With%20CPack.html)?).
 
+<!--
 ## Done
 
 - ~~Consider if GameStateMachine and other classes should be singletons~~
@@ -113,4 +121,4 @@ Communication with the backend from QML to C++ and vice-versa is always and excl
 - ~~Check the algorithm. The right-hand half of the grid does not behave correctly.~~
 - ~~Add Reset button, only active when the timer is not running, to reset the board.~~
 - ~~Improve Start button: it could display "running" (or something similar) when the game is running.~~
-- ~~Remove unused methods and test code.~~
+- ~~Remove unused methods and test code.~~ -->
